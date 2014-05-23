@@ -1,0 +1,58 @@
+﻿@model Alabama.CardLog
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>AddMoney1</title>
+</head>
+<body>
+    <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    
+    @using (Html.BeginForm()) {
+        @Html.ValidationSummary(true)
+        <fieldset>
+            <legend>CardLog</legend>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UserID)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UserID)
+                @Html.ValidationMessageFor(model => model.UserID)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CardID)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CardID)
+                @Html.ValidationMessageFor(model => model.CardID)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Date)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Date)
+                @Html.ValidationMessageFor(model => model.Date)
+            </div>
+    
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+    }
+    
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>
+

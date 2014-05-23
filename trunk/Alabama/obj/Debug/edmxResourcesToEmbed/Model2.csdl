@@ -1,0 +1,435 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="nationalITModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="nationalITEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Company_Expanses" EntityType="nationalITModel.Company_Expanses" />
+    <EntitySet Name="Customer_Info" EntityType="nationalITModel.Customer_Info" />
+    <EntitySet Name="Dispatchers" EntityType="nationalITModel.Dispatchers" />
+    <EntitySet Name="Equipment" EntityType="nationalITModel.Equipment" />
+    <EntitySet Name="fixed_charges" EntityType="nationalITModel.fixed_charges" />
+    <EntitySet Name="Income" EntityType="nationalITModel.Income" />
+    <EntitySet Name="InvoiceA" EntityType="nationalITModel.InvoiceA" />
+    <EntitySet Name="Maintenance" EntityType="nationalITModel.Maintenance" />
+    <EntitySet Name="Operating_Expenses" EntityType="nationalITModel.Operating_Expenses" />
+    <EntitySet Name="Owners" EntityType="nationalITModel.Owners" />
+    <EntitySet Name="Printed_Temp_Fuel___Expenses" EntityType="nationalITModel.Printed_Temp_Fuel___Expenses" />
+    <EntitySet Name="Printed_Temp_Split_Expenses_Driver" EntityType="nationalITModel.Printed_Temp_Split_Expenses_Driver" />
+    <EntitySet Name="Printed_Temp_Split_Expenses_Owner" EntityType="nationalITModel.Printed_Temp_Split_Expenses_Owner" />
+    <EntitySet Name="Printed_Temp_Trip_Info" EntityType="nationalITModel.Printed_Temp_Trip_Info" />
+    <EntitySet Name="ReportIDs" EntityType="nationalITModel.ReportIDs" />
+    <EntitySet Name="split_expenses" EntityType="nationalITModel.split_expenses" />
+    <EntitySet Name="Temp_Fuel___Expenses" EntityType="nationalITModel.Temp_Fuel___Expenses" />
+    <EntitySet Name="Temp_Operating_Expenses" EntityType="nationalITModel.Temp_Operating_Expenses" />
+    <EntitySet Name="Temp_split_expenses_Driver" EntityType="nationalITModel.Temp_split_expenses_Driver" />
+    <EntitySet Name="Temp_split_expenses_owner" EntityType="nationalITModel.Temp_split_expenses_owner" />
+    <EntitySet Name="Temp_Trip_Info" EntityType="nationalITModel.Temp_Trip_Info" />
+    <EntitySet Name="Trip_Info___old" EntityType="nationalITModel.Trip_Info___old" />
+    <EntitySet Name="Violations" EntityType="nationalITModel.Violations" />
+  </EntityContainer>
+  <EntityType Name="Company_Expanses">
+    <Key>
+      <PropertyRef Name="CompanyExpansesID" />
+    </Key>
+    <Property Name="CompanyExpansesID" Type="Int32" Nullable="false" />
+    <Property Name="Expanses" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Date" Type="DateTime" />
+    <Property Name="Comment" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Customer_Info">
+    <Key>
+      <PropertyRef Name="Customer_ID" />
+      <PropertyRef Name="Customer_Name" />
+      <PropertyRef Name="Street" />
+    </Key>
+    <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+    <Property Name="Customer_Name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Street" Type="String" Nullable="false" MaxLength="64" Unicode="true" FixedLength="false" />
+    <Property Name="City" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
+    <Property Name="State" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
+    <Property Name="ZIP_Code" Type="String" MaxLength="24" Unicode="true" FixedLength="false" />
+    <Property Name="Phone" Type="String" MaxLength="24" Unicode="true" FixedLength="false" />
+    <Property Name="Fax" Type="String" MaxLength="24" Unicode="true" FixedLength="false" />
+    <Property Name="Contact" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Comments" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Days_to_pay" Type="Int16" />
+  </EntityType>
+  <EntityType Name="Dispatchers">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Last_name" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Last_name" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
+    <Property Name="First_name" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+    <Property Name="SSN" Type="String" MaxLength="12" Unicode="true" FixedLength="false" />
+    <Property Name="DOB" Type="DateTime" />
+    <Property Name="Hire_date" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="Equipment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Equipment_Type" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+    <Property Name="Equipment_number" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+    <Property Name="Driver" Type="Int32" />
+    <Property Name="Owner" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="VIN" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+    <Property Name="Registration_Expiration" Type="DateTime" />
+    <Property Name="Inspection_Expiration" Type="DateTime" />
+    <Property Name="DATE_LEASED" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="EQUIPMENT_VALUE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="EQUIPMENT_DESCRIPTION" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="MODEL_YEAR" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="MAKE" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="fixed_charges">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Fee_Charged" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="DriverId" Type="Int32" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Type" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Frequency" Type="Int32" />
+    <Property Name="Beginning" Type="DateTime" />
+    <Property Name="Fee_Charged" Type="Boolean" Nullable="false" />
+    <Property Name="Next_Date" Type="DateTime" />
+    <Property Name="Prv_Date" Type="DateTime" />
+    <Property Name="Amount_To_Date" Type="Decimal" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="Income">
+    <Key>
+      <PropertyRef Name="IncomeID" />
+    </Key>
+    <Property Name="IncomeID" Type="Int32" Nullable="false" />
+    <Property Name="IncomeDate" Type="DateTime" />
+    <Property Name="AmountInvoiced" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="FundedAmount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ReserveAmount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="AdvanceFee" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ChargeBacks" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Comments" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="InvoiceA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Invoice" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Maintenance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Track_Trailer_Number" Type="Int32" />
+    <Property Name="Maintenance_performed" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Performed_date" Type="DateTime" />
+    <Property Name="Location" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="PO_" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="ApprovedAmount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="SpentAmount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ApprovedBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Operating_Expenses">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" />
+    <Property Name="Type" Type="String" MaxLength="24" Unicode="true" FixedLength="false" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Location" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
+    <Property Name="Driver" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Paid_off" Type="String" MaxLength="8" Unicode="true" FixedLength="false" />
+    <Property Name="Current_Payroll" Type="String" MaxLength="8" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Owners">
+    <Key>
+      <PropertyRef Name="OwnerID" />
+    </Key>
+    <Property Name="OwnerID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="ssn_" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="fee_rate" Type="Single" />
+    <Property Name="pay_rate" Type="Single" />
+  </EntityType>
+  <EntityType Name="Printed_Temp_Fuel___Expenses">
+    <Key>
+      <PropertyRef Name="Selection" />
+      <PropertyRef Name="Paid_off" />
+    </Key>
+    <Property Name="Selection" Type="Boolean" Nullable="false" />
+    <Property Name="ID" Type="Int32" />
+    <Property Name="Date" Type="DateTime" />
+    <Property Name="Type" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Location" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Driver" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Paid_off" Type="Boolean" Nullable="false" />
+    <Property Name="Current_Payroll" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="ReportID" Type="Int32" />
+    <Property Name="AmountN" Type="Decimal" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="Printed_Temp_Split_Expenses_Driver">
+    <Key>
+      <PropertyRef Name="Selection" />
+      <PropertyRef Name="Index" />
+      <PropertyRef Name="Fee_Charged" />
+      <PropertyRef Name="Current_Payroll" />
+      <PropertyRef Name="Paid_Off" />
+    </Key>
+    <Property Name="Selection" Type="Boolean" Nullable="false" />
+    <Property Name="Id" Type="Int32" />
+    <Property Name="OwnerDriver" Type="Int32" />
+    <Property Name="Index" Type="Int32" Nullable="false" />
+    <Property Name="Expenses" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Details" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Date" Type="DateTime" />
+    <Property Name="Fee_Charged" Type="Boolean" Nullable="false" />
+    <Property Name="Current_Payroll" Type="Boolean" Nullable="false" />
+    <Property Name="Paid_Off" Type="Boolean" Nullable="false" />
+    <Property Name="ReportID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Printed_Temp_Split_Expenses_Owner">
+    <Key>
+      <PropertyRef Name="Selection" />
+      <PropertyRef Name="Index" />
+      <PropertyRef Name="Fee_Charged" />
+      <PropertyRef Name="Current_Payroll" />
+      <PropertyRef Name="Paid_Off" />
+    </Key>
+    <Property Name="Selection" Type="Boolean" Nullable="false" />
+    <Property Name="Id" Type="Int32" />
+    <Property Name="OwnerDriver" Type="Int32" />
+    <Property Name="Index" Type="Int32" Nullable="false" />
+    <Property Name="Expenses" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Details" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Date" Type="DateTime" />
+    <Property Name="Fee_Charged" Type="Boolean" Nullable="false" />
+    <Property Name="Current_Payroll" Type="Boolean" Nullable="false" />
+    <Property Name="Paid_Off" Type="Boolean" Nullable="false" />
+    <Property Name="ReportID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Printed_Temp_Trip_Info">
+    <Key>
+      <PropertyRef Name="Selection" />
+      <PropertyRef Name="Paid" />
+      <PropertyRef Name="Deliverd" />
+      <PropertyRef Name="Customer_Invoiced" />
+      <PropertyRef Name="Current_Payroll" />
+      <PropertyRef Name="Driver_paid" />
+    </Key>
+    <Property Name="Selection" Type="Boolean" Nullable="false" />
+    <Property Name="Trip_ID" Type="Int32" />
+    <Property Name="Order_Date" Type="DateTime" />
+    <Property Name="Pickup_Date" Type="DateTime" />
+    <Property Name="Delivery_Date" Type="DateTime" />
+    <Property Name="Pickup_Location" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Delivery_Location" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Extra_stops" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Loaded_miles" Type="Int32" />
+    <Property Name="Dead_head_miles" Type="Int32" />
+    <Property Name="Comfirmed_Rate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Customer" Type="Int32" />
+    <Property Name="Dispatcher" Type="Int32" />
+    <Property Name="Driver" Type="Int32" />
+    <Property Name="Paid" Type="Boolean" Nullable="false" />
+    <Property Name="Extra_Charges" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Detention_pay" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Total_charges" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Detention" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Picked" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Deliverd" Type="Boolean" Nullable="false" />
+    <Property Name="Invoice" Type="Int32" />
+    <Property Name="Customer_Invoiced" Type="Boolean" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Current_Payroll" Type="Boolean" Nullable="false" />
+    <Property Name="Driver_paid" Type="Boolean" Nullable="false" />
+    <Property Name="ReportId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="ReportIDs">
+    <Key>
+      <PropertyRef Name="ReportID" />
+    </Key>
+    <Property Name="ReportID" Type="Int32" Nullable="false" />
+    <Property Name="DriverID" Type="Int32" />
+    <Property Name="Date" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="split_expenses">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Idndex" />
+      <PropertyRef Name="Fee_Charged" />
+      <PropertyRef Name="Current_Payroll" />
+      <PropertyRef Name="Paid_Off" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="OwnerDriver" Type="Int32" />
+    <Property Name="Idndex" Type="Int32" Nullable="false" />
+    <Property Name="Expenses" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Details" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Date" Type="DateTime" />
+    <Property Name="Fee_Charged" Type="Boolean" Nullable="false" />
+    <Property Name="Current_Payroll" Type="Boolean" Nullable="false" />
+    <Property Name="Paid_Off" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Temp_Fuel___Expenses">
+    <Key>
+      <PropertyRef Name="Selection" />
+      <PropertyRef Name="Paid_off" />
+    </Key>
+    <Property Name="Selection" Type="Boolean" Nullable="false" />
+    <Property Name="ID" Type="Int32" />
+    <Property Name="Date" Type="DateTime" />
+    <Property Name="Type" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Location" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Driver" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Paid_off" Type="Boolean" Nullable="false" />
+    <Property Name="Current_Payroll" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="AmountN" Type="Decimal" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="Temp_Operating_Expenses">
+    <Key>
+      <PropertyRef Name="Selection" />
+    </Key>
+    <Property Name="Selection" Type="Boolean" Nullable="false" />
+    <Property Name="OperatingID" Type="Int32" />
+    <Property Name="Date" Type="DateTime" />
+    <Property Name="Type" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Location" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Driver" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Paid_Off" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Current_payroll" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Temp_split_expenses_Driver">
+    <Key>
+      <PropertyRef Name="Selection" />
+      <PropertyRef Name="Index" />
+      <PropertyRef Name="Fee_Charged" />
+      <PropertyRef Name="Current_Payroll" />
+      <PropertyRef Name="Paid_Off" />
+    </Key>
+    <Property Name="Selection" Type="Boolean" Nullable="false" />
+    <Property Name="Id" Type="Int32" />
+    <Property Name="OwnerDriver" Type="Int32" />
+    <Property Name="Index" Type="Int32" Nullable="false" />
+    <Property Name="Expenses" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Details" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Date" Type="DateTime" />
+    <Property Name="Fee_Charged" Type="Boolean" Nullable="false" />
+    <Property Name="Current_Payroll" Type="Boolean" Nullable="false" />
+    <Property Name="Paid_Off" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Temp_split_expenses_owner">
+    <Key>
+      <PropertyRef Name="Selection" />
+      <PropertyRef Name="Index" />
+      <PropertyRef Name="Fee_Charged" />
+      <PropertyRef Name="Current_Payroll" />
+      <PropertyRef Name="Paid_Off" />
+    </Key>
+    <Property Name="Selection" Type="Boolean" Nullable="false" />
+    <Property Name="Id" Type="Int32" />
+    <Property Name="OwnerDriver" Type="Int32" />
+    <Property Name="Index" Type="Int32" Nullable="false" />
+    <Property Name="Expenses" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Details" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Date" Type="DateTime" />
+    <Property Name="Fee_Charged" Type="Boolean" Nullable="false" />
+    <Property Name="Current_Payroll" Type="Boolean" Nullable="false" />
+    <Property Name="Paid_Off" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Temp_Trip_Info">
+    <Key>
+      <PropertyRef Name="Selection" />
+      <PropertyRef Name="Paid" />
+      <PropertyRef Name="Deliverd" />
+      <PropertyRef Name="Customer_Invoiced" />
+      <PropertyRef Name="Current_Payroll" />
+      <PropertyRef Name="Driver_paid" />
+    </Key>
+    <Property Name="Selection" Type="Boolean" Nullable="false" />
+    <Property Name="Trip_ID" Type="Int32" />
+    <Property Name="Order_Date" Type="DateTime" />
+    <Property Name="Pickup_Date" Type="DateTime" />
+    <Property Name="Delivery_Date" Type="DateTime" />
+    <Property Name="Pickup_Location" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Delivery_Location" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Extra_stops" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Loaded_miles" Type="Int32" />
+    <Property Name="Dead_head_miles" Type="Int32" />
+    <Property Name="Comfirmed_Rate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Customer" Type="Int32" />
+    <Property Name="Dispatcher" Type="Int32" />
+    <Property Name="Driver" Type="Int32" />
+    <Property Name="Paid" Type="Boolean" Nullable="false" />
+    <Property Name="Extra_Charges" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Detention_pay" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Total_charges" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Detention" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Picked" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Deliverd" Type="Boolean" Nullable="false" />
+    <Property Name="Invoice" Type="Int32" />
+    <Property Name="Customer_Invoiced" Type="Boolean" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Current_Payroll" Type="Boolean" Nullable="false" />
+    <Property Name="Driver_paid" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Trip_Info___old">
+    <Key>
+      <PropertyRef Name="Trip_ID" />
+    </Key>
+    <Property Name="Trip_ID" Type="Int32" Nullable="false" />
+    <Property Name="Order_date" Type="DateTime" />
+    <Property Name="Pickup_date" Type="DateTime" />
+    <Property Name="Delivery_date" Type="DateTime" />
+    <Property Name="Pick_up_location" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Delivery_location" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Extra_stops" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Loaded_miles" Type="Int32" />
+    <Property Name="Dead_head_miles" Type="Int32" />
+    <Property Name="Comfirmed_Rate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Customer" Type="Int32" />
+    <Property Name="Dispatcher" Type="Int32" />
+    <Property Name="Driver" Type="Int32" />
+    <Property Name="Paid" Type="String" MaxLength="12" Unicode="true" FixedLength="false" />
+    <Property Name="Extra_charges" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Detention_pay" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Total_charges" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Detention" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Picked" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Deliverd" Type="String" MaxLength="8" Unicode="true" FixedLength="false" />
+    <Property Name="Invoice" Type="Int32" />
+    <Property Name="Customer_Invoiced" Type="String" MaxLength="8" Unicode="true" FixedLength="false" />
+    <Property Name="Address" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Current_Payroll" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Driver_paid" Type="String" MaxLength="8" Unicode="true" FixedLength="false" />
+    <Property Name="PO_" Type="String" MaxLength="16" Unicode="true" FixedLength="false" />
+    <Property Name="Customer_Invoiced_date" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="Violations">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Driver" Type="Int32" />
+    <Property Name="Location" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="Date_occurred" Type="DateTime" />
+    <Property Name="Date_resolved" Type="DateTime" />
+    <Property Name="Equipment" Type="Int32" />
+  </EntityType>
+</Schema>

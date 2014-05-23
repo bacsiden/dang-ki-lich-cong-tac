@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Alabama.User>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="icon-table"></i>@ViewBag.GroupName</h3>
+            </div>
+            <div class="box-content">
+                <p style="margin-left: 7px;">
+                    <img src="/Content/img/add.png" width="14" height="14" style="padding-bottom: 2px;" />
+                    @Html.ActionLink(" Thêm người dùng", "AddUser", new { ID = ViewBag.GroupID }, new { @class = "btnThemMoi" })
+                </p>
+                <table class="table" style="width: 50%">
+                    <thead>
+                        <tr class="table-flag-blue">
+                            <th>
+                                User name
+                            </th>
+                            <th>
+                                Họ tên
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink(item.UserName + "", "Details", "Account", new { id = item.ID }, null)
+                                </td>
+                                <th>
+                                    @item.Name
+                                </th>
+                                <td>
+                                    @Html.ActionLink("Remove", "RemoveUser", new { id = item.ID, groupID = ViewBag.GroupID })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <a href="/Group/index/@ViewBag.GroupID" class="btn btn-gray"><i class="icon-mail-reply"></i> Quay lại</a>
+            </div>
+        </div>
+    </div>
+</div>

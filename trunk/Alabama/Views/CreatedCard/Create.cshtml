@@ -1,0 +1,73 @@
+﻿<link rel="stylesheet" type="text/css" href="/Content/assets/bootstrap-datepicker/css/datepicker.css" />
+<script type="text/javascript" src="/Content/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box box-pink">
+            <div class="box-title">
+                <h3>
+                    <i class="icon-reorder"></i>Tạo danh sách thẻ</h3>
+                <div class="box-tool">
+                </div>
+            </div>
+            <div class="box-content">
+                <form action="/CreatedCard/Create" method="post" class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">
+                        Người tạo</label>
+                    <span class="control-label fleft">Duy Khánh </span>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">
+                        Mô tả</label>
+                    <div class="controls">
+                        <input name="txtNote" type="text" class="span10" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">
+                        Mệnh giá</label>
+                    <div class="controls">
+                        <select name="cboPrice" class="span6">
+                            @Html.Raw(ViewBag.PriceLevel)
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">
+                        Số lượng</label>
+                    <div class="controls">
+                        <select name="cboAmount" class="span6">
+                            <option value="10" selected="selected">10</option>
+                            <option value="100">100</option>
+                            <option value="1000">1,000</option>
+                            <option value="10000">10,000</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">
+                        Ngày phát hành</label>
+                    <div class="controls">
+                        <input name="dtRelease" class="date-picker" size="16" type="text" value="12-02-2012" />
+                    </div>
+                </div>
+                @if (!string.IsNullOrEmpty(ViewBag.Error))
+                {
+                    <div class="alert alert-error">
+                        <button class="close" data-dismiss="alert">
+                            &times;</button>
+                        <strong>Error!</strong> @ViewBag.Error
+                    </div>
+                }
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        Tạo thẻ</button>
+                    <button type="button" class="btn" onclick="javascript:window.history.go(-1);">
+                        Hủy</button>
+                    @*@Html.ActionLink("Hủy", "Index", null, new { @Class = "btn" })*@
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

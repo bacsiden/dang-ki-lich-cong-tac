@@ -1,0 +1,21 @@
+﻿@model Alabama.Group
+<h3>
+    Thêm vai trò cho: <a href="/Group/UsersInGroup/@Model.ID">@Model.Title</a></h3>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+@Html.ValidationSummary(true, "Thêm vai trò vào nhóm không thành công")
+@using (Html.BeginForm("DoRole", "Group", new { groupID = Model.ID }))
+{
+    <div>
+        @Html.Hidden("listCheck", null, new {id="HiddenListRole"})
+        <div class="control-group">            
+            <label class="control-label">
+                Nhóm quyền</label>
+            <div class="controls" id="ListRoles">
+                @Html.Raw(ViewBag.listRole)
+            </div>
+            <input type="submit" value="OK" class="btn btn-primary" id="SubmitRole" />
+            @Html.ActionLink("Hủy", "index", null, new { @class = "btn" })
+        </div>
+    </div>
+}

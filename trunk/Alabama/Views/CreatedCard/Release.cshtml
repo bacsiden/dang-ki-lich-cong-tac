@@ -1,0 +1,86 @@
+﻿<link rel="stylesheet" type="text/css" href="/Content/assets/bootstrap-datepicker/css/datepicker.css" />
+<script type="text/javascript" src="/Content/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box box-pink">
+            <div class="box-title">
+                <h3>
+                    <i class="icon-reorder"></i>Bàn giao thẻ cho đại lý</h3>
+                <div class="box-tool">
+                </div>
+            </div>
+            <div class="box-content">
+                <form action="/CreatedCard/Release" method="post" class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">
+                        Người bàn giao</label>
+                    <span class="control-label fleft">Duy Khánh </span>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">
+                        Mệnh giá thẻ</label>
+                    <div class="controls">
+                        <input name="txtPriceLevel" type="text" class="span10" value="@ViewBag.PriceLevel"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">
+                        Số lượng còn lại</label>
+                    <div class="controls">
+                        <input name="txtAmountLeft" type="text" class="span10" value="@ViewBag.AmountLeft"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">
+                        Số serial đầu</label>
+                    <div class="controls">
+                        <input name="txtFirstSerial" type="text" class="span10" value="@ViewBag.FirstSerial"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">
+                        Đại lý</label>
+                    <div class="controls">
+                        <select name="cboAgent" class="span6">
+                            @Html.Raw(ViewBag.Agent)
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">
+                        Số lượng</label>
+                    <div class="controls">
+                        <input name="txtAmount" type="text" class="span10" value="@ViewBag.AmountLeft"/>
+                    </div>
+                </div>
+                @*<div class="control-group">
+                    <label class="control-label">
+                        Tổng tiền</label>
+                    <div class="controls">
+                        <input name="txtSumMoney" type="text" class="span10" />
+                    </div>
+                </div>*@
+                <div class="control-group">
+                    <label class="control-label">
+                        Ngày phát bàn giao</label>
+                    <div class="controls">
+                        <input name="dtReleaseTime" class="date-picker" size="16" type="text" value="@ViewBag.ReleaseTime" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">
+                        Mô tả</label>
+                    <div class="controls">
+                        <input name="txtNote" type="text" class="span10" />
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        Bàn giao</button>
+                    @Html.ActionLink("Hủy", "Index", null, new { @Class = "btn" })
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

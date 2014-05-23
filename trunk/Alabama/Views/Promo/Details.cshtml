@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Alabama.TraLoiCauHoiDieuTra>
+@{
+    Layout = null;
+    ViewBag.Id = (string)Request["id"];
+}
+<html>
+<head>
+    <style type="text/css">
+        body
+        {
+            font-family: "Helvetica Neue" ,Helvetica,Arial,sans-serif;
+            font-size: 14px;
+        }
+        .CauHoiDieuTra
+        {
+            color: #0072BC;
+        }
+        #box-content
+        {
+            margin: 0 auto;
+            padding: 20px 10px 10px 10px;
+        }
+        #box-content .radio
+        {
+            line-height: 18px;
+            padding-bottom: 10px;
+            width: 100%;
+            float: left;
+        }
+        #SendCauHoiDieuTra
+        {
+            background-color: #0090ff;
+            padding: 4px 12px;
+            font-size: 14px;
+            line-height: 20px;
+            border: none;
+            color: white;
+        }
+        #SendCauHoiDieuTra:hover
+        {
+            cursor: pointer;
+            background-color: #017cdb;
+        }
+    </style>
+</head>
+<body>
+    <div ID="box-content" style="width:@(ViewBag.Width)px;">
+        <p>@Html.Raw(ViewBag.Content)</p>
+        <a href="@ViewBag.Url">
+            <img src="@ViewBag.ImageUrl" width="@ViewBag.Width" height="@ViewBag.Height"/></a>
+        <br />
+        <br />
+        @using (Html.BeginForm("Details", "Promo", FormMethod.Post))
+        {
+            if (Model.Count() > 0)
+            {
+            @Html.Hidden("Id", (string)ViewBag.Id);
+            foreach (var item in Model)
+            {
+            <label class="radio">
+                @Html.RadioButton("Rbt", @item.ID, null) <span class="CauHoiDieuTra">
+                    @item.NoiDung </span>
+                <br />
+            </label>
+            }
+            <br />
+            <input type="submit" name="submit" value="Gửi bình chọn" id="SendCauHoiDieuTra" />
+            }
+        }
+    </div>
+</body>
+</html>

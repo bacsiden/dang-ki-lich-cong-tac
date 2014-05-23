@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Alabama.CauHoiDieuTra>
+<!DOCTYPE html>
+<style>
+    .btnThemMoi:hover
+    {
+        color: #003759;
+    }
+</style>
+<h3>
+    Câu hỏi điều tra</h3>
+<p style="margin-left: 7px;">
+    <img src="/Content/img/add.png" width="14" height="14" style="padding-bottom: 2px;" />
+    @Html.ActionLink(" Tạo quảng cáo", "Create", null, new { @class = "btnThemMoi" })
+</p>
+<table class="table">
+    <thead>
+        <tr class="table-flag-blue">
+            <th>
+                Nội dung
+            </th>
+            <th>
+                Ngày tạo
+            </th>
+            <th>
+                Công ty
+            </th>
+            <th>
+                Banner
+            </th>
+            <th>
+                Kích hoạt
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Details", new { id = item.ID })">@Html.Raw(string.IsNullOrEmpty(item.Content) ? "Detail" : item.Content)</a>
+                </td>
+                <td>
+                    @item.CreatedDate.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @item.Company
+                </td>
+                <td>
+                    <a href="@item.Link">
+                        <img src="/PromoData/@item.ID@item.FileExtention" width="60"/></a>
+                </td>
+                <td>
+                    @if (item.Activated)
+                    {
+                        @Html.ActionLink("Activated", "Activate", new { id = item.ID, activate = false });
+@*<span style="color: #0072BC;">Đã kích hoạt</span>*@
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Disabled", "Activate", new { id = item.ID, activate = true }, new { @style = "color: red;" });
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

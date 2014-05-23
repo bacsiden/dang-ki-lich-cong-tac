@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Alabama.Group>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="icon-table"></i>Danh sách nhóm người dùng</h3>
+            </div>
+            <div class="box-content">
+                <p style="margin-left: 7px;">
+                    <img src="/Content/img/add.png" width="14" height="14" style="padding-bottom: 2px;" />
+                    @Html.ActionLink("Thêm nhóm", "Create", null, new { @class = "btnThemMoi" })
+                </p>
+                <table class="table">
+                    <thead>
+                        <tr class="table-flag-blue">
+                            <th>
+                                Tên nhóm
+                            </th>
+                            <th>
+                                Vai trò
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink(item.Title, "UsersInGroup", new { id = item.ID }, null)
+                                </td>
+                                <td>
+                                    @foreach (var role in item.Role1)
+                                    {
+                                        @role.Name <br />
+                                    }
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Phân quyền", "Role", new { id = item.ID })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Phân menu", "Menu", new { id = item.ID })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "confirmDelete" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="alert alert-info">                    
+                    <strong>Ghi chú: </strong> Click vào tên nhóm để thêm người dùng vào nhóm.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

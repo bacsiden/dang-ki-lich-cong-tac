@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<script type="text/javascript" src="/Content/assets/jquery/jquery-1.10.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#money").keydown(function (event) {
+            if (event.getKey() < 48 && event.getKey() > 57)
+                return;
+            }
+        });
+    });
+</script>
+<style>
+    a.btnThanhToan img
+    {
+        border:1px solid;
+        width: 150px;
+        height: 150px;
+    }
+    .action
+    {
+        padding:20px 0px 20px 179px;
+    }
+    .mauchu
+    {
+        color:#0072BC;
+    }
+</style>
+<form id="form1" action="/Account/NganLuongRedirect" method="post" class="form-horizontal">
+<h2 class="mauchu action">Nạp tiền vào tài khoản Viegrid</h2>
+<div class="control-group info">
+    <label class="control-label">
+        Tên tài khoản</label>
+    <div class="controls">
+        <input class="span6" type="text" runat="server" name="txtUserName"/>
+    </div>
+</div>
+<div class="control-group info">
+    <label class="control-label">
+        Số tiền</label>
+    <div class="controls">
+        <input class="span6" type="text" runat="server" name="money" id="money"/>
+    </div>
+</div>
+<div class="action">
+    <h4 class="mauchu ">
+        Lựa chọn cổng thanh toán</h4>
+    <div>
+        <a onclick="$('#portCheckout').val(1); form1.submit();" href="javascript:void(0);" class="btnThanhToan">
+            <img src="/Content/img/3.png" /></a> 
+            <a onclick="$('#portCheckout').val(2); form1.submit();" href="javascript:void(0);" class="btnThanhToan">
+                <img src="/Content/img/4.png" /></a>
+    </div>
+</div>
+<input type="hidden" id="portCheckout" name="portCheckout" value=""/>
+</form>
