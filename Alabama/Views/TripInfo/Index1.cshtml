@@ -1,0 +1,196 @@
+﻿@model IEnumerable<DKLCT.Trip_Info>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            Order_date
+        </th>
+        <th>
+            Pickup_date
+        </th>
+        <th>
+            Delivery_date
+        </th>
+        <th>
+            Pick_up_location
+        </th>
+        <th>
+            Delivery_location
+        </th>
+        <th>
+            Extra_stops
+        </th>
+        <th>
+            Loaded_miles
+        </th>
+        <th>
+            Dead_head_miles
+        </th>
+        <th>
+            Comfirmed_Rate
+        </th>
+        <th>
+            Customer
+        </th>
+        <th>
+            Dispatcher
+        </th>
+        <th>
+            Driver
+        </th>
+        <th>
+            Paid
+        </th>
+        <th>
+            Extra_charges
+        </th>
+        <th>
+            Detention_pay
+        </th>
+        <th>
+            Total_charges
+        </th>
+        <th>
+            Detention
+        </th>
+        <th>
+            Picked
+        </th>
+        <th>
+            Deliverd
+        </th>
+        <th>
+            Invoice
+        </th>
+        <th>
+            Customer_Invoiced
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Current_Payroll
+        </th>
+        <th>
+            Driver_paid
+        </th>
+        <th>
+            Equipment_ID
+        </th>
+        <th>
+            Comment
+        </th>
+        <th>
+            PO_
+        </th>
+        <th>
+            Customer_Invoiced_date
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Trip_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Trip_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Trip_ID })
+        </td>
+        <td>
+            @String.Format("{0:g}", item.Order_date)
+        </td>
+        <td>
+            @String.Format("{0:g}", item.Pickup_date)
+        </td>
+        <td>
+            @String.Format("{0:g}", item.Delivery_date)
+        </td>
+        <td>
+            @item.Pick_up_location
+        </td>
+        <td>
+            @item.Delivery_location
+        </td>
+        <td>
+            @item.Extra_stops
+        </td>
+        <td>
+            @item.Loaded_miles
+        </td>
+        <td>
+            @item.Dead_head_miles
+        </td>
+        <td>
+            @String.Format("{0:F}", item.Comfirmed_Rate)
+        </td>
+        <td>
+            @item.Customer
+        </td>
+        <td>
+            @item.Dispatcher
+        </td>
+        <td>
+            @item.Driver
+        </td>
+        <td>
+            @item.Paid
+        </td>
+        <td>
+            @String.Format("{0:F}", item.Extra_charges)
+        </td>
+        <td>
+            @String.Format("{0:F}", item.Detention_pay)
+        </td>
+        <td>
+            @String.Format("{0:F}", item.Total_charges)
+        </td>
+        <td>
+            @String.Format("{0:F}", item.Detention)
+        </td>
+        <td>
+            @item.Picked
+        </td>
+        <td>
+            @item.Deliverd
+        </td>
+        <td>
+            @item.Invoice
+        </td>
+        <td>
+            @item.Customer_Invoiced
+        </td>
+        <td>
+            @item.Address
+        </td>
+        <td>
+            @item.Current_Payroll
+        </td>
+        <td>
+            @item.Driver_paid
+        </td>
+        <td>
+            @item.Equipment_ID
+        </td>
+        <td>
+            @item.Comment
+        </td>
+        <td>
+            @item.PO_
+        </td>
+        <td>
+            @String.Format("{0:g}", item.Customer_Invoiced_date)
+        </td>
+    </tr>
+}
+
+</table>
+

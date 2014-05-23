@@ -1,0 +1,120 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model PagedList<Alabama.Customer_Info>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="icon-table"></i>List Customer_info</h3>
+            </div>
+            <div class="box-content">
+                <p style="margin-left: 7px;">
+                    <img src="/Content/img/add.png" width="14" height="14" style="padding-bottom: 2px;" />
+                    @Html.ActionLink("Create New", "Create", null, new { @class = "btnThemMoi" })
+                </p>
+                <table class="table">
+                    <thead>
+                        <tr class="table-flag-blue">
+                            <th>
+                                City
+                            </th>
+                            <th>
+                                State
+                            </th>
+                            <th>
+                                ZIP_Code
+                            </th>
+                            <th>
+                                Phone
+                            </th>
+                            <th>
+                                Fax
+                            </th>
+                            <th>
+                                Contact
+                            </th>
+                            <th>
+                                Comments
+                            </th>
+                            <th>
+                                Days_to_pay
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @item.City
+                                </td>
+                                <td>
+                                    @item.State
+                                </td>
+                                <td>
+                                    @item.ZIP_Code
+                                </td>
+                                <td>
+                                    @item.Phone
+                                </td>
+                                <td>
+                                    @item.Fax
+                                </td>
+                                <td>
+                                    @item.Contact
+                                </td>
+                                <td>
+                                    @item.Comments
+                                </td>
+                                <td>
+                                    @item.Days_to_pay
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Customer_ID }) | @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Customer_ID }, new { @class = "confirmDelete" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="row-fluid">
+                    <div class="span4">
+                        <div class="dataTables_info">
+                            @if (Model.TotalItemCount > 0)
+                            {
+                                if (Model.TotalItemCount < Model.PageSize)
+                                {
+                                <span>1 </span>
+                                <span>- </span>@Model.TotalItemCount
+                                }
+                                else
+                                {
+                                <span></span>@((Model.CurrentPageIndex - 1) * Model.PageSize + 1)
+                                <span>- </span>@((Model.CurrentPageIndex != Model.TotalPageCount) ? (Model.CurrentPageIndex * Model.PageSize) : Math.Abs((Model.CurrentPageIndex) * Model.PageSize - (Model.PageSize * Model.TotalPageCount) - Model.TotalItemCount))
+                                }
+                                <span>of </span>@(Model.TotalItemCount)
+                            
+                            }
+                        </div>
+                    </div>
+                    <div class="span8">
+                        <div class="dataTables_paginate paging_bootstrap pagination phantrangmvcpager">
+                            @* <ul>
+                        <li class="prev disabled"><a href="#">← Prev</a></li><li class="active"><a href="#">
+                            1</a></li><li><a href="#">2</a></li><li class="next"><a href="#">Next → </a>
+                        </li>
+                    </ul>*@
+                            @Html.Pager(Model, new PagerOptions { ContainerTagName = "ul", PageIndexParameterName = "page", CurrentPagerItemWrapperFormatString = "<li class='active'>{0}</li>", CurrentPageNumberFormatString = "{0}", FirstPageText = "&laquo; ", LastPageText = " &raquo;", NextPageText = "Next →", PrevPageText = "← Prev", SeparatorHtml = "" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

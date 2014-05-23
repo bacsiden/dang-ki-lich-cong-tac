@@ -1,0 +1,100 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model PagedList<DKLCT.Customer_Info>
+<style type="text/css">
+    .phantrangmvcpager li, .phantrangmvcpager a
+    {
+        padding: 0 5px; 
+    }
+    .phantrangmvcpager
+    {
+        width: 500px;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".phantrangmvcpager a[data-ajax='true']").click(function () {
+            var url = $(this).attr('href');
+            $.ajax({
+                type: "GET",
+                url: url,
+                async: true,
+                success: function (model) {
+                    $("#resultCustomerInfo").html(model);
+                    return false;
+                }
+            });
+            return false;
+        });
+    });
+</script>
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Customer_Name
+        </th>
+        <th>
+            Street
+        </th>
+        <th>
+            City
+        </th>
+        <th>
+            State
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+            ZIP_code
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @*@Html.ActionLink(item.Customer_ID.ToString(), "NewOrEdit", new { id = item.Customer_ID })*@
+                <a href="#" class="choiceCustomer">@item.Customer_ID</a>
+            </td>
+            <td>
+                @item.Customer_Name
+            </td>
+            <td>
+                @item.Street
+            </td>
+            <td>
+                @item.City
+            </td>
+            <td>
+                @item.State
+            </td>
+            <td>
+                @item.Phone
+            </td>
+            <td>
+                @item.ZIP_Code
+            </td>
+        </tr>
+    }
+</table>
+<div class="dataTables_info">
+    @if (Model.TotalItemCount > 0)
+    {
+        if (Model.TotalItemCount < Model.PageSize)
+        {
+        <span>1 </span>
+        <span>- </span>@Model.TotalItemCount
+        }
+        else
+        {
+        <span></span>@((Model.CurrentPageIndex - 1) * Model.PageSize + 1)
+        <span>- </span>@((Model.CurrentPageIndex != Model.TotalPageCount) ? (Model.CurrentPageIndex * Model.PageSize) : Math.Abs((Model.CurrentPageIndex) * Model.PageSize - (Model.PageSize * Model.TotalPageCount) - Model.TotalItemCount))
+        }
+        <span>of </span>@(Model.TotalItemCount)                            
+    }
+</div>
+<div class="dataTables_paginate paging_bootstrap pagination phantrangmvcpager">
+    @Ajax.Pager(Model, new PagerOptions { ContainerTagName = "ul", PageIndexParameterName = "page", CurrentPagerItemWrapperFormatString = "<li class='active'>{0}</li>", CurrentPageNumberFormatString = "{0}", FirstPageText = "«", LastPageText = "»", NextPageText = "Next →", PrevPageText = "← Prev", SeparatorHtml = "" }, new AjaxOptions { UpdateTargetId = "resultCustomerInfo", HttpMethod = "GET" })
+</div>

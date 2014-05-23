@@ -1,0 +1,107 @@
+﻿@model Alabama.Customer_Info
+@{
+    ViewBag.Title = "Edit";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="icon-table"></i>Edit</h3>
+            </div>
+            <div class="box-content">
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.ValidationSummary(true)                    
+@*<div class="control-group">
+                        <label class="control-label">
+                            @Html.LabelFor(model => model.City)</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.City)
+                            @Html.ValidationMessageFor(model => model.City)
+                        </div>
+                    </div>*@
+                    @Html.HiddenFor(model => model.Customer_ID)
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Customer_Name)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Customer_Name)
+                        @Html.ValidationMessageFor(model => model.Customer_Name)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Street)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Street)
+                        @Html.ValidationMessageFor(model => model.Street)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.City)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.City)
+                        @Html.ValidationMessageFor(model => model.City)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.State)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.State)
+                        @Html.ValidationMessageFor(model => model.State)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ZIP_Code)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ZIP_Code)
+                        @Html.ValidationMessageFor(model => model.ZIP_Code)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Phone)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Phone)
+                        @Html.ValidationMessageFor(model => model.Phone)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Fax)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Fax)
+                        @Html.ValidationMessageFor(model => model.Fax)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Contact)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Contact)
+                        @Html.ValidationMessageFor(model => model.Contact)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Comments)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Comments)
+                        @Html.ValidationMessageFor(model => model.Comments)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Days_to_pay)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Days_to_pay)
+                        @Html.ValidationMessageFor(model => model.Days_to_pay)
+                    </div>
+                    <p>
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn" })
+                    </p>
+                    
+                }
+            </div>
+        </div>
+    </div>
+</div>

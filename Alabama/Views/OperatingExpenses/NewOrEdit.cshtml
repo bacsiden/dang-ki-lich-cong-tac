@@ -1,0 +1,276 @@
+﻿@model DKLCT.Operating_Expenses
+@{
+    ViewBag.Title = "NewOrEdit";
+}
+<div class="row-fluid">
+    <div class="span12">
+        <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)                    
+
+            @Html.HiddenFor(model => model.ID)
+                    
+            <div class="control-group">
+                <label class="control-label" for="Order_date">@Html.LabelFor(model => model.Current_Payroll)</label>
+                <div class="controls">
+                    <div class="span12">
+                        @Html.TextBoxFor(model => model.Current_Payroll, new { @class = "input-xlarge" })
+                        @Html.ValidationMessageFor(model => model.Current_Payroll)
+                    </div>
+                </div>
+            </div>
+@*         <div class="control-group">
+                        <label class="control-label" for="Pickup_date">@Html.LabelFor(model => model.Pickup_date)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Pickup_date, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Pickup_date)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="Delivery_date">@Html.LabelFor(model => model.Delivery_date)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Delivery_date, new { @class = "input-xlarge date-picker" })
+                                @Html.ValidationMessageFor(model => model.Delivery_date)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="Pick_up_location">@Html.LabelFor(model => model.Pick_up_location)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Pick_up_location, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Pick_up_location)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="Delivery_location">@Html.LabelFor(model => model.Delivery_location)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Delivery_location, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Delivery_location)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Extra_stops">@Html.LabelFor(model => model.Extra_stops)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Extra_stops, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Extra_stops)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Loaded_miles">@Html.LabelFor(model => model.Loaded_miles)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Loaded_miles, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Loaded_miles)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Dead_head_miles">@Html.LabelFor(model => model.Dead_head_miles)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Dead_head_miles, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Dead_head_miles)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Comfirmed_Rate">@Html.LabelFor(model => model.Comfirmed_Rate)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Comfirmed_Rate, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Comfirmed_Rate)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Customer">@Html.LabelFor(model => model.Customer)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Customer, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Customer)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Dispatcher">@Html.LabelFor(model => model.Dispatcher)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Dispatcher, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Dispatcher)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Driver">@Html.LabelFor(model => model.Driver)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Driver, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Driver)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Paid">@Html.LabelFor(model => model.Paid)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Paid, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Paid)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Extra_charges">@Html.LabelFor(model => model.Extra_charges)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Extra_charges, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Extra_charges)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Detention_pay">@Html.LabelFor(model => model.Detention_pay)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Detention_pay, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Detention_pay)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Total_charges">@Html.LabelFor(model => model.Total_charges)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Total_charges, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Total_charges)
+                            </div>
+                        </div>
+                    </div> 
+                    
+                        
+                    <div class="control-group">
+                        <label class="control-label" for="Detention">@Html.LabelFor(model => model.Detention)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Detention, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Detention)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Picked">@Html.LabelFor(model => model.Picked)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Picked, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Picked)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Deliverd">@Html.LabelFor(model => model.Deliverd)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Deliverd, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Deliverd)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Invoice">@Html.LabelFor(model => model.Invoice)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Invoice, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Invoice)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Customer_Invoiced">@Html.LabelFor(model => model.Customer_Invoiced)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Customer_Invoiced, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Customer_Invoiced)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Address">@Html.LabelFor(model => model.Address)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Address, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Address)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Current_Payroll">@Html.LabelFor(model => model.Current_Payroll)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Current_Payroll, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Current_Payroll)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Driver_paid">@Html.LabelFor(model => model.Driver_paid)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Driver_paid, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Driver_paid)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Equipment_ID">@Html.LabelFor(model => model.Equipment_ID)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Equipment_ID, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Equipment_ID)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Comment">@Html.LabelFor(model => model.Comment)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Comment, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Comment)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="PO_">@Html.LabelFor(model => model.PO_)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.PO_, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.PO_)
+                            </div>
+                        </div>
+                    </div>    
+                    <div class="control-group">
+                        <label class="control-label" for="Customer_Invoiced_date">@Html.LabelFor(model => model.Customer_Invoiced_date)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.Customer_Invoiced_date, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Customer_Invoiced_date)
+                            </div>
+                        </div>
+                    </div> *@
+            <div class="form-actions">
+                <input type="submit" value="Save" class="btn btn-info" />
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn" })
+            </div>
+        }
+    </div>
+</div>

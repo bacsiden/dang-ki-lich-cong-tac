@@ -1,0 +1,300 @@
+﻿@model DKLCT.Driver_Info
+@using Webdiyer.WebControls.Mvc;
+@{
+    ViewBag.Title = "NewOrEdit";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        //        autoCompleteByClassName($(":input.Dispatcher"),Html.Raw(ViewBag.dataDispatchers));
+        //        autoCompleteByClassName($(":input.Owner_Name"),Html.Raw(ViewBag.dataOwners));
+
+        $(".DriverPayrollExpanses").click(function () {
+            $(".DriverPayRollList").fadeIn();
+            $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+        });
+
+        // show/hide input checkbox
+        $('input[type=checkbox]').parent().hide();
+        $('.DriverPayRollList input[type=checkbox]').parent().show();
+
+        // Add parameter for 2 button report
+        clickFunctionByClassName('Printreport');
+        clickFunctionByClassName('PDFreport');
+
+    });
+    function clickFunctionByClassName(classReport) {
+        $("." + classReport).click(function () {
+            //        PDFreport
+            // GetListID when click checkbox
+            var listIDTripInfo = getListIDCheckBoxByClassName('DriverPayRollList', 'DriverTripCheckItem');
+            var listIDFuelExpenses = getListIDCheckBoxByClassName('DriverPayRollList', 'DriverFuel___ExpensesItem');
+            var listIDOperatingExpenses = getListIDCheckBoxByClassName('DriverPayRollList', 'DriverOperating_ExpensesItem');
+            var url = $(this).attr('href');
+            var newUrl = addParam(addParam(addParam(url, 'listIDOperatingExpenses', listIDOperatingExpenses), 'listIDFuelExpenses', listIDFuelExpenses), 'listIDTripInfo', listIDTripInfo);
+            $(this).attr('href', newUrl);
+        });
+    }   
+</script>
+<div class="row-fluid">
+    <div class="span12">
+        <h3>
+            Driver Info</h3>
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.ID)
+            <div class="row-fluid">
+                <div class="span12">
+                    <a href="/TripInfo/NewOrEdit?driverID=@(Model != null ? Model.ID : 0)" class="btn btn-info"> New Trip info</a> 
+                    <a href="/Equipment" class="btn btn-info">Equipment</a> 
+                    <a href="/Violations" class="btn btn-info">Violations</a> 
+                    <a href="/Maintenance" class="btn btn-info">Maintenance</a>
+                    <a href="/DriverInfo/PayrollsRollback/@Model.ID" class="btn btn-info">Pay rolls rollback</a> 
+                    <a href="#" class="btn btn-info">Pay rolls operations rollback</a>
+                    @*<a href="/DriverInfo/PayrollsRollback/@Model.ID" class="btn btn-info DriverPayrollExpanses">Driver payroll & expanses</a>*@
+                    <a href="/DriverInfo/PayrollsRollback/@Model.ID" class="btn btn-info">Driver payroll & expanses</a>
+                </div>
+                <div class="span11">
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span4">
+                    <div class="control-group">
+                        <label for="Employee_ID">
+                            Employee ID</label>
+                        @Html.TextBoxFor(model => model.Employee_ID, new { @class = "input-xlarge" })
+                        @Html.ValidationMessageFor(model => model.Employee_ID)
+                    </div>
+                    <div class="control-group">
+                        <label for="First_name">
+                            First name <span class="requiredStar">(*)</span></label>
+                        @Html.TextBoxFor(model => model.First_name, new { @class = "input-xlarge" })
+                        @Html.ValidationMessageFor(model => model.First_name)
+                    </div>
+                    <div class="control-group">
+                        <label for="Middle_in">
+                            Middle in</label>
+                        @Html.TextBoxFor(model => model.Middle_in, new { @class = "input-xlarge" })
+                        @Html.ValidationMessageFor(model => model.Middle_in)
+                    </div>
+                    <div class="control-group">
+                        <label for="Expiration_Date">
+                            Expiration Date <span class="requiredStar">(*)</span></label>
+                        @Html.TextBoxFor(model => model.Expiration_Date, new { @class = "input-xlarge date-picker" })
+                        @Html.ValidationMessageFor(model => model.Expiration_Date)
+                    </div>
+                    <div class="control-group">
+                        <label for="Pay_rate">
+                            Pay Rate</label>
+                        @Html.TextBoxFor(model => model.Pay_rate, new { @class = "input-xlarge" })
+                        @Html.ValidationMessageFor(model => model.Pay_rate)
+                    </div>
+                    <div class="control-group">
+                        <label for="fuel___advance_Fee_rate">
+                            Fuel Advance Fee Rate</label>
+                        @Html.TextBoxFor(model => model.fuel___advance_Fee_rate, new { @class = "input-xlarge" })
+                        @Html.ValidationMessageFor(model => model.fuel___advance_Fee_rate)
+                    </div>
+                    <div class="control-group">
+                        <label for="Fuel_Card">
+                            Fuel Card</label>
+                        @Html.TextBoxFor(model => model.Fuel_Card, new { @class = "input-xlarge" })
+                        @Html.ValidationMessageFor(model => model.Fuel_Card)
+                    </div>
+                    <div class="control-group">
+                        <label for="Truck">
+                            @Html.LabelFor(model => model.Truck)</label>
+                        @*@Html.TextBoxFor(model => model.Truck, new { @class = "input-xlarge" })*@
+                        <select data-placeholder="Select Truck" name="Truck" class="chosen-with-diselect input-xlarge">
+                            @Html.Raw(ViewBag.dataTruck)
+                        </select>
+                        @Html.ValidationMessageFor(model => model.Truck)
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="control-group">
+                        <label for="Active" class="checkbox">
+                            Active
+                            @Html.CheckBoxFor(model => model.Active, new { @class = "input-xlarge" })</label>
+                        @Html.ValidationMessageFor(model => model.Active)
+                    </div>
+                    <div class="control-group">
+                        <label for="Last_name">
+                            Last Name <span class="requiredStar">(*)</span></label>
+                        @Html.TextBoxFor(model => model.Last_name, new { @class = "input-xlarge" })
+                        @Html.ValidationMessageFor(model => model.Last_name)
+                    </div>
+                    <div class="control-group">
+                        <label for="SSN">
+                            SSN <span class="requiredStar">(*)</span></label>
+                        @Html.TextBoxFor(model => model.SSN, new { @class = "input-xlarge" })
+                        @Html.ValidationMessageFor(model => model.SSN)
+                    </div>
+                    <div class="control-group">
+                        <label for="Drive_Lic">
+                            Driver license <span class="requiredStar">(*)</span></label>
+                        @Html.TextBoxFor(model => model.Drive_Lic, new { @class = "input-xlarge" })
+                        @Html.ValidationMessageFor(model => model.Drive_Lic)
+                    </div>
+                    <div class="control-group">
+                        <label for="State">
+                            State <span class="requiredStar">(*)</label>
+                        @Html.TextBoxFor(model => model.State, new { @class = "input-xlarge" })
+                        @Html.ValidationMessageFor(model => model.State)
+                    </div>
+                    <div class="control-group">
+                        <label for="Date_Issued">
+                            Date Issued</label>
+                        @Html.TextBoxFor(model => model.Date_Issued, new { @class = "input-xlarge" })
+                        @Html.ValidationMessageFor(model => model.Date_Issued)
+                    </div>
+                    <div class="control-group">
+                        <label for="HazMat" class="checkbox">
+                            HazMat
+                            @Html.CheckBoxFor(model => model.HazMat, new { @class = "input-xlarge" })
+                        </label>
+                        @Html.ValidationMessageFor(model => model.HazMat)
+                    </div>
+                    <div class="control-group">
+                        <label for="Dispatcher">
+                            @Html.LabelFor(model => model.Dispatcher)</label>
+                        @*@Html.TextBoxFor(model => model.Dispatcher, new { @class = "input-xlarge" })*@
+                        <select data-placeholder="Select Dispatcher" name="Dispatcher" class="chosen-with-diselect input-xlarge">
+                            @Html.Raw(ViewBag.dataDispatchers)
+                        </select>
+                        @*@Html.ValidationMessageFor(model => model.Dispatcher," ")*@
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="control-group">
+                        <label for="Trailer">
+                            @Html.LabelFor(model => model.Trailer)</label>
+                        <select data-placeholder="Select Trailer" name="Trailer" class="chosen-with-diselect input-xlarge">
+                            @Html.Raw(ViewBag.dataTrailer)
+                        </select>
+                        @Html.ValidationMessageFor(model => model.Trailer)
+                    </div>
+                    <div class="control-group">
+                        <label for="Owner" class="checkbox">
+                            Owner
+                            @Html.CheckBoxFor(model => model.Owner, new { @class = "input-xlarge" })
+                        </label>
+                        @Html.ValidationMessageFor(model => model.Owner)
+                    </div>
+                    <div class="control-group">
+                        <label for="Owner_Pay_Rate">
+                            @Html.LabelFor(model => model.Owner_Pay_Rate)</label>
+                        @Html.TextBoxFor(model => model.Owner_Pay_Rate, new { @class = "input-xlarge" })
+                        @Html.ValidationMessageFor(model => model.Owner_Pay_Rate)
+                    </div>
+                    <div class="control-group">
+                        <label for="Owner_Name">
+                            @Html.LabelFor(model => model.Owner_Name)</label>
+                        @*@Html.TextBoxFor(model => model.Owner_Name, new { @class = "input-xlarge" })*@
+                        @*<input type="text" class="input-xlarge Owner_Name" name="Owner_Name" value="@Model.Owner_Name" style="margin: 0 auto;" data-provide="typeahead" data-items="4" />*@
+                        <select data-placeholder="Select Owners" name="Owner_Name" class="chosen-with-diselect input-xlarge">
+                            @Html.Raw(ViewBag.dataOwners)
+                        </select>
+                        @*@Html.ValidationMessageFor(model => model.Owner_Name)*@
+                    </div>
+                    <div class="control-group">
+                        <label for="Address">
+                            Address <span class="requiredStar">(*)</span></label>
+                        @Html.TextBoxFor(model => model.Address, new { @class = "input-xlarge" })
+                        @Html.ValidationMessageFor(model => model.Address)
+                    </div>
+                    <div class="control-group">
+                        <label for="Phone">
+                            Phone <span class="requiredStar">(*)</span></label>
+                        @Html.TextBoxFor(model => model.Phone, new { @class = "input-xlarge" })
+                        @Html.ValidationMessageFor(model => model.Phone)
+                    </div>
+                    <div class="control-group">
+                        <label for="Comments">
+                            @Html.LabelFor(model => model.Comments)</label>
+                        @Html.TextAreaFor(model => model.Comments, new { @class = "input-xlarge", rows = "5" })
+                        @Html.ValidationMessageFor(model => model.Comments)
+                    </div>
+                </div>
+            </div>  
+            <div class="row-fluid">
+                <div class="span12">
+                    @{
+            int page = (!string.IsNullOrEmpty(Request.Params["page"]) ? int.Parse(Request.Params["page"]) : 1);
+            int pageIndex = (!string.IsNullOrEmpty(Request.Params["pageIndex"]) ? int.Parse(Request.Params["pageIndex"]) : 1);
+            int pageInfo = (!string.IsNullOrEmpty(Request.Params["pageInfo"]) ? int.Parse(Request.Params["pageInfo"]) : 1);
+            int pageSize = (!string.IsNullOrEmpty(Request.Params["pageSize"]) ? int.Parse(Request.Params["pageSize"]) : 10);
+
+            var lstFuel_Expenses = Model.Fuel___Expenses.ToList();
+            var lstOperating_Expenses = Model.Operating_Expenses.ToList();
+            var listTripInfo = Model.Trip_Info.ToList();
+
+            var lst = lstFuel_Expenses.Where(m => m.Current_Payroll.Equals("YES") && m.Paid_off.Equals("NO")).ToList();
+            var lst1 = lstOperating_Expenses.Where(m => m.Current_Payroll.Equals("YES") && m.Paid_off.Equals("NO")).ToList();
+            var listTripInfoConditon = listTripInfo.Where(m => m.Picked == true && m.Deliverd == true && m.Current_Payroll == true && m.Customer_Invoiced == true && m.Driver_paid == false).ToList();
+                                    
+                    }
+                    @Html.Partial("_Fuel_ExpensesPartial", new PagedList<DKLCT.Fuel___Expenses>(lstFuel_Expenses, page, pageSize))
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    @Html.Partial("_Operating_ExpensesPartial", new PagedList<DKLCT.Operating_Expenses>(lstOperating_Expenses, pageIndex, pageSize))
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <div id="wrap-AjaxPaging">
+                        <h3>
+                            Trip Driver</h3>
+                        @Html.Partial("_IndexPartialTripInfo", new PagedList<DKLCT.Trip_Info>(listTripInfo, pageInfo, pageSize))
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <input type="submit" value="Save" class="btn btn-info" />
+                    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn" })
+                </div>
+            </div> 
+            <div class="DriverPayRollList" style="display: none; margin: 50px 0 0 0;">
+                <div class="row-fluid">
+                    <div class="span12" style="background: #5ab4da; text-align: center;">
+                        <h3 style="margin: 0; color: White; text-transform: uppercase;">
+                            Driver PayRoll List</h3>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div id="wrap-AjaxPaging">
+                            <h3>
+                                Trip Driver Selection</h3>
+                            @Html.Partial("_IndexPartialTripInfo1", listTripInfoConditon)
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <h3>
+                            Fuel Expenses</h3>
+                        @Html.Partial("_Fuel_ExpensesPartial1", lst)
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <h3>
+                            Operating Expenses</h3>
+                        @Html.Partial("_Operating_ExpensesPartial1", lst1)
+                    </div>
+                </div>
+                <div class="row-fluid" style="padding-top: 20px">
+                    <div class="span12">
+                        @Html.ActionLink("Print report", "Printreport", null, new { @class = "btn btn-info Printreport" })
+                        @Html.ActionLink("PDF report", "PDFreport", null, new { @class = "btn btn-info PDFreport" })
+                    </div>
+                </div>
+            </div>
+            
+        }
+    </div>
+</div>

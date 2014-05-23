@@ -1,0 +1,66 @@
+﻿@model DKLCT.Owners
+@{
+    ViewBag.Title = "NewOrEdit";
+}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="icon-table"></i>NewOrEdit Owner</h3>
+            </div>
+            <div class="box-content">
+                <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+                <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.ValidationSummary(true)                    
+
+                    @Html.HiddenFor(model => model.OwnerID)
+                    
+                    <div class="control-group">
+                        <label class="control-label" for="Name">@Html.LabelFor(model => model.Name)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @*<input type="text" name="username" id="username" class="input-xlarge" data-rule-required="true" data-rule-minlength="3" />*@
+                                @Html.TextBoxFor(model => model.Name, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.Name)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="ssn_">@Html.LabelFor(model => model.ssn_)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.ssn_, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.ssn_)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="fee_rate">@Html.LabelFor(model => model.fee_rate)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.fee_rate, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.fee_rate)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="pay_rate">@Html.LabelFor(model => model.pay_rate)</label>
+                        <div class="controls">
+                            <div class="span12">
+                                @Html.TextBoxFor(model => model.pay_rate, new { @class = "input-xlarge" })
+                                @Html.ValidationMessageFor(model => model.pay_rate)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <input type="submit" value="Save" class="btn btn-info" />
+                        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
