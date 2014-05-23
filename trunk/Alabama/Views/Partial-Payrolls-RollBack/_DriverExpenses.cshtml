@@ -1,0 +1,78 @@
+﻿@model List<DKLCT.split_expenses>
+<div id="DriverExpensesSplit" class="boxScroll">
+    <table class="table">
+        <tr>
+            <th>
+                <input type="checkbox" name="" value="" class="SplitcheckAll" />
+            </th>
+            <th>
+                ID
+            </th>
+            <th>
+                OwnerDriver
+            </th>
+            <th>
+                Index
+            </th>
+            <th>
+                Expenses
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                Details
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Fee_Charged
+            </th>
+            <th>
+                Current_Payroll
+            </th>
+            <th>
+                Paid_Off
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" name="checkOwner" value="@item.Amount" class="Splitcheckitem"/>
+                </td>
+                <td>
+                    @Html.ActionLink(item.Id.ToString(), "NewOrEdit", new { id = item.Id })
+                </td>
+                <td>
+                    @item.OwnerDriver
+                </td>
+                <td>
+                    @item.Idndex
+                </td>
+                <td>
+                    @item.Expenses
+                </td>
+                <td>
+                    @String.Format("{0:F}", item.Amount)
+                </td>
+                <td>
+                    @item.Details
+                </td>
+                <td>
+                    @String.Format("{0:g}", item.Date)
+                </td>
+                <td>
+                    @item.Fee_Charged
+                </td>
+                <td>
+                    @item.Current_Payroll
+                </td>
+                <td>
+                    @item.Paid_Off
+                </td>
+            </tr>
+        }
+    </table>
+</div>

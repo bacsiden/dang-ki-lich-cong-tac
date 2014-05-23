@@ -1,0 +1,96 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model PagedList<DKLCT.Violations>
+           <h3>Violations</h3>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="row-fluid">
+            <div class="span12">
+                @Html.ActionLink("Create New", "NewOrEdit", null, new { @class = "btn btn-info addNewItem" })
+                @Html.ActionLink("Edit", "NewOrEdit", null, new { @class = "btn btn-info EditItem" })
+                @Html.ActionLink("Delete", "Delete", null, new { @class = "btn btn-danger DeleteItem confirmDelete" })
+            </div>
+        </div>
+        <table class="table">
+            <tr>
+                <th>
+                    <input type="checkbox" name="" value="" class="checkAll" />
+                </th>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Driver
+                </th>
+                <th>
+                    Location
+                </th>
+                <th>
+                    Date_occurred
+                </th>
+                <th>
+                    Date_resolved
+                </th>
+                <th>
+                    Equipment
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="checkOwner" value="@item.ID" class="checkitem"/>
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.ID.ToString(), "NewOrEdit", new { id = item.ID })
+                    </td>
+                    <td>
+                        @(item.Driver_Info != null ? item.Driver_Info.Last_name + " " + item.Driver_Info.First_name : null)
+                    </td>
+                    <td>
+                        @item.Location
+                    </td>
+                    <td>
+                        @String.Format("{0:g}", item.Date_occurred)
+                    </td>
+                    <td>
+                        @String.Format("{0:g}", item.Date_resolved)
+                    </td>
+                    <td>
+                        @(item.Equipment1 != null ? item.Equipment1.Equipment_number : null)
+                    </td>
+                </tr>
+            }
+        </table>
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="dataTables_info">
+                    @if (Model.TotalItemCount > 0)
+                    {
+                        if (Model.TotalItemCount < Model.PageSize)
+                        {
+                        <span>1 </span>
+                        <span>- </span>@Model.TotalItemCount
+                        }
+                        else
+                        {
+                        <span></span>@((Model.CurrentPageIndex - 1) * Model.PageSize + 1)
+                        <span>- </span>@((Model.CurrentPageIndex != Model.TotalPageCount) ? (Model.CurrentPageIndex * Model.PageSize) : Math.Abs((Model.CurrentPageIndex) * Model.PageSize - (Model.PageSize * Model.TotalPageCount) - Model.TotalItemCount))
+                        }
+                        <span>of </span>@(Model.TotalItemCount)
+                            
+                    }
+                </div>
+            </div>
+            <div class="span8">
+                <div class="dataTables_paginate paging_bootstrap pagination phantrangmvcpager">
+                    @* <ul>
+                        <li class="prev disabled"><a href="#">← Prev</a></li><li class="active"><a href="#">
+                            1</a></li><li><a href="#">2</a></li><li class="next"><a href="#">Next → </a>
+                        </li>
+                    </ul>*@
+                    @Html.Pager(Model, new PagerOptions { ContainerTagName = "ul", PageIndexParameterName = "page", CurrentPagerItemWrapperFormatString = "<li class='active'>{0}</li>", CurrentPageNumberFormatString = "{0}", FirstPageText = "&laquo; ", LastPageText = " &raquo;", NextPageText = "Next →", PrevPageText = "← Prev", SeparatorHtml = "" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

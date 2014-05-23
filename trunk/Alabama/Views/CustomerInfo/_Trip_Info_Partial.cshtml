@@ -1,0 +1,74 @@
+﻿@model Webdiyer.WebControls.Mvc.PagedList<DKLCT.Trip_Info>
+@using Webdiyer.WebControls.Mvc;
+<h3>Trip Info</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Order_date
+            </th>
+            <th>
+                Pickup_date
+            </th>
+            <th>
+                Delivery_date
+            </th>
+            <th>
+                Pick_up_location
+            </th>
+            <th>
+                Delivery_location
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @String.Format("{0:g}", item.Order_date)
+                </td>
+                <td>
+                    @String.Format("{0:g}", item.Pickup_date)
+                </td>
+                <td>
+                    @String.Format("{0:F}", item.Delivery_date)
+                </td>
+                <td>
+                    @item.Pick_up_location
+                </td>
+                <td>
+                    @item.Delivery_location
+                </td>
+            </tr>
+            }
+        }
+    </tbody>
+</table>
+<div class="row-fluid">
+    <div class="span4">
+        <div class="dataTables_info">
+            @if (Model != null && Model.TotalItemCount > 0)
+            {
+                if (Model.TotalItemCount < Model.PageSize)
+                {
+                <span>1 </span>
+                <span>- </span>@Model.TotalItemCount
+                }
+                else
+                {
+                <span></span>@((Model.CurrentPageIndex - 1) * Model.PageSize + 1)
+                <span>- </span>@((Model.CurrentPageIndex != Model.TotalPageCount) ? (Model.CurrentPageIndex * Model.PageSize) : Math.Abs((Model.CurrentPageIndex) * Model.PageSize - (Model.PageSize * Model.TotalPageCount) - Model.TotalItemCount))
+                }
+                <span>of </span>@(Model.TotalItemCount)                            
+            }
+        </div>
+    </div>
+    <div class="span8">
+        <div class="dataTables_paginate paging_bootstrap pagination phantrangmvcpager">
+            @Ajax.Pager(Model, new PagerOptions { ContainerTagName = "ul", PageIndexParameterName = "page", CurrentPagerItemWrapperFormatString = "<li class='active'>{0}</li>", CurrentPageNumberFormatString = "{0}", FirstPageText = "«", LastPageText = "»", NextPageText = "Next →", PrevPageText = "← Prev", SeparatorHtml = "" }, new AjaxOptions { UpdateTargetId = "CHECK" })
+        </div>
+    </div>
+</div>

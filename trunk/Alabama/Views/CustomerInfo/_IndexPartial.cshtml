@@ -1,0 +1,91 @@
+﻿<div id="AjaxPaging">
+    @using Webdiyer.WebControls.Mvc
+    @model PagedList<DKLCT.Customer_Info>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            ajaxPagingByID("AjaxPaging");
+        });
+    </script>
+    <table class="table">
+        <tr>
+            <th>
+                <input type="checkbox" name="" value="" class="checkAll" />
+            </th>
+            <th>
+                ID
+            </th>
+            <th>
+                Customer_Name
+            </th>
+            <th>
+                Street
+            </th>
+            <th>
+                City
+            </th>
+            <th>
+                State
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+                Days_to_pay
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" name="checkOwner" value="@item.Customer_ID" class="checkitem"/>
+                </td>
+                <td>
+                    @Html.ActionLink(item.Customer_ID.ToString(), "NewOrEdit", new { id = item.Customer_ID })
+                </td>
+                <td>
+                    @item.Customer_Name
+                </td>
+                <td>
+                    @item.Street
+                </td>
+                <td>
+                    @item.City
+                </td>
+                <td>
+                    @item.State
+                </td>
+                <td>
+                    @item.Phone
+                </td>
+                <td>
+                    @item.Days_to_pay
+                </td>
+            </tr>
+        }
+    </table>
+    <div class="row-fluid">
+        <div class="span4">
+            <div class="dataTables_info">
+                @if (Model.TotalItemCount > 0)
+                {
+                    if (Model.TotalItemCount < Model.PageSize)
+                    {
+                    <span>1 </span>
+                    <span>- </span>@Model.TotalItemCount
+                    }
+                    else
+                    {
+                    <span></span>@((Model.CurrentPageIndex - 1) * Model.PageSize + 1)
+                    <span>- </span>@((Model.CurrentPageIndex != Model.TotalPageCount) ? (Model.CurrentPageIndex * Model.PageSize) : Math.Abs((Model.CurrentPageIndex) * Model.PageSize - (Model.PageSize * Model.TotalPageCount) - Model.TotalItemCount))
+                    }
+                    <span>of </span>@(Model.TotalItemCount)                            
+                }
+            </div>
+        </div>
+        <div class="span8">
+            <div class="dataTables_paginate paging_bootstrap pagination phantrangmvcpager">
+                @Html.AjaxPager(Model, new PagerOptions { ContainerTagName = "ul", PageIndexParameterName = "page", CurrentPagerItemWrapperFormatString = "<li class='active'>{0}</li>", CurrentPageNumberFormatString = "{0}", FirstPageText = "&laquo; ", LastPageText = " &raquo;", NextPageText = "Next →", PrevPageText = "← Prev", SeparatorHtml = "" }, new AjaxOptions { UpdateTargetId = "AjaxPaging" })
+            </div>
+        </div>
+    </div>
+</div>

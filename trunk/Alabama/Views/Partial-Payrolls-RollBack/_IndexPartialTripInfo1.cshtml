@@ -1,0 +1,64 @@
+﻿<div id="TripAmountTable" class="boxScroll">
+    @model List<DKLCT.Trip_Info>
+    @*<script type="text/javascript">
+        $(document).ready(function () {
+            ajaxPagingByID("AjaxPaging");
+        });
+    </script>*@
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" name="TripCheckAll" value=" " class="DriverTripCheckAll" />
+                </th>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Address
+                </th>
+                <th>
+                    Order_date
+                </th>
+                @*<th>
+                    Pickup_date
+                </th>*@
+                <th>
+                    Delivery_date
+                </th>
+                
+                <th>
+                    Total_charges
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="DriverTripCheckItem" value="@item.Total_charges" class="DriverTripCheckItem"/>
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.Trip_ID.ToString(), "NewOrEdit", new { id = item.Trip_ID })
+                    </td>
+                    <td>
+                        @item.Address
+                    </td>
+                    <td>
+                        @String.Format("{0:MM/dd/yyyy}", item.Order_date)
+                    </td>
+                    @*<td>
+                        @String.Format("{0:MM/dd/yyyy}", item.Pickup_date)
+                    </td>*@
+                    <td>
+                        @String.Format("{0:MM/dd/yyyy}", item.Delivery_date)
+                    </td>                    
+                    <td>
+                        @item.Total_charges
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

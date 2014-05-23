@@ -1,0 +1,89 @@
+﻿<div id="Fuel_ExpensesPartial">
+    @model Webdiyer.WebControls.Mvc.PagedList<DKLCT.Fuel___Expenses>
+@using Webdiyer.WebControls.Mvc;
+    <h3>
+        Fuel Expenses</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" name="DriverFuel___ExpensesAll" value=" " class="DriverFuel___ExpensesAll" />
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    AmountN
+                </th>
+                <th>
+                    Location
+                </th>
+                <th>
+                    Driver
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="DriverFuel___ExpensesItem" value="@item.ID" class="DriverFuel___ExpensesItem" />
+                    </td>
+                    <td>
+                        @item.Date
+                    </td>
+                    <td>
+                        @item.Type
+                    </td>
+                    <td>
+                        @item.Amount
+                    </td>
+                    <td>
+                        @item.AmountN
+                    </td>
+                    <td>
+                        @item.Location
+                    </td>
+                    <td>
+                        @Html.Raw(item.Driver_Info != null ? item.Driver_Info.First_name : "")
+                    </td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <div class="row-fluid">
+        <div class="span4">
+            <div class="dataTables_info">
+                @if (Model != null && Model.TotalItemCount > 0)
+                {
+                    if (Model.TotalItemCount < Model.PageSize)
+                    {
+                    <span>1 </span>
+                    <span>- </span>@Model.TotalItemCount
+                    }
+                    else
+                    {
+                    <span></span>@((Model.CurrentPageIndex - 1) * Model.PageSize + 1)
+                    <span>- </span>@((Model.CurrentPageIndex != Model.TotalPageCount) ? (Model.CurrentPageIndex * Model.PageSize) : Math.Abs((Model.CurrentPageIndex) * Model.PageSize - (Model.PageSize * Model.TotalPageCount) - Model.TotalItemCount))
+                    }
+                    <span>of </span>@(Model.TotalItemCount)                            
+                }
+            </div>
+        </div>
+        <div class="span8">
+            <div class="dataTables_paginate paging_bootstrap pagination phantrangmvcpager">
+                @Ajax.Pager(Model, new PagerOptions { ContainerTagName = "ul", PageIndexParameterName = "page", CurrentPagerItemWrapperFormatString = "<li class='active'>{0}</li>", CurrentPageNumberFormatString = "{0}", FirstPageText = "«", LastPageText = "»", NextPageText = "Next →", PrevPageText = "← Prev", SeparatorHtml = "" }, new AjaxOptions { UpdateTargetId = "Fuel_ExpensesPartial" })
+            </div>
+        </div>
+    </div>
+</div>
