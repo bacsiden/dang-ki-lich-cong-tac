@@ -1,0 +1,44 @@
+﻿.label-add
+{
+    line-height:28px;
+    font-weight:bold;
+}
+.fleft
+{
+    text-align: left !important;
+    padding-left: 20px;
+}
+table.styleWidth
+{
+    width: 50%;
+}
+.validation-summary-errors,.error
+{
+    color: Red;
+}
+.nav-list li.hiddenField
+{
+    display: none;
+}
+.topLogo
+{
+    display: block;
+    float: left;
+    line-height: 49px;
+    text-align: center;
+    width: 100%;
+}
+#navbar .Fluild-Edit
+{
+    position: relative;
+}
+#navbar .Fluild-Edit #OptionLogin
+{
+    position: absolute;
+    top: 10px;
+    width: 98%;
+}
+#navbar .Fluild-Edit #OptionLogin .user-profile
+{
+    float:right;
+}

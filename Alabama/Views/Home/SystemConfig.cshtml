@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Alabama.Config>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="icon-table"></i>Danh sách cấu hình</h3>
+            </div>
+            <div class="box-content">
+                <p style="margin-left: 7px;">
+                    <img src="/Content/img/add.png" width="14" height="14" style="padding-bottom: 2px;" />
+                    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btnThemMoi" })
+                </p>
+                <table class="table">
+                    <thead>
+                        <tr class="table-flag-blue">
+                            <th>
+                                Tên cấu hình
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink(item.Title, "Edit", "Home", new { id = item.ID }, null)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
