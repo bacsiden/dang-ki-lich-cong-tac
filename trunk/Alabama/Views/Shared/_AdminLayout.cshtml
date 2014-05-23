@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Menu = Alabama.Controllers.HomeController.BuildMenu();
+}
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>@(string.IsNullOrEmpty(ViewBag.Title)?"PHẦN MỀM QUẢN LÝ BƯU PHẨM - BƯU KIỆN":ViewBag.Title)</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="/Content/assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/Content/assets/bootstrap/bootstrap-responsive.min.css">
+    <link href="/Content/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Content/assets/normalize/normalize.css">
+    <link rel="stylesheet" href="/Content/css/flaty.css">
+    <link rel="stylesheet" href="/Content/css/flaty-responsive.css">
+    <link href="/Content/css/myStylecss.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="/Content/img/favicon.html">
+    <script type="text/javascript" src="/Content/assets/modernizr/modernizr-2.6.2.min.js"></script>
+    <script type="text/javascript">        window.jQuery || document.write('<script src="/Content/assets/jquery/jquery-1.10.1.min.js"><\/script>')</script>
+    <script type="text/javascript" src="/Content/assets/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/Content/assets/nicescroll/jquery.nicescroll.min.js"></script>
+    <script type="text/javascript" src="/Content/js/flaty.js"></script>
+    <script src="/Content/js/myJquery.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="navbar" class="navbar">
+        <div class="navbar-inner">
+            <div class="container-fluid Fluild-Edit">
+                <!-- BEGIN Brand -->
+                <a href="#" class="brand topLogo"><big><i class="icon-desktop"></i>&nbsp;QUẢN LÝ BƯU
+                    PHẨM - BƯU KIỆN </big></a>
+                <!-- END Brand -->
+                <!-- BEGIN Responsive Sidebar Collapse -->
+                <a href="#" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+                    <i class="icon-reorder"></i></a>
+                <!-- END Responsive Sidebar Collapse -->
+                <!-- BEGIN Navbar Buttons -->
+                <ul class="nav flaty-nav pull-right OptionLogin" id="OptionLogin">
+                    <!-- BEGIN Button User -->
+                    @Html.Partial("AccountTask")
+                    <!-- END Button User -->
+                </ul>
+                <!-- END Navbar Buttons -->
+            </div>
+            <!--/.container-fluid-->
+        </div>
+        <!--/.navbar-inner-->
+    </div>
+    <!-- END Navbar -->
+    <!-- BEGIN Container -->
+    <div class="container-fluid" id="main-container">
+        <!-- BEGIN Sidebar -->
+        <div id="sidebar" class="nav-collapse">
+            <!-- BEGIN Navlist -->
+            <ul class="nav nav-list">
+                <!-- BEGIN Search Form -->
+                <li>
+                    <form target="#" method="GET" class="search-form">
+                    <span class="search-pan">
+                        @*<button type="submit">
+                            <i class="icon-search"></i>
+                        </button>
+                        <input type="text" name="search" placeholder="Search ..." autocomplete="off" />*@
+                    </span>
+                    </form>
+                </li>
+                <!-- END Search Form -->
+                @Html.Raw(ViewBag.Menu)
+            </ul>
+            <!-- END Navlist -->
+            <!-- BEGIN Sidebar Collapse Button -->
+            <div id="sidebar-collapse" class="visible-desktop">
+                <i class="icon-double-angle-left"></i>
+            </div>
+            <!-- END Sidebar Collapse Button -->
+        </div>
+        <!-- END Sidebar -->
+        <!-- BEGIN Content -->
+        <div id="main-content">
+            <!-- BEGIN Breadcrumb -->
+            @*<div id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li><i class="icon-home"></i><a href="./">Home</a> <span class="divider"><i class="icon-angle-right">
+                    </i></span></li>
+                    <li class="active">Index</li>
+                </ul>
+            </div>*@
+            <!-- END Breadcrumb -->
+            @RenderBody()
+            <a id="btn-scrollup" class="btn btn-circle btn-large" href="#"><i class="icon-chevron-up">
+            </i></a>
+        </div>
+        <!-- END Content -->
+    </div>
+    <!-- END Container -->
+    <!--basic scripts-->
+    <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>-->
+</body>
+</html>
