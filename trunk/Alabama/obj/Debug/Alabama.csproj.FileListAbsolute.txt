@@ -63,3 +63,10 @@ D:\Project\Quan ly Buu Kien\VPSS\Alabama\Alabama\obj\Debug\RdlCompile.cache
 D:\Project\Quan ly Buu Kien\VPSS\Alabama\Alabama\obj\Debug\RdlCompile.compiled
 D:\Project\Quan ly Buu Kien\VPSS\Alabama\Alabama\obj\Debug\Alabama.dll
 D:\Project\Quan ly Buu Kien\VPSS\Alabama\Alabama\obj\Debug\Alabama.pdb
+D:\Project\Đăng ký lịch công tác\Alabama\bin\Alabama.dll
+D:\Project\Đăng ký lịch công tác\Alabama\bin\Alabama.pdb
+D:\Project\Đăng ký lịch công tác\Alabama\obj\Debug\Alabama.csprojResolveAssemblyReference.cache
+D:\Project\Đăng ký lịch công tác\Alabama\obj\Debug\RdlCompile.cache
+D:\Project\Đăng ký lịch công tác\Alabama\obj\Debug\RdlCompile.compiled
+D:\Project\Đăng ký lịch công tác\Alabama\obj\Debug\Alabama.dll
+D:\Project\Đăng ký lịch công tác\Alabama\obj\Debug\Alabama.pdb
