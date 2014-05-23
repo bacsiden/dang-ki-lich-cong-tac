@@ -1,0 +1,206 @@
+﻿@using Alabama;
+@model Alabama.BuuKien
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="icon-table"></i>Chi tiết bưu kiện</h3>
+            </div>
+            <div class="box-content">
+                <div class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">
+                            Mã bưu kiện</label>
+                        <div class="controls label-add error">
+                            @Model.MaBuuKien
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Tên bưu kiện</label>
+                        <div class="controls label-add">
+                            @Model.TenBuuKien
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Ngày nhận</label>
+                        <div class="controls label-add">
+                            @Model.NgayNhan
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Người tiếp nhận</label>
+                        <div class="controls label-add">
+                            @Model.User.UserName
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Trạng thái</label>
+                        <div class="controls label-add">
+                            @Model.TrangThai
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Tên bưu kiện</label>
+                        <div class="controls label-add">
+                            @Model.TenBuuKien
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Người gửi</label>
+                        <div class="controls label-add">
+                            @Model.NguoiGui
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Địa chỉ người gửi</label>
+                        <div class="controls label-add">
+                            @Model.DiaChiNguoiGui
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Người nhận</label>
+                        <div class="controls label-add">
+                            @Model.NguoiNhan
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Địa chỉ người nhận</label>
+                        <div class="controls label-add">
+                            @Model.DiaChiNguoiNhan
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Khối lượng</label>
+                        <div class="controls label-add">
+                            @Model.KhoiLuong (Kg)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Loại hàng</label>
+                        <div class="controls label-add">
+                            @Model.LoaiHang.Title
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Loại dịch vụ cộng thêm</label>
+                        <div class="controls label-add">
+                            @(Model.DichVuCongThem==null?null:Model.DichVuCongThem.Name)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Đường vận chuyển</label>
+                        <div class="controls label-add">
+                            @Model.CuocPhi.Title
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Bưu cục nhận</label>
+                        <div class="controls label-add">
+                            @(Model.BuuCuc.TenBuuCuc)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Bưu cục trả</label>
+                        <div class="controls label-add">
+                            @(Model.BuuCucTraID != null ? DB.Entities.BuuCuc.FirstOrDefault(m => m.ID == Model.BuuCucTraID).TenBuuCuc : null)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Bưu cục hiện tại</label>
+                        <div class="controls label-add">
+                            @(Model.BuuCucHienTaiID != null ? DB.Entities.BuuCuc.FirstOrDefault(m => m.ID == Model.BuuCucHienTaiID).TenBuuCuc : null)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Ghi chú</label>
+                        <div class="controls label-add">
+                            @Model.GhiChu
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Tổng cước phí phải trả</label>
+                        <div class="controls label-add error">
+                            @(ViewBag.CuocPhi)(VNĐ)
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        @*@Html.ActionLink("Chuyển bưu kiện", "ChuyenBuuKien", new { id = Model.ID }, new { @class = "btn btn-primary" })*@
+                        <a href="#modal-4" role="button" class="btn btn-primary" data-toggle="modal">Chuyển
+                            bưu kiện</a>
+                        <a href="#modal-5" role="button" class="btn btn-primary" data-toggle="modal">
+                                Trả bưu kiện</a>
+                        @(Model.TrangThai == TrangThai.DaTiepNhan ? Html.ActionLink("Sửa", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary" }) : null)
+                        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="display: none;" id="modal-4" class="modal hide fade" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel3" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×</button>
+        <h3 id="myModalLabel3">
+            Chuyển bưu kiện</h3>
+    </div>
+    @using (Html.BeginForm("ChuyenBuuKien", "BuuKien", new { id = Model.ID }))
+    {
+        <div class="modal-body">
+            <p>
+                Bưu cục trả
+            </p>
+            <p>
+                @Html.DropDownList("SelectListBuuCuc")
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">
+                Chuyển</button>
+        </div>
+    }
+</div>
+<div style="display: none;" id="modal-5" class="modal hide fade" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel3" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×</button>
+        <h3 id="myModalLabel3">
+            Trả bưu kiện</h3>
+    </div>
+    @using (Html.BeginForm("TraBuuKien", "BuuKien", new { id = Model.ID }))
+    {
+        <div class="modal-body">
+            <p>
+                Bưu cục trả
+            </p>
+            <p>
+                @Html.DropDownList("SelectListBuuCuc")
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">
+                Hoàn tất</button>
+        </div>
+    }
+</div>

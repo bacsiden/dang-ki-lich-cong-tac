@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<style>
+    .action
+    {
+        padding: 20px 0px 20px 179px;
+    }
+    .mauchu
+    {
+        color: #0072BC;
+    }
+</style>
+<form id="form1" action="/Account/DoAddCard" method="post" class="form-horizontal">
+<h2 class="mauchu action">
+    Nạp thẻ Viegrid</h2>
+<div class="control-group info">
+    <label class="control-label">
+        Tên tài khoản</label>
+    <div class="controls">
+        <input class="span6" type="text" runat="server" name="txtUserName" />
+    </div>
+</div>
+<div class="control-group info">
+    <label class="control-label">
+        Mã thẻ</label>
+    <div class="controls">
+        <input class="span6" type="text" runat="server" name="cardChar" id="cardChar" />
+    </div>
+</div>
+<div class="action">
+    <button type="submit" class="btn btn-primary">
+        Nạp thẻ</button>
+    <button type="button" class="btn" onclick="javascript:window.history.go(-1);">
+        Hủy</button>
+</div>
+</form>

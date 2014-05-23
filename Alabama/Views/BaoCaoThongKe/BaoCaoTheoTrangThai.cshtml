@@ -1,0 +1,76 @@
+﻿@using Alabama;
+@model IEnumerable<Alabama.BuuKien>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="icon-table"></i>Danh sách bưu kiện</h3>
+            </div>
+            <div class="box-content">
+                <table class="table">
+                    <thead>
+                        <tr class="table-flag-blue">
+                            <th>
+                                Mã bưu kiện
+                            </th>
+                            <th>
+                                Tên bưu kiện
+                            </th>
+                            <th>
+                                Ngày nhận
+                            </th>
+                            <th>
+                                Ngày gửi
+                            </th>
+                            <th>
+                                Trạng thái
+                            </th>
+                            <th>
+                                Bưu cục nhận
+                            </th>
+                            <th>
+                                Bưu cục trả
+                            </th>
+                            <th>
+                                Cước phí
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink(item.MaBuuKien, "Details", new { id = item.ID }, null)
+                                </td>
+                                <td>
+                                    @item.TenBuuKien
+                                </td>
+                                <td>
+                                    @item.NgayNhan
+                                </td>
+                                <td>
+                                    @item.NgayGui
+                                </td>
+                                <td>
+                                    @item.TrangThai
+                                </td>
+                                <td>
+                                    @item.BuuCuc.TenBuuCuc
+                                </td>
+                                <td>
+                                    @(item.BuuCucTraID!=null?DB.Entities.BuuCuc.FirstOrDefault(m=>m.ID==item.BuuCucTraID).TenBuuCuc:null)
+                                </td>
+                                <td class="error">
+                                    @(item.KhoiLuong * item.LoaiHang.HeSo * item.CuocPhi.Cost + (item.DichVuCongThem!=null?item.DichVuCongThem.Cost:0)) (VNĐ)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <input type="button" name="name" value="Xuất file PDF" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</div>

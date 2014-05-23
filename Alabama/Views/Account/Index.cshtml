@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Alabama.User>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="icon-table"></i> @ViewBag.GroupName</h3>
+            </div>
+            <div class="box-content">
+               
+                <p style="margin-left: 7px;">
+                    <img src="/Content/img/add.png" width="14" height="14" style="padding-bottom: 2px;" />
+                    @Html.ActionLink(" Thêm người dùng", "Create", "CreatedUser", null, new { @class = "btnThemMoi" })
+                </p>
+                <table class="table">
+                    <thead>
+                        <tr class="table-flag-blue">
+                            <th style="width: 18px">
+                                <input type="checkbox" />
+                            </th>
+                            <th>
+                                User name
+                            </th>
+                            <th>
+                                Họ tên
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                User kind
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>
+                                    @Html.ActionLink(string.IsNullOrEmpty(item.UserName) ? " " : item.UserName, "Details", new { id = item.ID })
+                                    @*<a href="/Card/Index/@item.ID" style="color: #0072BC;">@item.Note</a>*@
+                                </td>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @item.Email
+                                </td>
+                                <td>
+                                    @item.UserKind.Title
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "confirmDelete" })
+                                    <br />
+                                    @Html.ActionLink("Look", "Look", new { id = item.ID })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

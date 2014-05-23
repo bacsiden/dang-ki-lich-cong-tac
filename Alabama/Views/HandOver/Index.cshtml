@@ -1,0 +1,116 @@
+﻿@model IEnumerable<Alabama.HandOverCard>
+<script type="text/javascript">
+    $(document).ready(function () {
+//        // selected for 2 select
+//        var href = $(location).attr('href');
+//        if (href.indexOf('year=') != -1) {
+//            $("#Year").val(gup("year", href));
+//        }
+//        if (href.indexOf('moth=') != -1) {
+//            $("#Moth").val(gup("moth", href));
+//        }
+
+        $("#Year").change(function () {
+            var url = $(location).attr('href');
+            if (url.indexOf('?') == -1) {
+                location.href = url+"?year="+ $(this).val();
+            }
+            else {
+                location.href = url+"&year=" + $(this).val();
+            }
+        });
+        $("#Moth").change(function () {
+            var url = $(location).attr('href');
+            if (url.indexOf('?') == -1) {
+                location.href = url + "?moth=" + $(this).val();
+            }
+            else {
+                location.href = url + "&moth=" + $(this).val();
+            }
+        });
+    });
+//    function gup(name, url) {
+//        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+//        var regexS = "[\\?&]" + name + "=([^&]*)";
+//        var regex = new RegExp(regexS);
+//        if (url == undefined)
+//            url = window.location.href;
+//        var results = regex.exec(url);
+//        if (results == null) return "";
+//        else return results[1];
+//    }
+</script>
+<h3>
+    Lịch sử phát hành thẻ</h3>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@*<div id="xxx">
+    <select id="Year">
+        <option value="0">Chọn năm</option>
+        <option value="2014">2014</option>
+        <option value="2015">2015</option>
+    </select>
+    <select id="Moth">
+        <option value="0">Chọn tháng</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+    </select>
+</div>*@
+<table class="table">
+    <thead>
+        <tr class="table-flag-blue">
+            <th>
+                Thời gian
+            </th>
+            <th>
+                Tên đại lý
+            </th>
+            <th>
+                Số serial đầu
+            </th>
+            <th>
+                Số lượng
+            </th>
+            <th>
+                Mệnh giá (vnđ)
+            </th>
+            <th>
+                Tổng tiền (vnđ)
+            </th>
+            <th>
+                Ghi chú
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.RelaseTime
+                </td>
+                <td>
+                    @Html.ActionLink(item.User.UserName, "Details", "Account", new { id = item.UserID }, null)
+                </td>
+                <td>
+                    @Html.ActionLink(item.Card.Serial, "Details", "Card", new { id = item.FirstCardID }, null)
+                </td>
+                <td>
+                    @item.Amount
+                </td>
+                <td>
+                    @item.Card.CreatedCard.PriceLevel.ToString("0,0")
+                </td>
+                <td>
+                    @item.Money.Value.ToString("0,0")
+                </td>
+                <td>
+                    @item.Note
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
