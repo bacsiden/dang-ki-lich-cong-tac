@@ -78,9 +78,6 @@ namespace Alabama.Models
         [Display(Name = "Địa chỉ")]
         public string Address { get; set; }
 
-        [Display(Name = "Bưu cục")]
-        public int BuuCucID { get; set; }
-
         [Display(Name = "Số điện thoại")]
         public string Phone { get; set; }
     }
