@@ -185,13 +185,7 @@ namespace Alabama.Controllers
         {
             ViewBag.PasswordLength = MembershipService.MinPasswordLength;
             // DropDown Bưu cục
-            var db = DB.Entities;
-            List<BuuCuc> lstBuuCuc = new List<BuuCuc>();
-            var obj = new BuuCuc() { ID = 0, TenBuuCuc = "- Chọn bưu cục -" };
-            lstBuuCuc.Add(obj);
-            lstBuuCuc.AddRange(db.BuuCuc);
-            var selectListBuuCuc = new SelectList(lstBuuCuc, "ID", "TenBuuCuc");
-            ViewBag.SelectListBuuCuc = selectListBuuCuc;
+            var db = DB.Entities;           
             return View();
         }
 
@@ -211,7 +205,7 @@ namespace Alabama.Controllers
                     if (userCreated != null)
                     {
 
-                        db.User.AddObject(new User() { UserName = model.UserName, Email = model.Email, PhoneNumber = model.Phone, Address = model.Address, AspnetUserID = userCreated, UserKindID = 1, BuuCucID = model.BuuCucID, Name = model.Name });
+                        db.User.AddObject(new User() { UserName = model.UserName, Email = model.Email, PhoneNumber = model.Phone, Address = model.Address, AspnetUserID = userCreated, UserKindID = 1, Name = model.Name });
                         db.SaveChanges();
                         FormsService.SignIn(model.UserName, false /* createPersistentCookie */);
                         return RedirectToAction("Index", "Home");
@@ -226,14 +220,7 @@ namespace Alabama.Controllers
                     ModelState.AddModelError("", "Tài khoản đã tồn tại!");
                 }
             }
-            // DropDown Bưu cục
-            List<BuuCuc> lstBuuCuc = new List<BuuCuc>();
-            var obj = new BuuCuc() { ID = 0, TenBuuCuc = "- Chọn bưu cục -" };
-            lstBuuCuc.Add(obj);
-            lstBuuCuc.AddRange(DB.Entities.BuuCuc);
-            var selectListBuuCuc = new SelectList(lstBuuCuc, "ID", "TenBuuCuc");
-            ViewBag.SelectListBuuCuc = selectListBuuCuc;
-
+           
             // If we got this far, something failed, redisplay form
             ViewBag.PasswordLength = MembershipService.MinPasswordLength;
             return View(model);
