@@ -85,11 +85,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
-    <Compile Include="DataSetBaoCao.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSetBaoCao.xsd</DependentUpon>
-    </Compile>
     <Compile Include="DB.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -211,17 +206,6 @@
     <Content Include="Content\js\flaty.js" />
     <Content Include="Content\js\myJquery.js" />
     <Content Include="Global.asax" />
-    <None Include="DataSetBaoCao.xsc">
-      <DependentUpon>DataSetBaoCao.xsd</DependentUpon>
-    </None>
-    <None Include="DataSetBaoCao.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSetBaoCao.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="DataSetBaoCao.xss">
-      <DependentUpon>DataSetBaoCao.xsd</DependentUpon>
-    </None>
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
