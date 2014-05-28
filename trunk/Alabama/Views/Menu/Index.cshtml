@@ -7,9 +7,8 @@
                     <i class="icon-table"></i>Quản lý menu</h3>
             </div>
             <div class="box-content">
-                <p style="margin-left: 7px;">
-                    <img src="/Content/img/add.png" width="14" height="14" style="padding-bottom: 2px;" />
-                    @Html.ActionLink(" Add Menu", "Create", null, new { @class = "btnThemMoi" })
+                <p style="margin-left: 7px;">                    
+                    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
                 </p>
                 <table class="table">
                     <thead>
@@ -21,6 +20,7 @@
                                 Vị trí
                             </th>
                             <th>
+                                Trạng thái
                             </th>
                         </tr>
                     </thead>
@@ -42,7 +42,7 @@
                                         {<span class='validation-summary-errors'>Đã tắt</span>}</a>
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "confirmDelete" })
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new { @class = "confirmDelete" })
                                 </td>
                             </tr>
                         }
