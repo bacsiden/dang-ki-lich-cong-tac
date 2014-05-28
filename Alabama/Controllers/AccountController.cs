@@ -246,7 +246,7 @@ namespace Alabama.Controllers
             if (ModelState.IsValid)
             {
                 var user = new UserDAL().GetUserByUserName(model.UserName);
-                if (user!=null && user.Locked)
+                if (user!=null && !user.Locked)
                 {
                     if (MembershipService.ValidateUser(model.UserName, model.Password))
                     {

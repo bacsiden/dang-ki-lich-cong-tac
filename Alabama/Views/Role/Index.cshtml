@@ -8,8 +8,7 @@
             </div>
             <div class="box-content">
                 <p style="margin-left: 7px;">
-                    <img src="/Content/img/add.png" width="14" height="14" style="padding-bottom: 2px;" />
-                    @Html.ActionLink("Thêm vai trò", "Create", null, new { @class = "btnThemMoi" })
+                    @Html.ActionLink("Thêm vai trò", "Create", null, new { @class = "btn btn-primary" })
                 </p>
                 <table class="table">
                     <thead>
@@ -24,18 +23,15 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
+                            <tr>                                
                                 <td>
-                                    @item.Name
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                                    @Html.ActionLink(item.Name, "Edit", new { id = item.ID })
                                 </td>
                                 <td>
                                     @Html.ActionLink("Phân chức năng", "Function", new { id = item.ID })
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "confirmDelete" })
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new { @class = "confirmDelete" })
                                 </td>
                             </tr>
                         }
