@@ -37,8 +37,13 @@ table.styleWidth
     position: absolute;
     top: 10px;
     width: 98%;
+    height: initial;
 }
 #navbar .Fluild-Edit #OptionLogin .user-profile
 {
     float:right;
+}
+.LockUser, .DeleteItem, .EditItem
+{
+    display:none;
 }

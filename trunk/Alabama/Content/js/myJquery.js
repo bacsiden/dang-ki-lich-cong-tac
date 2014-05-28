@@ -2,7 +2,7 @@
     // thêm thẻ <li> cho phân trang    
     addClassForPagging();
     $(".confirmDelete").click(function () {
-        if (confirm("Are you sure?")) {
+        if (confirm("Bạn có chắc chắn?")) {
             return true;
         }
         return false;
@@ -34,30 +34,55 @@
         $(".EditItem").hide();
         if ($(this).is(':checked')) {
             $(".checkitem").prop('checked', true);
-            $(".DeleteItem").text('Delete All');
             $(".DeleteItem").show();
+            $(".LockUser").show();
         } else {
             $(".checkitem").prop('checked', false);
-            $(".DeleteItem").text('Delete');
             $(".DeleteItem").hide();
+            $(".LockUser").hide();
         }
     });
     $(".checkitem").click(function () {
         $(".DeleteItem").show();
+        $(".LockUser").show();
         var numberOfChecked = $('input:checkbox:checked').length;
+        var numberItem = $('input:checkbox.checkitem').length;
         if (numberOfChecked == 0) {
             $(".DeleteItem").hide();
+            $(".LockUser").hide();
         }
         if (numberOfChecked == 1) {
             $(".EditItem").show();
         } else {
             $(".EditItem").hide();
         }
+        if ($(this).is(':checked')) {
+            if (numberItem == numberOfChecked) {
+                $(".checkAll").prop('checked', true);
+            }
+        } else {
+            $(".checkAll").prop('checked', false);
+        }
+
     });
 
 
     // Event click with button Edit & Delete
     $(".DeleteItem").click(function () {
+        var listID = "";
+        var url = $(this).attr('href');
+        $('input.checkitem:checkbox:checked').each(function () {
+            listID += "," + $(this).val();
+        });
+        if (listID != "") {
+            $(this).attr('href', url + "?arrayID=" + listID);
+        } else {
+            alert('Warring!');
+            return false;
+        }
+    });
+
+    $(".LockUser").click(function () {
         var listID = "";
         var url = $(this).attr('href');
         $('input.checkitem:checkbox:checked').each(function () {
@@ -191,7 +216,7 @@
     //--------------------------------
 
 
-});              //----------------END DOCUMENT READY FUNCTION -------------------------------  
+});               //----------------END DOCUMENT READY FUNCTION -------------------------------  
 
 
 
