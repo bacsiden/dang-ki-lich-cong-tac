@@ -19,7 +19,6 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("VPSS1Model", "FK_UserKind_Users", "UserKind", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Alabama.UserKind), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.User), true)]
 [assembly: EdmRelationshipAttribute("VPSS1Model", "FunctionInRole", "Function", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Function), "Role1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Role1))]
 [assembly: EdmRelationshipAttribute("VPSS1Model", "GroupInMenu", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Group), "Menu", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Menu))]
 [assembly: EdmRelationshipAttribute("VPSS1Model", "RoleInGroup", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Group), "Role1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Role1))]
@@ -170,22 +169,6 @@ namespace Alabama
             }
         }
         private ObjectSet<User> _User;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<UserKind> UserKind
-        {
-            get
-            {
-                if ((_UserKind == null))
-                {
-                    _UserKind = base.CreateObjectSet<UserKind>("UserKind");
-                }
-                return _UserKind;
-            }
-        }
-        private ObjectSet<UserKind> _UserKind;
 
         #endregion
 
@@ -237,14 +220,6 @@ namespace Alabama
         public void AddToUser(User user)
         {
             base.AddObject("User", user);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the UserKind EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToUserKind(UserKind userKind)
-        {
-            base.AddObject("UserKind", userKind);
         }
 
         #endregion
@@ -1122,8 +1097,7 @@ namespace Alabama
         /// <param name="userName">Initial value of the UserName property.</param>
         /// <param name="status">Initial value of the Status property.</param>
         /// <param name="locked">Initial value of the Locked property.</param>
-        /// <param name="userKindID">Initial value of the UserKindID property.</param>
-        public static User CreateUser(global::System.Int32 id, global::System.Guid aspnetUserID, global::System.String userName, global::System.Int32 status, global::System.Boolean locked, global::System.Int32 userKindID)
+        public static User CreateUser(global::System.Int32 id, global::System.Guid aspnetUserID, global::System.String userName, global::System.Int32 status, global::System.Boolean locked)
         {
             User user = new User();
             user.ID = id;
@@ -1131,7 +1105,6 @@ namespace Alabama
             user.UserName = userName;
             user.Status = status;
             user.Locked = locked;
-            user.UserKindID = userKindID;
             return user;
         }
 
@@ -1429,73 +1402,11 @@ namespace Alabama
         private global::System.String _Avata;
         partial void OnAvataChanging(global::System.String value);
         partial void OnAvataChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 UserKindID
-        {
-            get
-            {
-                return _UserKindID;
-            }
-            set
-            {
-                OnUserKindIDChanging(value);
-                ReportPropertyChanging("UserKindID");
-                _UserKindID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UserKindID");
-                OnUserKindIDChanged();
-            }
-        }
-        private global::System.Int32 _UserKindID;
-        partial void OnUserKindIDChanging(global::System.Int32 value);
-        partial void OnUserKindIDChanged();
 
         #endregion
 
     
         #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_UserKind_Users", "UserKind")]
-        public UserKind UserKind
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserKind>("VPSS1Model.FK_UserKind_Users", "UserKind").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserKind>("VPSS1Model.FK_UserKind_Users", "UserKind").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<UserKind> UserKindReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<UserKind>("VPSS1Model.FK_UserKind_Users", "UserKind");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<UserKind>("VPSS1Model.FK_UserKind_Users", "UserKind", value);
-                }
-            }
-        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1515,115 +1426,6 @@ namespace Alabama
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Group>("VPSS1Model.UserInGroup", "Group", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="VPSS1Model", Name="UserKind")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class UserKind : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new UserKind object.
-        /// </summary>
-        /// <param name="id">Initial value of the ID property.</param>
-        /// <param name="title">Initial value of the Title property.</param>
-        public static UserKind CreateUserKind(global::System.Int32 id, global::System.String title)
-        {
-            UserKind userKind = new UserKind();
-            userKind.ID = id;
-            userKind.Title = title;
-            return userKind;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                if (_ID != value)
-                {
-                    OnIDChanging(value);
-                    ReportPropertyChanging("ID");
-                    _ID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("ID");
-                    OnIDChanged();
-                }
-            }
-        }
-        private global::System.Int32 _ID;
-        partial void OnIDChanging(global::System.Int32 value);
-        partial void OnIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Title
-        {
-            get
-            {
-                return _Title;
-            }
-            set
-            {
-                OnTitleChanging(value);
-                ReportPropertyChanging("Title");
-                _Title = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Title");
-                OnTitleChanged();
-            }
-        }
-        private global::System.String _Title;
-        partial void OnTitleChanging(global::System.String value);
-        partial void OnTitleChanged();
-
-        #endregion
-
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_UserKind_Users", "User")]
-        public EntityCollection<User> User
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("VPSS1Model.FK_UserKind_Users", "User");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("VPSS1Model.FK_UserKind_Users", "User", value);
                 }
             }
         }

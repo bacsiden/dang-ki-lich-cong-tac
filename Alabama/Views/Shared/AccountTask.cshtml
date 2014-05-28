@@ -1,4 +1,20 @@
-﻿@if (Request.IsAuthenticated)
+﻿@{
+    
+    var ctrler = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".nav-list li a.menu-item-a").each(function () {
+            var $this = $(this);
+            if ($this.attr('href').indexOf("@ctrler") > -1) {
+                $(".nav-list li.active").removeClass();
+                $this.parent().addClass("active");
+            }
+        });
+    });
+</script>
+@if (Request.IsAuthenticated)
 {<li class="user-profile"><a data-toggle="dropdown" href="#" class="user-menu dropdown-toggle">
         <img class="nav-user-photo" src="/Content/img/demo/avatar/avatar1.jpg" alt="Penny's Photo" />
         <span class="hidden-phone" id="user_info"><span>@User.Identity.Name</span></span>

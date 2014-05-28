@@ -301,6 +301,7 @@
     <Content Include="Views\Shared\AccountTask.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Group\Menu.cshtml" />
+    <Content Include="Views\Account\NewOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_Layout.cshtml" />

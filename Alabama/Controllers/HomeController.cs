@@ -19,7 +19,7 @@ namespace Alabama.Controllers
             return View();
         }
 
-        public static string temp1 = "<li class='{3}'><a href=\"{1}\"><i class=\"{2} icon-list\"></i><span>&nbsp;{0}</span> </a></li>";
+        public static string temp1 = "<li class='{3}'><a href=\"{1}\" class='menu-item-a'><i class=\"{2} icon-list\"></i><span>&nbsp;{0}</span> </a></li>";
         public static string temp2 = "";
         public static string BuildMenu()
         {

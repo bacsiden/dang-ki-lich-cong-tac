@@ -4,19 +4,20 @@
         <div class="box">
             <div class="box-title">
                 <h3>
-                    <i class="icon-table"></i> @ViewBag.GroupName</h3>
+                    <i class="icon-table"></i>@ViewBag.GroupName</h3>
             </div>
             <div class="box-content">
-               
                 <p style="margin-left: 7px;">
-                    <img src="/Content/img/add.png" width="14" height="14" style="padding-bottom: 2px;" />
-                    @Html.ActionLink(" Thêm người dùng", "Create", "CreatedUser", null, new { @class = "btnThemMoi" })
+                    @Html.ActionLink(" Thêm người dùng", "NewOrEdit", "Account", null, new { @class = "btn btn-primary" })
+                    <a href="/Account/NewOrEdit" class="btn btn-primary EditItem">Sửa</a>
+                    <a href="/Account/LockByListID" class="btn btn-primary LockUser">Khóa</a> 
+                    <a href="/Account/DeleteByListID" class="btn btn-danger DeleteItem confirmDelete">Xóa</a>
                 </p>
                 <table class="table">
                     <thead>
                         <tr class="table-flag-blue">
                             <th style="width: 18px">
-                                <input type="checkbox" />
+                                <input type="checkbox" class="checkAll" />
                             </th>
                             <th>
                                 User name
@@ -25,12 +26,10 @@
                                 Họ tên
                             </th>
                             <th>
+                                Trạng thái
+                            </th>
+                            <th>
                                 Email
-                            </th>
-                            <th>
-                                User kind
-                            </th>
-                            <th>
                             </th>
                         </tr>
                     </thead>
@@ -39,25 +38,19 @@
                         {
                             <tr>
                                 <td>
-                                    <input type="checkbox" />
+                                    <input type="checkbox" class="checkitem" value="@item.ID" />
                                 </td>
                                 <td>
-                                    @Html.ActionLink(string.IsNullOrEmpty(item.UserName) ? " " : item.UserName, "Details", new { id = item.ID })
-                                    @*<a href="/Card/Index/@item.ID" style="color: #0072BC;">@item.Note</a>*@
+                                    @Html.ActionLink(string.IsNullOrEmpty(item.UserName) ? " " : item.UserName, "NewOrEdit", new { id = item.ID })
                                 </td>
                                 <td>
                                     @item.Name
+                                </td>                                
+                                <td>
+                                    @(item.Locked?"Bị khóa":"Đang hoạt động")
                                 </td>
                                 <td>
                                     @item.Email
-                                </td>
-                                <td>
-                                    @item.UserKind.Title
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "confirmDelete" })
-                                    <br />
-                                    @Html.ActionLink("Look", "Look", new { id = item.ID })
                                 </td>
                             </tr>
                         }
@@ -66,3 +59,4 @@
             </div>
         </div>
     </div>
+</div>

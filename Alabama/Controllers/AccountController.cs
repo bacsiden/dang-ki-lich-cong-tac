@@ -75,6 +75,15 @@ namespace Alabama.Controllers
 
             return listID;
         }
+        public User GetUserByUserName(string userName)
+        {
+            var context = DB.Entities;
+            return context.User.FirstOrDefault(m => m.UserName.ToLower() == userName.ToLower());
+        }
+        public User GetUserByID(int id)
+        {
+            return GetByID(id);
+        }
         public User GetCurrentUser
         {
             get
@@ -87,6 +96,12 @@ namespace Alabama.Controllers
                 }
                 return null;
             }
+        }
+        public void LockUserByID(int id)
+        {
+            var user = GetUserByID(id);
+            user.Locked = true;
+            Update(user);
         }
     }
     public class AccountController : BaseController
@@ -132,6 +147,93 @@ namespace Alabama.Controllers
             }
         }
 
+        public ActionResult NewOrEdit(int? id = 0)
+        {
+            var obj = DB.Entities.User.FirstOrDefault(m => m.ID == id);
+            ViewBag.Title = "Sửa tài khoản người dùng";
+            if (obj == null)
+            {
+                ViewBag.Title = "Thêm mới tài khoản người dùng";
+                obj = new User();
+            }
+            return View(obj);
+        }
+
+        [HttpPost]
+        public ActionResult NewOrEdit(User model)
+        {
+            try
+            {
+                var db = DB.Entities;
+                if (model.ID == 0)
+                {
+                    // Add new                 
+                    db.User.AddObject(model);
+                }
+                else
+                {
+                    // Edit    
+                    db.AttachTo("User", model);
+                    db.ObjectStateManager.ChangeObjectState(model, System.Data.EntityState.Modified);
+                }
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult DeleteByListID(string arrayID = "")
+        {
+            try
+            {
+                // TODO: Add delete logic here
+                var lstID = arrayID.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                var db = DB.Entities;
+                if (lstID.Length > 0)
+                {
+                    foreach (var item in lstID)
+                    {
+                        int tmpID = int.Parse(item);
+                        var obj = db.User.FirstOrDefault(m => m.ID == tmpID);
+                        db.User.DeleteObject(obj);
+                    }
+                    db.SaveChanges();
+                }
+            }
+            catch
+            {
+
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult LockByListID(string arrayID = "")
+        {
+            try
+            {
+                // TODO: Add delete logic here
+                var lstID = arrayID.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                var db = DB.Entities;
+                var userDAL = new UserDAL();
+                if (lstID.Length > 0)
+                {
+                    foreach (var item in lstID)
+                    {
+                        // Thực hiện khóa tài khoản người dùng
+                        userDAL.LockUserByID(int.Parse(item));
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+            return RedirectToAction("Index");
+        }
+
 
         public ActionResult LogOn()
         {
@@ -143,22 +245,30 @@ namespace Alabama.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (MembershipService.ValidateUser(model.UserName, model.Password))
+                var user = new UserDAL().GetUserByUserName(model.UserName);
+                if (user!=null && user.Locked)
                 {
-                    FormsService.SignIn(model.UserName, model.RememberMe);
-                    ListFunctionCode = new UserDAL().GetListFunctionCodeByUsername(model.UserName);
-                    if (Url.IsLocalUrl(returnUrl))
+                    if (MembershipService.ValidateUser(model.UserName, model.Password))
                     {
-                        return Redirect(returnUrl);
+                        FormsService.SignIn(model.UserName, model.RememberMe);
+                        ListFunctionCode = new UserDAL().GetListFunctionCodeByUsername(model.UserName);
+                        if (Url.IsLocalUrl(returnUrl))
+                        {
+                            return Redirect(returnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home");
+                        ModelState.AddModelError("", "Tài khoản hoặc mật khẩu không đúng.");
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Tài khoản hoặc mật khẩu không đúng.");
+                    ModelState.AddModelError("", "Tài khoản đã bị khóa. Vui lòng liên hệ quản trị để được giải đáp.");
                 }
             }
 
@@ -185,7 +295,7 @@ namespace Alabama.Controllers
         {
             ViewBag.PasswordLength = MembershipService.MinPasswordLength;
             // DropDown Bưu cục
-            var db = DB.Entities;           
+            var db = DB.Entities;
             return View();
         }
 
@@ -198,14 +308,14 @@ namespace Alabama.Controllers
                 // Attempt to register the user
                 if (db.User.FirstOrDefault(m => m.UserName.Equals(model.UserName)) == null)
                 {
-                    
+
 
                     MembershipUser aspnetUser = Membership.CreateUser(model.UserName, model.Password, model.Email);
                     Guid userCreated = (Guid)aspnetUser.ProviderUserKey;
                     if (userCreated != null)
                     {
 
-                        db.User.AddObject(new User() { UserName = model.UserName, Email = model.Email, PhoneNumber = model.Phone, Address = model.Address, AspnetUserID = userCreated, UserKindID = 1, Name = model.Name });
+                        db.User.AddObject(new User() { UserName = model.UserName, Email = model.Email, PhoneNumber = model.Phone, Address = model.Address, AspnetUserID = userCreated, Name = model.Name });
                         db.SaveChanges();
                         FormsService.SignIn(model.UserName, false /* createPersistentCookie */);
                         return RedirectToAction("Index", "Home");
@@ -220,7 +330,7 @@ namespace Alabama.Controllers
                     ModelState.AddModelError("", "Tài khoản đã tồn tại!");
                 }
             }
-           
+
             // If we got this far, something failed, redisplay form
             ViewBag.PasswordLength = MembershipService.MinPasswordLength;
             return View(model);
