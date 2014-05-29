@@ -109,6 +109,7 @@ namespace Alabama.Controllers
                     }
                     obj.ParentID = model.ParentID;
                     obj.Url = model.Url;
+                    obj.Icon = model.Icon;
                     db.ObjectStateManager.ChangeObjectState(obj, System.Data.EntityState.Modified);
                     db.SaveChanges();
                     return RedirectToAction("Index");

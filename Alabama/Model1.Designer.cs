@@ -22,7 +22,11 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("VPSS1Model", "FunctionInRole", "Function", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Function), "Role1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Role1))]
 [assembly: EdmRelationshipAttribute("VPSS1Model", "GroupInMenu", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Group), "Menu", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Menu))]
 [assembly: EdmRelationshipAttribute("VPSS1Model", "RoleInGroup", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Group), "Role1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Role1))]
+[assembly: EdmRelationshipAttribute("VPSS1Model", "FK_JobRegister_Location", "Location", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Alabama.Location), "JobRegister", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.JobRegister), true)]
+[assembly: EdmRelationshipAttribute("VPSS1Model", "FK_JobRegister_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Alabama.User), "JobRegister", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.JobRegister), true)]
 [assembly: EdmRelationshipAttribute("VPSS1Model", "UserInGroup", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Group), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.User))]
+[assembly: EdmRelationshipAttribute("VPSS1Model", "FK_DonVi_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Alabama.User), "DonVi", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.DonVi), true)]
+[assembly: EdmRelationshipAttribute("VPSS1Model", "FK_User_DonVi", "DonVi", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Alabama.DonVi), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.User), true)]
 
 #endregion
 
@@ -157,6 +161,38 @@ namespace Alabama
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<JobRegister> JobRegister
+        {
+            get
+            {
+                if ((_JobRegister == null))
+                {
+                    _JobRegister = base.CreateObjectSet<JobRegister>("JobRegister");
+                }
+                return _JobRegister;
+            }
+        }
+        private ObjectSet<JobRegister> _JobRegister;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Location> Location
+        {
+            get
+            {
+                if ((_Location == null))
+                {
+                    _Location = base.CreateObjectSet<Location>("Location");
+                }
+                return _Location;
+            }
+        }
+        private ObjectSet<Location> _Location;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<User> User
         {
             get
@@ -169,6 +205,22 @@ namespace Alabama
             }
         }
         private ObjectSet<User> _User;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<DonVi> DonVi
+        {
+            get
+            {
+                if ((_DonVi == null))
+                {
+                    _DonVi = base.CreateObjectSet<DonVi>("DonVi");
+                }
+                return _DonVi;
+            }
+        }
+        private ObjectSet<DonVi> _DonVi;
 
         #endregion
 
@@ -215,11 +267,35 @@ namespace Alabama
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the JobRegister EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToJobRegister(JobRegister jobRegister)
+        {
+            base.AddObject("JobRegister", jobRegister);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Location EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLocation(Location location)
+        {
+            base.AddObject("Location", location);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the User EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToUser(User user)
         {
             base.AddObject("User", user);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the DonVi EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToDonVi(DonVi donVi)
+        {
+            base.AddObject("DonVi", donVi);
         }
 
         #endregion
@@ -361,6 +437,201 @@ namespace Alabama
         #endregion
 
     
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="VPSS1Model", Name="DonVi")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class DonVi : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new DonVi object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="title">Initial value of the Title property.</param>
+        public static DonVi CreateDonVi(global::System.Int32 id, global::System.String title)
+        {
+            DonVi donVi = new DonVi();
+            donVi.ID = id;
+            donVi.Title = title;
+            return donVi;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                OnTitleChanging(value);
+                ReportPropertyChanging("Title");
+                _Title = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Title");
+                OnTitleChanged();
+            }
+        }
+        private global::System.String _Title;
+        partial void OnTitleChanging(global::System.String value);
+        partial void OnTitleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> LanhDaoID
+        {
+            get
+            {
+                return _LanhDaoID;
+            }
+            set
+            {
+                OnLanhDaoIDChanging(value);
+                ReportPropertyChanging("LanhDaoID");
+                _LanhDaoID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LanhDaoID");
+                OnLanhDaoIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _LanhDaoID;
+        partial void OnLanhDaoIDChanging(Nullable<global::System.Int32> value);
+        partial void OnLanhDaoIDChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_DonVi_User", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("VPSS1Model.FK_DonVi_User", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("VPSS1Model.FK_DonVi_User", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("VPSS1Model.FK_DonVi_User", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("VPSS1Model.FK_DonVi_User", "User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_User_DonVi", "User")]
+        public EntityCollection<User> User1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("VPSS1Model.FK_User_DonVi", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("VPSS1Model.FK_User_DonVi", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
     }
     
     /// <summary>
@@ -639,6 +910,500 @@ namespace Alabama
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("VPSS1Model.UserInGroup", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="VPSS1Model", Name="JobRegister")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class JobRegister : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new JobRegister object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="created">Initial value of the Created property.</param>
+        /// <param name="nguoiThucHien">Initial value of the NguoiThucHien property.</param>
+        /// <param name="content">Initial value of the Content property.</param>
+        /// <param name="dateFrom">Initial value of the DateFrom property.</param>
+        public static JobRegister CreateJobRegister(global::System.Int32 id, global::System.DateTime created, global::System.String nguoiThucHien, global::System.String content, global::System.DateTime dateFrom)
+        {
+            JobRegister jobRegister = new JobRegister();
+            jobRegister.ID = id;
+            jobRegister.Created = created;
+            jobRegister.NguoiThucHien = nguoiThucHien;
+            jobRegister.Content = content;
+            jobRegister.DateFrom = dateFrom;
+            return jobRegister;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> UserID
+        {
+            get
+            {
+                return _UserID;
+            }
+            set
+            {
+                OnUserIDChanging(value);
+                ReportPropertyChanging("UserID");
+                _UserID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserID");
+                OnUserIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _UserID;
+        partial void OnUserIDChanging(Nullable<global::System.Int32> value);
+        partial void OnUserIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Created
+        {
+            get
+            {
+                return _Created;
+            }
+            set
+            {
+                OnCreatedChanging(value);
+                ReportPropertyChanging("Created");
+                _Created = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Created");
+                OnCreatedChanged();
+            }
+        }
+        private global::System.DateTime _Created;
+        partial void OnCreatedChanging(global::System.DateTime value);
+        partial void OnCreatedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String NguoiThucHien
+        {
+            get
+            {
+                return _NguoiThucHien;
+            }
+            set
+            {
+                OnNguoiThucHienChanging(value);
+                ReportPropertyChanging("NguoiThucHien");
+                _NguoiThucHien = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("NguoiThucHien");
+                OnNguoiThucHienChanged();
+            }
+        }
+        private global::System.String _NguoiThucHien;
+        partial void OnNguoiThucHienChanging(global::System.String value);
+        partial void OnNguoiThucHienChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Content
+        {
+            get
+            {
+                return _Content;
+            }
+            set
+            {
+                OnContentChanging(value);
+                ReportPropertyChanging("Content");
+                _Content = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Content");
+                OnContentChanged();
+            }
+        }
+        private global::System.String _Content;
+        partial void OnContentChanging(global::System.String value);
+        partial void OnContentChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> LocationID
+        {
+            get
+            {
+                return _LocationID;
+            }
+            set
+            {
+                OnLocationIDChanging(value);
+                ReportPropertyChanging("LocationID");
+                _LocationID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LocationID");
+                OnLocationIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _LocationID;
+        partial void OnLocationIDChanging(Nullable<global::System.Int32> value);
+        partial void OnLocationIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String FullName
+        {
+            get
+            {
+                return _FullName;
+            }
+            set
+            {
+                OnFullNameChanging(value);
+                ReportPropertyChanging("FullName");
+                _FullName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("FullName");
+                OnFullNameChanged();
+            }
+        }
+        private global::System.String _FullName;
+        partial void OnFullNameChanging(global::System.String value);
+        partial void OnFullNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime DateFrom
+        {
+            get
+            {
+                return _DateFrom;
+            }
+            set
+            {
+                OnDateFromChanging(value);
+                ReportPropertyChanging("DateFrom");
+                _DateFrom = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DateFrom");
+                OnDateFromChanged();
+            }
+        }
+        private global::System.DateTime _DateFrom;
+        partial void OnDateFromChanging(global::System.DateTime value);
+        partial void OnDateFromChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateTo
+        {
+            get
+            {
+                return _DateTo;
+            }
+            set
+            {
+                OnDateToChanging(value);
+                ReportPropertyChanging("DateTo");
+                _DateTo = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DateTo");
+                OnDateToChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateTo;
+        partial void OnDateToChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateToChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                OnStatusChanging(value);
+                ReportPropertyChanging("Status");
+                _Status = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Status");
+                OnStatusChanged();
+            }
+        }
+        private global::System.String _Status;
+        partial void OnStatusChanging(global::System.String value);
+        partial void OnStatusChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_JobRegister_Location", "Location")]
+        public Location Location
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Location>("VPSS1Model.FK_JobRegister_Location", "Location").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Location>("VPSS1Model.FK_JobRegister_Location", "Location").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Location> LocationReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Location>("VPSS1Model.FK_JobRegister_Location", "Location");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Location>("VPSS1Model.FK_JobRegister_Location", "Location", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_JobRegister_User", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("VPSS1Model.FK_JobRegister_User", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("VPSS1Model.FK_JobRegister_User", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("VPSS1Model.FK_JobRegister_User", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("VPSS1Model.FK_JobRegister_User", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="VPSS1Model", Name="Location")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Location : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Location object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="title">Initial value of the Title property.</param>
+        public static Location CreateLocation(global::System.Int32 id, global::System.String title)
+        {
+            Location location = new Location();
+            location.ID = id;
+            location.Title = title;
+            return location;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                OnTitleChanging(value);
+                ReportPropertyChanging("Title");
+                _Title = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Title");
+                OnTitleChanged();
+            }
+        }
+        private global::System.String _Title;
+        partial void OnTitleChanging(global::System.String value);
+        partial void OnTitleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Content
+        {
+            get
+            {
+                return _Content;
+            }
+            set
+            {
+                OnContentChanging(value);
+                ReportPropertyChanging("Content");
+                _Content = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Content");
+                OnContentChanged();
+            }
+        }
+        private global::System.String _Content;
+        partial void OnContentChanging(global::System.String value);
+        partial void OnContentChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_JobRegister_Location", "JobRegister")]
+        public EntityCollection<JobRegister> JobRegister
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<JobRegister>("VPSS1Model.FK_JobRegister_Location", "JobRegister");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<JobRegister>("VPSS1Model.FK_JobRegister_Location", "JobRegister", value);
                 }
             }
         }
@@ -1402,11 +2167,57 @@ namespace Alabama
         private global::System.String _Avata;
         partial void OnAvataChanging(global::System.String value);
         partial void OnAvataChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> DonViID
+        {
+            get
+            {
+                return _DonViID;
+            }
+            set
+            {
+                OnDonViIDChanging(value);
+                ReportPropertyChanging("DonViID");
+                _DonViID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DonViID");
+                OnDonViIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _DonViID;
+        partial void OnDonViIDChanging(Nullable<global::System.Int32> value);
+        partial void OnDonViIDChanged();
 
         #endregion
 
     
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_JobRegister_User", "JobRegister")]
+        public EntityCollection<JobRegister> JobRegister
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<JobRegister>("VPSS1Model.FK_JobRegister_User", "JobRegister");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<JobRegister>("VPSS1Model.FK_JobRegister_User", "JobRegister", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1426,6 +2237,66 @@ namespace Alabama
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Group>("VPSS1Model.UserInGroup", "Group", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_DonVi_User", "DonVi")]
+        public EntityCollection<DonVi> DonVi
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DonVi>("VPSS1Model.FK_DonVi_User", "DonVi");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DonVi>("VPSS1Model.FK_DonVi_User", "DonVi", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_User_DonVi", "DonVi")]
+        public DonVi DonVi1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DonVi>("VPSS1Model.FK_User_DonVi", "DonVi").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DonVi>("VPSS1Model.FK_User_DonVi", "DonVi").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<DonVi> DonVi1Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DonVi>("VPSS1Model.FK_User_DonVi", "DonVi");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DonVi>("VPSS1Model.FK_User_DonVi", "DonVi", value);
                 }
             }
         }
