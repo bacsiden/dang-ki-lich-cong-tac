@@ -84,6 +84,7 @@
     <Compile Include="Controllers\DonViController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobRegisterController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -292,6 +293,8 @@
     <Content Include="Views\Location\NewOrEdit.cshtml" />
     <Content Include="Views\DonVi\Index.cshtml" />
     <Content Include="Views\DonVi\NewOrEdit.cshtml" />
+    <Content Include="Views\JobRegister\Index.cshtml" />
+    <Content Include="Views\JobRegister\NewOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_Layout.cshtml" />

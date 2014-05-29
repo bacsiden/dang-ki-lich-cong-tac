@@ -1,0 +1,85 @@
+﻿@model Alabama.JobRegister
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <i class="icon-table"></i>@ViewBag.Title</h3>
+            </div>
+            <div class="box-content">
+                <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+                <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.ValidationSummary(true)                    
+
+                    @Html.HiddenFor(model => model.ID)
+                    @Html.HiddenFor(model => model.UserID)
+                    <div class="control-group">
+                        <label class="control-label" for="UserName">
+                            Người đăng ký</label>
+                        <div class="controls">
+                            <input type="text" name="UserName" value="@ViewBag.UserName" Readonly ="Readonly" />
+                            @Html.ValidationMessageFor(model => model.UserID)
+                        </div>
+                    </div>                                      
+                    <div class="control-group">
+                        <label class="control-label" for="Created">
+                            Ngày tạo</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.Created, new { Class = "date-picker" })
+                            @Html.ValidationMessageFor(model => model.Created)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="NguoiThucHien">
+                            Người thực hiện</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.NguoiThucHien)
+                            @Html.ValidationMessageFor(model => model.NguoiThucHien)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="LocationName">
+                            Địa điểm</label>
+                        <div class="controls">
+                            <select data-placeholder="Chọn địa điểm" name="LocationID" class="chosen-with-diselect">
+                                @Html.Raw(ViewBag.dataLocation)
+                            </select>
+                            @Html.ValidationMessageFor(model => model.LocationID)
+                        </div>
+                    </div>  
+                    <div class="control-group">
+                        <label class="control-label" for="DateFrom">
+                            Thời gian từ</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.DateFrom, new { Class = "date-picker" })
+                            @Html.ValidationMessageFor(model => model.DateFrom)
+                        </div>
+                    </div>
+                     <div class="control-group">
+                        <label class="control-label" for="DateTo">
+                            đến</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.DateTo, new { Class = "date-picker" })
+                            @Html.ValidationMessageFor(model => model.DateTo)
+                        </div>
+                    </div>         
+                    <div class="control-group">
+                        <label class="control-label" for="Content">
+                            Nội dung</label>
+                        <div class="controls">
+                            @Html.TextAreaFor(model => model.Content, new {rows="5"})
+                            @Html.ValidationMessageFor(model => model.Content)
+                        </div>
+                    </div>
+                               
+                    <div class="form-actions">
+                        <input type="submit" value="Lưu lại" class="btn btn-info" />
+                        @Html.ActionLink("Hủy", "Index", null, new { @class = "btn" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
