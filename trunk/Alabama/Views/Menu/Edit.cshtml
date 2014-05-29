@@ -24,6 +24,11 @@
                 @Html.TextBoxFor(m => m.Url)
             </div>
             <label class="control-label">
+                Icon</label>
+            <div class="controls">
+                @Html.TextBoxFor(m => m.Icon)
+            </div>
+            <label class="control-label">
                 Menu cha</label>
             <div class="controls">
                 @Html.DropDownListFor(m => m.ParentID, (SelectList)ViewBag.dropDown)
