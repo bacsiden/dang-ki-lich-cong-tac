@@ -281,3 +281,8 @@ function getListIDCheckBoxByClassName(classWrapper, classItem) {
     });
     return listID;
 }
+
+function convertDateTimeVItoEN(date) {
+    var arr = date.split('/');
+    return arr[1] + "/" + arr[0] + "/" + arr[2] + " ";
+}

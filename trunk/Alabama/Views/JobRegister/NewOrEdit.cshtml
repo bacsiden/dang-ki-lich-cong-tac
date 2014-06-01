@@ -1,4 +1,14 @@
 ﻿@model Alabama.JobRegister
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    });
+    function beforSubmit() {
+        var DateFrom = convertDateTimeVItoEN($("#DateFrom").val()) + $(".timeFrom").val();
+        $("#DateFrom").val(DateFrom);
+        return true;
+    }
+</script>
 <div class="row-fluid">
     <div class="span12">
         <div class="box">
@@ -15,6 +25,7 @@
 
                     @Html.HiddenFor(model => model.ID)
                     @Html.HiddenFor(model => model.UserID)
+                    @Html.HiddenFor(model => model.Created)
                     <div class="control-group">
                         <label class="control-label" for="UserName">
                             Người đăng ký</label>
@@ -22,23 +33,16 @@
                             <input type="text" name="UserName" value="@ViewBag.UserName" Readonly ="Readonly" />
                             @Html.ValidationMessageFor(model => model.UserID)
                         </div>
-                    </div>                                      
-                    <div class="control-group">
-                        <label class="control-label" for="Created">
-                            Ngày tạo</label>
-                        <div class="controls">
-                            @Html.TextBoxFor(model => model.Created, new { Class = "date-picker" })
-                            @Html.ValidationMessageFor(model => model.Created)
-                        </div>
-                    </div>
+                    </div> 
                     <div class="control-group">
                         <label class="control-label" for="NguoiThucHien">
                             Người thực hiện</label>
                         <div class="controls">
-                            @Html.TextBoxFor(model => model.NguoiThucHien)
+                            @Html.TextAreaFor(model => model.NguoiThucHien, new { rows = "3", Class = "input-xxlarge" })
                             @Html.ValidationMessageFor(model => model.NguoiThucHien)
                         </div>
                     </div>
+
                     <div class="control-group">
                         <label class="control-label" for="LocationName">
                             Địa điểm</label>
@@ -51,31 +55,35 @@
                     </div>  
                     <div class="control-group">
                         <label class="control-label" for="DateFrom">
-                            Thời gian từ</label>
+                            Thời gian bắt đầu</label>
                         <div class="controls">
-                            @Html.TextBoxFor(model => model.DateFrom, new { Class = "date-picker" })
+                            @Html.TextBoxFor(model => model.DateFrom, new { Class = "date-picker", @Value = Model.DateFrom.ToString("dd/MM/yyyy") })
+                            <div class="input-append bootstrap-timepicker-component">
+                                <input class="timepicker-default input-small timeFrom" type="text" value="@ViewBag.DateFrom" name="timeFrom"/>
+                                <span class="add-on"><i class="icon-time"></i></span>
+                            </div>
                             @Html.ValidationMessageFor(model => model.DateFrom)
                         </div>
                     </div>
-                     <div class="control-group">
+@*<div class="control-group">
                         <label class="control-label" for="DateTo">
                             đến</label>
                         <div class="controls">
                             @Html.TextBoxFor(model => model.DateTo, new { Class = "date-picker" })
                             @Html.ValidationMessageFor(model => model.DateTo)
                         </div>
-                    </div>         
+                    </div>*@         
                     <div class="control-group">
                         <label class="control-label" for="Content">
                             Nội dung</label>
                         <div class="controls">
-                            @Html.TextAreaFor(model => model.Content, new {rows="5"})
+                            @Html.TextAreaFor(model => model.Content, new { rows = "4" , Class="input-xxlarge"})
                             @Html.ValidationMessageFor(model => model.Content)
                         </div>
                     </div>
                                
                     <div class="form-actions">
-                        <input type="submit" value="Lưu lại" class="btn btn-info" />
+                        <input type="submit" value="Lưu lại" class="btn btn-info" onclick="beforSubmit();" />
                         @Html.ActionLink("Hủy", "Index", null, new { @class = "btn" })
                     </div>
                 }

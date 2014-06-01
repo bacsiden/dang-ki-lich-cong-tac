@@ -87,7 +87,9 @@
     <Compile Include="Controllers\JobRegisterController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\NguoiTrucController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\TongHopLichCongTacController.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -295,6 +297,11 @@
     <Content Include="Views\DonVi\NewOrEdit.cshtml" />
     <Content Include="Views\JobRegister\Index.cshtml" />
     <Content Include="Views\JobRegister\NewOrEdit.cshtml" />
+    <Content Include="Views\NguoiTruc\Index.cshtml" />
+    <Content Include="Views\NguoiTruc\NewOrEdit.cshtml" />
+    <Content Include="Views\TongHopLichCongTac\NewOrEdit.cshtml" />
+    <Content Include="Views\TongHopLichCongTac\_EditDetail.cshtml" />
+    <Content Include="Views\Shared\_Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_Layout.cshtml" />

@@ -1,0 +1,148 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model List<Alabama.TongHopDetail>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.StartDate').datepicker({ language: "vi", format: "dd/mm/yyyy" }).on('changeDate', function (ev) {
+            var curr = new Date(convertDateTimeVItoEN($(this).val()));
+            var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+            var res;
+            if (first + 1 != curr.getDate()) {
+                res = '';
+            } else {
+                var last = first + 7; // last day is the first day + 6
+
+                var firstday = new Date(curr.setDate(first));
+
+                var lastday = new Date(curr.setDate(last));
+                res = lastday.getDate() + '/' + (lastday.getMonth() + 1) + '/' + lastday.getFullYear();
+            }
+
+            $('.EndDate').val(res);
+        });
+        $(".TongHop").click(function () {
+            var start = $(".StartDate").val();
+            var end = $(".EndDate").val();
+            var url = $(this).attr('href');
+            var newUrl = addParam(addParam(url, "fromDate", start), "endDate", end);
+            $(this).attr('href', newUrl);
+        });
+        $(".EditDetail").click(function () {
+            var id = $(this).attr('value');
+            $.ajax({
+                url: "/TongHopLichCongTac/EditDetail",
+                type: "GET",
+                data: { "id": id },
+                success: function (model) {
+                    $("#Modal-EditDetail").html(model);
+                }
+            });
+        });
+    });
+</script>
+<h3>
+    Tổng hợp lịch công tác</h3>
+<div class="row-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            @Html.ActionLink("Tổng hợp", "NewOrEdit", null, new { @class = "btn btn-info TongHop" })
+            @Html.ActionLink("Edit", "NewOrEdit", null, new { @class = "btn btn-info EditItem" })
+            @Html.ActionLink("Delete", "Delete", null, new { @class = "btn btn-danger DeleteItem confirmDelete" })
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4">
+            <label>
+                Ngày bắt đầu</label>
+            <input type="text" name="name" value="@Request.QueryString["fromDate"]" class="StartDate" />
+        </div>
+        <div class="span4">
+            <label>
+                Ngày cuối tuần</label>
+            <input type="text" name="name" value="@Request.QueryString["EndDate"]" class="EndDate" readonly="readonly" />
+        </div>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                <input type="checkbox" name="" value="" class="checkAll" />
+            </th>
+            <th>
+                Nội dung
+            </th>
+            <th>
+                Người thực hiện
+            </th>
+            <th>
+                Người trực
+            </th>
+            <th>
+                Thời gian
+            </th>
+        </tr>
+        @if (Model != null && Model.Count > 0)
+        {
+            for (int i = 0; i < 7; i++)
+            {
+                var list = Model.Where(m => m.TongHop.DayOfWeek == i).ToList();
+            <tr>
+                @if (i == 6)
+                {
+                    if (list.Count > 0)
+                    {
+                    <td rowspan="@list.Count">
+                        Chủ nhật
+                    </td>
+                    }
+                    else
+                    {
+                    <td>
+                        Chủ nhật
+                    </td>
+                    }
+
+                }
+                else
+                {
+                    if (list.Count > 0)
+                    {
+                    <td rowspan="@list.Count">
+                        Thứ @(i + 2)
+                    </td>
+                    }
+                    else
+                    {
+                    <td>
+                        Thứ @(i + 2)
+                    </td>
+                    }
+
+                }
+                @foreach (var item in list)
+                {
+                    <td>
+                        @item.NoiDung
+                    </td> 
+                    <td>
+                        @item.NguoiThucHien
+                    </td> 
+                    <td>
+                        @(item.TongHop.NguoiTruc != null ? item.TongHop.NguoiTruc.Title : "")
+                    </td> 
+                    <td>
+                        @item.Time
+                    </td> 
+                    <td>
+                        <a href="#Modal-EditDetail" role="button" class="btn EditDetail" value="@item.ID" data-toggle="modal">
+                            Sửa</a>
+                    </td>
+                }
+            </tr>
+            }
+        }
+    </table>
+</div>
+@*<div id="Modal-EditDetail" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+    aria-hidden="true">
+</div>*@
+<div id="Modal-EditDetail" class="modal hide fade">
+    </div>
