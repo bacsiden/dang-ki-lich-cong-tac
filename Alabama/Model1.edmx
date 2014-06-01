@@ -15,8 +15,11 @@
           <EntitySet Name="JobRegister" EntityType="VPSS1Model.Store.JobRegister" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Location" EntityType="VPSS1Model.Store.Location" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Menu" EntityType="VPSS1Model.Store.Menu" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="NguoiTruc" EntityType="VPSS1Model.Store.NguoiTruc" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Role1" EntityType="VPSS1Model.Store.Role1" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="RoleInGroup" EntityType="VPSS1Model.Store.RoleInGroup" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TongHop" EntityType="VPSS1Model.Store.TongHop" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TongHopDetail" EntityType="VPSS1Model.Store.TongHopDetail" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="VPSS1Model.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserInGroup" EntityType="VPSS1Model.Store.UserInGroup" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_DonVi_User" Association="VPSS1Model.Store.FK_DonVi_User">
@@ -54,6 +57,14 @@
           <AssociationSet Name="FK_RoleInGroup_Role1" Association="VPSS1Model.Store.FK_RoleInGroup_Role1">
             <End Role="Role1" EntitySet="Role1" />
             <End Role="RoleInGroup" EntitySet="RoleInGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TongHop_NguoiTruc" Association="VPSS1Model.Store.FK_TongHop_NguoiTruc">
+            <End Role="NguoiTruc" EntitySet="NguoiTruc" />
+            <End Role="TongHop" EntitySet="TongHop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TongHopDetail_TongHop" Association="VPSS1Model.Store.FK_TongHopDetail_TongHop">
+            <End Role="TongHop" EntitySet="TongHop" />
+            <End Role="TongHopDetail" EntitySet="TongHopDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_User_DonVi" Association="VPSS1Model.Store.FK_User_DonVi">
             <End Role="DonVi" EntitySet="DonVi" />
@@ -131,6 +142,7 @@
           <Property Name="DateFrom" Type="datetime" Nullable="false" />
           <Property Name="DateTo" Type="datetime" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Added" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -154,6 +166,13 @@
           <Property Name="Inherit" Type="bit" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
+        <EntityType Name="NguoiTruc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Role1">
           <Key>
             <PropertyRef Name="ID" />
@@ -169,6 +188,28 @@
           </Key>
           <Property Name="GroupID" Type="int" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TongHop">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NguoiTrucID" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="FromDate" Type="datetime" Nullable="false" />
+          <Property Name="DayOfWeek" Type="int" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="TongHopDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TongHopID" Type="int" Nullable="false" />
+          <Property Name="Time" Type="time" Nullable="false" />
+          <Property Name="NguoiThucHien" Type="nvarchar" MaxLength="200" />
+          <Property Name="NoiDung" Type="nvarchar" MaxLength="200" />
+          <Property Name="Code" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -316,6 +357,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TongHop_NguoiTruc">
+          <End Role="NguoiTruc" Type="VPSS1Model.Store.NguoiTruc" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TongHop" Type="VPSS1Model.Store.TongHop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiTruc">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TongHop">
+              <PropertyRef Name="NguoiTrucID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TongHopDetail_TongHop">
+          <End Role="TongHop" Type="VPSS1Model.Store.TongHop" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TongHopDetail" Type="VPSS1Model.Store.TongHopDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TongHop">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TongHopDetail">
+              <PropertyRef Name="TongHopID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_DonVi">
           <End Role="DonVi" Type="VPSS1Model.Store.DonVi" Multiplicity="0..1" />
           <End Role="User" Type="VPSS1Model.Store.User" Multiplicity="*" />
@@ -378,17 +447,8 @@
             <End Role="Group" EntitySet="Group" />
             <End Role="Role1" EntitySet="Role1" />
           </AssociationSet>
-          <EntitySet Name="JobRegister" EntityType="VPSS1Model.JobRegister" />
           <EntitySet Name="Location" EntityType="VPSS1Model.Location" />
           <EntitySet Name="User" EntityType="VPSS1Model.User" />
-          <AssociationSet Name="FK_JobRegister_Location" Association="VPSS1Model.FK_JobRegister_Location">
-            <End Role="Location" EntitySet="Location" />
-            <End Role="JobRegister" EntitySet="JobRegister" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JobRegister_User" Association="VPSS1Model.FK_JobRegister_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="JobRegister" EntitySet="JobRegister" />
-          </AssociationSet>
           <AssociationSet Name="UserInGroup" Association="VPSS1Model.UserInGroup">
             <End Role="Group" EntitySet="Group" />
             <End Role="User" EntitySet="User" />
@@ -401,6 +461,26 @@
           <AssociationSet Name="FK_User_DonVi" Association="VPSS1Model.FK_User_DonVi">
             <End Role="DonVi" EntitySet="DonVi" />
             <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <EntitySet Name="NguoiTruc" EntityType="VPSS1Model.NguoiTruc" />
+          <EntitySet Name="TongHop" EntityType="VPSS1Model.TongHop" />
+          <AssociationSet Name="FK_TongHop_NguoiTruc" Association="VPSS1Model.FK_TongHop_NguoiTruc">
+            <End Role="NguoiTruc" EntitySet="NguoiTruc" />
+            <End Role="TongHop" EntitySet="TongHop" />
+          </AssociationSet>
+          <EntitySet Name="TongHopDetail" EntityType="VPSS1Model.TongHopDetail" />
+          <AssociationSet Name="FK_TongHopDetail_TongHop" Association="VPSS1Model.FK_TongHopDetail_TongHop">
+            <End Role="TongHop" EntitySet="TongHop" />
+            <End Role="TongHopDetail" EntitySet="TongHopDetail" />
+          </AssociationSet>
+          <EntitySet Name="JobRegister" EntityType="VPSS1Model.JobRegister" />
+          <AssociationSet Name="FK_JobRegister_Location" Association="VPSS1Model.FK_JobRegister_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="JobRegister" EntitySet="JobRegister" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobRegister_User" Association="VPSS1Model.FK_JobRegister_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="JobRegister" EntitySet="JobRegister" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Config">
@@ -468,23 +548,6 @@
           <End Type="VPSS1Model.Group" Role="Group" Multiplicity="*" />
           <End Type="VPSS1Model.Role1" Role="Role1" Multiplicity="*" />
         </Association>
-        <EntityType Name="JobRegister">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="UserID" />
-          <Property Type="DateTime" Name="Created" Nullable="false" />
-          <Property Type="String" Name="NguoiThucHien" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Content" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="LocationID" />
-          <Property Type="String" Name="FullName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="DateFrom" Nullable="false" />
-          <Property Type="DateTime" Name="DateTo" />
-          <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Location" Relationship="VPSS1Model.FK_JobRegister_Location" FromRole="JobRegister" ToRole="Location" />
-          <NavigationProperty Name="User" Relationship="VPSS1Model.FK_JobRegister_User" FromRole="JobRegister" ToRole="User" />
-        </EntityType>
         <EntityType Name="Location">
           <Key>
             <PropertyRef Name="ID" />
@@ -511,35 +574,11 @@
           <Property Type="Boolean" Name="Locked" Nullable="false" />
           <Property Type="String" Name="Avata" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="DonViID" />
-          <NavigationProperty Name="JobRegister" Relationship="VPSS1Model.FK_JobRegister_User" FromRole="User" ToRole="JobRegister" />
           <NavigationProperty Name="Group" Relationship="VPSS1Model.UserInGroup" FromRole="User" ToRole="Group" />
           <NavigationProperty Name="DonVi" Relationship="VPSS1Model.FK_DonVi_User" FromRole="User" ToRole="DonVi" />
           <NavigationProperty Name="DonVi1" Relationship="VPSS1Model.FK_User_DonVi" FromRole="User" ToRole="DonVi" />
+          <NavigationProperty Name="JobRegister" Relationship="VPSS1Model.FK_JobRegister_User" FromRole="User" ToRole="JobRegister" />
         </EntityType>
-        <Association Name="FK_JobRegister_Location">
-          <End Type="VPSS1Model.Location" Role="Location" Multiplicity="0..1" />
-          <End Type="VPSS1Model.JobRegister" Role="JobRegister" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Location">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="JobRegister">
-              <PropertyRef Name="LocationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_JobRegister_User">
-          <End Type="VPSS1Model.User" Role="User" Multiplicity="0..1" />
-          <End Type="VPSS1Model.JobRegister" Role="JobRegister" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="JobRegister">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="UserInGroup">
           <End Type="VPSS1Model.Group" Role="Group" Multiplicity="*" />
           <End Type="VPSS1Model.User" Role="User" Multiplicity="*" />
@@ -576,6 +615,105 @@
             </Principal>
             <Dependent Role="User">
               <PropertyRef Name="DonViID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="NguoiTruc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TongHop" Relationship="VPSS1Model.FK_TongHop_NguoiTruc" FromRole="NguoiTruc" ToRole="TongHop" />
+        </EntityType>
+        <EntityType Name="TongHop">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="NguoiTrucID" />
+          <Property Type="String" Name="Status" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="FromDate" Nullable="false" />
+          <Property Type="Int32" Name="DayOfWeek" Nullable="false" />
+          <Property Type="String" Name="Code" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="NguoiTruc" Relationship="VPSS1Model.FK_TongHop_NguoiTruc" FromRole="TongHop" ToRole="NguoiTruc" />
+          <NavigationProperty Name="TongHopDetail" Relationship="VPSS1Model.FK_TongHopDetail_TongHop" FromRole="TongHop" ToRole="TongHopDetail" />
+        </EntityType>
+        <Association Name="FK_TongHop_NguoiTruc">
+          <End Type="VPSS1Model.NguoiTruc" Role="NguoiTruc" Multiplicity="0..1" />
+          <End Type="VPSS1Model.TongHop" Role="TongHop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiTruc">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TongHop">
+              <PropertyRef Name="NguoiTrucID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TongHopDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="TongHopID" Nullable="false" />
+          <Property Type="Time" Name="Time" Nullable="false" />
+          <Property Type="String" Name="NguoiThucHien" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NoiDung" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Code" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TongHop" Relationship="VPSS1Model.FK_TongHopDetail_TongHop" FromRole="TongHopDetail" ToRole="TongHop" />
+        </EntityType>
+        <Association Name="FK_TongHopDetail_TongHop">
+          <End Type="VPSS1Model.TongHop" Role="TongHop" Multiplicity="1" />
+          <End Type="VPSS1Model.TongHopDetail" Role="TongHopDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TongHop">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TongHopDetail">
+              <PropertyRef Name="TongHopID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="JobRegister">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserID" />
+          <Property Type="DateTime" Name="Created" Nullable="false" />
+          <Property Type="String" Name="NguoiThucHien" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Content" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="LocationID" />
+          <Property Type="String" Name="FullName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="DateFrom" Nullable="false" />
+          <Property Type="DateTime" Name="DateTo" />
+          <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Added" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="VPSS1Model.FK_JobRegister_Location" FromRole="JobRegister" ToRole="Location" />
+          <NavigationProperty Name="User" Relationship="VPSS1Model.FK_JobRegister_User" FromRole="JobRegister" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_JobRegister_Location">
+          <End Type="VPSS1Model.Location" Role="Location" Multiplicity="0..1" />
+          <End Type="VPSS1Model.JobRegister" Role="JobRegister" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JobRegister">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobRegister_User">
+          <End Type="VPSS1Model.User" Role="User" Multiplicity="0..1" />
+          <End Type="VPSS1Model.JobRegister" Role="JobRegister" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JobRegister">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -660,22 +798,6 @@
               <ScalarProperty Name="ID" ColumnName="GroupID" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="JobRegister">
-            <EntityTypeMapping TypeName="VPSS1Model.JobRegister">
-              <MappingFragment StoreEntitySet="JobRegister">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="DateTo" ColumnName="DateTo" />
-                <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="NguoiThucHien" ColumnName="NguoiThucHien" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Location">
             <EntityTypeMapping TypeName="VPSS1Model.Location">
               <MappingFragment StoreEntitySet="Location">
@@ -722,6 +844,55 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="NguoiTruc">
+            <EntityTypeMapping TypeName="VPSS1Model.NguoiTruc">
+              <MappingFragment StoreEntitySet="NguoiTruc">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TongHop">
+            <EntityTypeMapping TypeName="VPSS1Model.TongHop">
+              <MappingFragment StoreEntitySet="TongHop">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="NguoiTrucID" ColumnName="NguoiTrucID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TongHopDetail">
+            <EntityTypeMapping TypeName="VPSS1Model.TongHopDetail">
+              <MappingFragment StoreEntitySet="TongHopDetail">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="NguoiThucHien" ColumnName="NguoiThucHien" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="TongHopID" ColumnName="TongHopID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobRegister">
+            <EntityTypeMapping TypeName="VPSS1Model.JobRegister">
+              <MappingFragment StoreEntitySet="JobRegister">
+                <ScalarProperty Name="Added" ColumnName="Added" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+                <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="NguoiThucHien" ColumnName="NguoiThucHien" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -760,18 +931,8 @@
           <ConnectorPoint PointX="2.25" PointY="5.9708968098958373" />
           <ConnectorPoint PointX="6" PointY="5.9708968098958373" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="VPSS1Model.JobRegister" Width="1.5" PointX="11.25" PointY="8.625" Height="3.3263964843750031" />
         <EntityTypeShape EntityType="VPSS1Model.Location" Width="1.5" PointX="9" PointY="6.375" Height="1.7879850260416745" />
         <EntityTypeShape EntityType="VPSS1Model.User" Width="1.5" PointX="6" PointY="8.125" Height="4.2879036458333388" />
-        <AssociationConnector Association="VPSS1Model.FK_JobRegister_Location" >
-          <ConnectorPoint PointX="10.5" PointY="7.2689925130208373" />
-          <ConnectorPoint PointX="12" PointY="7.2689925130208373" />
-          <ConnectorPoint PointX="12" PointY="8.625" />
-        </AssociationConnector>
-        <AssociationConnector Association="VPSS1Model.FK_JobRegister_User" >
-          <ConnectorPoint PointX="7.5" PointY="11.655742187500001" />
-          <ConnectorPoint PointX="11.25" PointY="11.655742187500001" />
-        </AssociationConnector>
         <AssociationConnector Association="VPSS1Model.UserInGroup" >
           <ConnectorPoint PointX="1.5" PointY="7.2302864583333317" />
           <ConnectorPoint PointX="1.5" PointY="10.3191943359375" />
@@ -779,12 +940,32 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="VPSS1Model.DonVi" Width="1.5" PointX="8.25" PointY="9.125" Height="2.1725878906249996" />
         <AssociationConnector Association="VPSS1Model.FK_DonVi_User" >
-          <ConnectorPoint PointX="7.5" PointY="10.2112939453125" />
-          <ConnectorPoint PointX="8.25" PointY="10.2112939453125" />
+          <ConnectorPoint PointX="7.5" PointY="10.589823303222655" />
+          <ConnectorPoint PointX="8.25" PointY="10.589823303222655" />
         </AssociationConnector>
         <AssociationConnector Association="VPSS1Model.FK_User_DonVi" >
-          <ConnectorPoint PointX="8.25" PointY="9.605646972656249" />
-          <ConnectorPoint PointX="7.5" PointY="9.605646972656249" />
+          <ConnectorPoint PointX="8.25" PointY="9.7949116516113275" />
+          <ConnectorPoint PointX="7.5" PointY="9.7949116516113275" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="VPSS1Model.NguoiTruc" Width="1.5" PointX="8.375" PointY="1.375" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="VPSS1Model.TongHop" Width="1.5" PointX="10.625" PointY="0.875" Height="2.5571907552083388" />
+        <AssociationConnector Association="VPSS1Model.FK_TongHop_NguoiTruc" >
+          <ConnectorPoint PointX="9.875" PointY="2.172841796875" />
+          <ConnectorPoint PointX="10.625" PointY="2.172841796875" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="VPSS1Model.TongHopDetail" Width="1.5" PointX="12.875" PointY="1" Height="2.3648893229166674" />
+        <AssociationConnector Association="VPSS1Model.FK_TongHopDetail_TongHop" >
+          <ConnectorPoint PointX="12.125" PointY="2.1824446614583337" />
+          <ConnectorPoint PointX="12.875" PointY="2.1824446614583337" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="VPSS1Model.JobRegister" Width="1.5" PointX="11.25" PointY="7.625" Height="3.5186979166666674" />
+        <AssociationConnector Association="VPSS1Model.FK_JobRegister_Location" >
+          <ConnectorPoint PointX="10.5" PointY="7.8939925130208328" />
+          <ConnectorPoint PointX="11.25" PointY="7.8939925130208328" />
+        </AssociationConnector>
+        <AssociationConnector Association="VPSS1Model.FK_JobRegister_User" >
+          <ConnectorPoint PointX="7.5" PointY="8.6439925130208337" />
+          <ConnectorPoint PointX="11.25" PointY="8.6439925130208337" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>

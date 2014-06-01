@@ -1,4 +1,4 @@
-﻿@model Alabama.Location
+﻿@model Alabama.NguoiTruc
 <div class="row-fluid">
     <div class="span12">
         <div class="box">
@@ -16,7 +16,7 @@
                     @Html.HiddenFor(model => model.ID)
                     
                     <div class="control-group">
-                        <label class="control-label" for="Title">Tên địa điểm</label>
+                        <label class="control-label" for="Title">Tên người trực</label>
                         <div class="controls">
                             <div class="span12">
                                 @Html.TextBoxFor(model => model.Title)
@@ -24,16 +24,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label" for="Content">Nội dung</label>
-                        <div class="controls">
-                            <div class="span12">
-                                @Html.TextAreaFor(model => model.Content, new { rows = "4" , Class="input-xxlarge"})
-                                @Html.ValidationMessageFor(model => model.Content)
-                            </div>
-                        </div>
-                    </div>
-                    
                     <div class="form-actions">
                         <input type="submit" value="Lưu lại" class="btn btn-info" />
                         @Html.ActionLink("Hủy", "Index", null, new { @class = "btn" })

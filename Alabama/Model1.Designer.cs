@@ -22,11 +22,13 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("VPSS1Model", "FunctionInRole", "Function", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Function), "Role1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Role1))]
 [assembly: EdmRelationshipAttribute("VPSS1Model", "GroupInMenu", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Group), "Menu", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Menu))]
 [assembly: EdmRelationshipAttribute("VPSS1Model", "RoleInGroup", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Group), "Role1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Role1))]
-[assembly: EdmRelationshipAttribute("VPSS1Model", "FK_JobRegister_Location", "Location", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Alabama.Location), "JobRegister", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.JobRegister), true)]
-[assembly: EdmRelationshipAttribute("VPSS1Model", "FK_JobRegister_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Alabama.User), "JobRegister", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.JobRegister), true)]
 [assembly: EdmRelationshipAttribute("VPSS1Model", "UserInGroup", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Group), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.User))]
 [assembly: EdmRelationshipAttribute("VPSS1Model", "FK_DonVi_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Alabama.User), "DonVi", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.DonVi), true)]
 [assembly: EdmRelationshipAttribute("VPSS1Model", "FK_User_DonVi", "DonVi", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Alabama.DonVi), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.User), true)]
+[assembly: EdmRelationshipAttribute("VPSS1Model", "FK_TongHop_NguoiTruc", "NguoiTruc", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Alabama.NguoiTruc), "TongHop", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.TongHop), true)]
+[assembly: EdmRelationshipAttribute("VPSS1Model", "FK_TongHopDetail_TongHop", "TongHop", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Alabama.TongHop), "TongHopDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.TongHopDetail), true)]
+[assembly: EdmRelationshipAttribute("VPSS1Model", "FK_JobRegister_Location", "Location", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Alabama.Location), "JobRegister", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.JobRegister), true)]
+[assembly: EdmRelationshipAttribute("VPSS1Model", "FK_JobRegister_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Alabama.User), "JobRegister", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.JobRegister), true)]
 
 #endregion
 
@@ -161,22 +163,6 @@ namespace Alabama
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<JobRegister> JobRegister
-        {
-            get
-            {
-                if ((_JobRegister == null))
-                {
-                    _JobRegister = base.CreateObjectSet<JobRegister>("JobRegister");
-                }
-                return _JobRegister;
-            }
-        }
-        private ObjectSet<JobRegister> _JobRegister;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Location> Location
         {
             get
@@ -221,6 +207,70 @@ namespace Alabama
             }
         }
         private ObjectSet<DonVi> _DonVi;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<NguoiTruc> NguoiTruc
+        {
+            get
+            {
+                if ((_NguoiTruc == null))
+                {
+                    _NguoiTruc = base.CreateObjectSet<NguoiTruc>("NguoiTruc");
+                }
+                return _NguoiTruc;
+            }
+        }
+        private ObjectSet<NguoiTruc> _NguoiTruc;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<TongHop> TongHop
+        {
+            get
+            {
+                if ((_TongHop == null))
+                {
+                    _TongHop = base.CreateObjectSet<TongHop>("TongHop");
+                }
+                return _TongHop;
+            }
+        }
+        private ObjectSet<TongHop> _TongHop;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<TongHopDetail> TongHopDetail
+        {
+            get
+            {
+                if ((_TongHopDetail == null))
+                {
+                    _TongHopDetail = base.CreateObjectSet<TongHopDetail>("TongHopDetail");
+                }
+                return _TongHopDetail;
+            }
+        }
+        private ObjectSet<TongHopDetail> _TongHopDetail;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<JobRegister> JobRegister
+        {
+            get
+            {
+                if ((_JobRegister == null))
+                {
+                    _JobRegister = base.CreateObjectSet<JobRegister>("JobRegister");
+                }
+                return _JobRegister;
+            }
+        }
+        private ObjectSet<JobRegister> _JobRegister;
 
         #endregion
 
@@ -267,14 +317,6 @@ namespace Alabama
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the JobRegister EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToJobRegister(JobRegister jobRegister)
-        {
-            base.AddObject("JobRegister", jobRegister);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Location EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToLocation(Location location)
@@ -296,6 +338,38 @@ namespace Alabama
         public void AddToDonVi(DonVi donVi)
         {
             base.AddObject("DonVi", donVi);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the NguoiTruc EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToNguoiTruc(NguoiTruc nguoiTruc)
+        {
+            base.AddObject("NguoiTruc", nguoiTruc);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the TongHop EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToTongHop(TongHop tongHop)
+        {
+            base.AddObject("TongHop", tongHop);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the TongHopDetail EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToTongHopDetail(TongHopDetail tongHopDetail)
+        {
+            base.AddObject("TongHopDetail", tongHopDetail);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the JobRegister EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToJobRegister(JobRegister jobRegister)
+        {
+            base.AddObject("JobRegister", jobRegister);
         }
 
         #endregion
@@ -936,7 +1010,8 @@ namespace Alabama
         /// <param name="nguoiThucHien">Initial value of the NguoiThucHien property.</param>
         /// <param name="content">Initial value of the Content property.</param>
         /// <param name="dateFrom">Initial value of the DateFrom property.</param>
-        public static JobRegister CreateJobRegister(global::System.Int32 id, global::System.DateTime created, global::System.String nguoiThucHien, global::System.String content, global::System.DateTime dateFrom)
+        /// <param name="added">Initial value of the Added property.</param>
+        public static JobRegister CreateJobRegister(global::System.Int32 id, global::System.DateTime created, global::System.String nguoiThucHien, global::System.String content, global::System.DateTime dateFrom, global::System.Boolean added)
         {
             JobRegister jobRegister = new JobRegister();
             jobRegister.ID = id;
@@ -944,6 +1019,7 @@ namespace Alabama
             jobRegister.NguoiThucHien = nguoiThucHien;
             jobRegister.Content = content;
             jobRegister.DateFrom = dateFrom;
+            jobRegister.Added = added;
             return jobRegister;
         }
 
@@ -1193,6 +1269,30 @@ namespace Alabama
         private global::System.String _Status;
         partial void OnStatusChanging(global::System.String value);
         partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Added
+        {
+            get
+            {
+                return _Added;
+            }
+            set
+            {
+                OnAddedChanging(value);
+                ReportPropertyChanging("Added");
+                _Added = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Added");
+                OnAddedChanged();
+            }
+        }
+        private global::System.Boolean _Added;
+        partial void OnAddedChanging(global::System.Boolean value);
+        partial void OnAddedChanged();
 
         #endregion
 
@@ -1692,6 +1792,115 @@ namespace Alabama
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="VPSS1Model", Name="NguoiTruc")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class NguoiTruc : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new NguoiTruc object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="title">Initial value of the Title property.</param>
+        public static NguoiTruc CreateNguoiTruc(global::System.Int32 id, global::System.String title)
+        {
+            NguoiTruc nguoiTruc = new NguoiTruc();
+            nguoiTruc.ID = id;
+            nguoiTruc.Title = title;
+            return nguoiTruc;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                OnTitleChanging(value);
+                ReportPropertyChanging("Title");
+                _Title = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Title");
+                OnTitleChanged();
+            }
+        }
+        private global::System.String _Title;
+        partial void OnTitleChanging(global::System.String value);
+        partial void OnTitleChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_TongHop_NguoiTruc", "TongHop")]
+        public EntityCollection<TongHop> TongHop
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TongHop>("VPSS1Model.FK_TongHop_NguoiTruc", "TongHop");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TongHop>("VPSS1Model.FK_TongHop_NguoiTruc", "TongHop", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="VPSS1Model", Name="Role1")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -1836,6 +2045,474 @@ namespace Alabama
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Group>("VPSS1Model.RoleInGroup", "Group", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="VPSS1Model", Name="TongHop")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class TongHop : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new TongHop object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="fromDate">Initial value of the FromDate property.</param>
+        /// <param name="dayOfWeek">Initial value of the DayOfWeek property.</param>
+        public static TongHop CreateTongHop(global::System.Int32 id, global::System.DateTime fromDate, global::System.Int32 dayOfWeek)
+        {
+            TongHop tongHop = new TongHop();
+            tongHop.ID = id;
+            tongHop.FromDate = fromDate;
+            tongHop.DayOfWeek = dayOfWeek;
+            return tongHop;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> NguoiTrucID
+        {
+            get
+            {
+                return _NguoiTrucID;
+            }
+            set
+            {
+                OnNguoiTrucIDChanging(value);
+                ReportPropertyChanging("NguoiTrucID");
+                _NguoiTrucID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NguoiTrucID");
+                OnNguoiTrucIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _NguoiTrucID;
+        partial void OnNguoiTrucIDChanging(Nullable<global::System.Int32> value);
+        partial void OnNguoiTrucIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                OnStatusChanging(value);
+                ReportPropertyChanging("Status");
+                _Status = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Status");
+                OnStatusChanged();
+            }
+        }
+        private global::System.String _Status;
+        partial void OnStatusChanging(global::System.String value);
+        partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime FromDate
+        {
+            get
+            {
+                return _FromDate;
+            }
+            set
+            {
+                OnFromDateChanging(value);
+                ReportPropertyChanging("FromDate");
+                _FromDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FromDate");
+                OnFromDateChanged();
+            }
+        }
+        private global::System.DateTime _FromDate;
+        partial void OnFromDateChanging(global::System.DateTime value);
+        partial void OnFromDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 DayOfWeek
+        {
+            get
+            {
+                return _DayOfWeek;
+            }
+            set
+            {
+                OnDayOfWeekChanging(value);
+                ReportPropertyChanging("DayOfWeek");
+                _DayOfWeek = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DayOfWeek");
+                OnDayOfWeekChanged();
+            }
+        }
+        private global::System.Int32 _DayOfWeek;
+        partial void OnDayOfWeekChanging(global::System.Int32 value);
+        partial void OnDayOfWeekChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_TongHop_NguoiTruc", "NguoiTruc")]
+        public NguoiTruc NguoiTruc
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<NguoiTruc>("VPSS1Model.FK_TongHop_NguoiTruc", "NguoiTruc").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<NguoiTruc>("VPSS1Model.FK_TongHop_NguoiTruc", "NguoiTruc").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<NguoiTruc> NguoiTrucReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<NguoiTruc>("VPSS1Model.FK_TongHop_NguoiTruc", "NguoiTruc");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<NguoiTruc>("VPSS1Model.FK_TongHop_NguoiTruc", "NguoiTruc", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_TongHopDetail_TongHop", "TongHopDetail")]
+        public EntityCollection<TongHopDetail> TongHopDetail
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TongHopDetail>("VPSS1Model.FK_TongHopDetail_TongHop", "TongHopDetail");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TongHopDetail>("VPSS1Model.FK_TongHopDetail_TongHop", "TongHopDetail", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="VPSS1Model", Name="TongHopDetail")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class TongHopDetail : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new TongHopDetail object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="tongHopID">Initial value of the TongHopID property.</param>
+        /// <param name="time">Initial value of the Time property.</param>
+        public static TongHopDetail CreateTongHopDetail(global::System.Int32 id, global::System.Int32 tongHopID, global::System.TimeSpan time)
+        {
+            TongHopDetail tongHopDetail = new TongHopDetail();
+            tongHopDetail.ID = id;
+            tongHopDetail.TongHopID = tongHopID;
+            tongHopDetail.Time = time;
+            return tongHopDetail;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TongHopID
+        {
+            get
+            {
+                return _TongHopID;
+            }
+            set
+            {
+                OnTongHopIDChanging(value);
+                ReportPropertyChanging("TongHopID");
+                _TongHopID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TongHopID");
+                OnTongHopIDChanged();
+            }
+        }
+        private global::System.Int32 _TongHopID;
+        partial void OnTongHopIDChanging(global::System.Int32 value);
+        partial void OnTongHopIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.TimeSpan Time
+        {
+            get
+            {
+                return _Time;
+            }
+            set
+            {
+                OnTimeChanging(value);
+                ReportPropertyChanging("Time");
+                _Time = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Time");
+                OnTimeChanged();
+            }
+        }
+        private global::System.TimeSpan _Time;
+        partial void OnTimeChanging(global::System.TimeSpan value);
+        partial void OnTimeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String NguoiThucHien
+        {
+            get
+            {
+                return _NguoiThucHien;
+            }
+            set
+            {
+                OnNguoiThucHienChanging(value);
+                ReportPropertyChanging("NguoiThucHien");
+                _NguoiThucHien = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("NguoiThucHien");
+                OnNguoiThucHienChanged();
+            }
+        }
+        private global::System.String _NguoiThucHien;
+        partial void OnNguoiThucHienChanging(global::System.String value);
+        partial void OnNguoiThucHienChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String NoiDung
+        {
+            get
+            {
+                return _NoiDung;
+            }
+            set
+            {
+                OnNoiDungChanging(value);
+                ReportPropertyChanging("NoiDung");
+                _NoiDung = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("NoiDung");
+                OnNoiDungChanged();
+            }
+        }
+        private global::System.String _NoiDung;
+        partial void OnNoiDungChanging(global::System.String value);
+        partial void OnNoiDungChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_TongHopDetail_TongHop", "TongHop")]
+        public TongHop TongHop
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TongHop>("VPSS1Model.FK_TongHopDetail_TongHop", "TongHop").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TongHop>("VPSS1Model.FK_TongHopDetail_TongHop", "TongHop").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<TongHop> TongHopReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TongHop>("VPSS1Model.FK_TongHopDetail_TongHop", "TongHop");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TongHop>("VPSS1Model.FK_TongHopDetail_TongHop", "TongHop", value);
                 }
             }
         }
@@ -2203,28 +2880,6 @@ namespace Alabama
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_JobRegister_User", "JobRegister")]
-        public EntityCollection<JobRegister> JobRegister
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<JobRegister>("VPSS1Model.FK_JobRegister_User", "JobRegister");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<JobRegister>("VPSS1Model.FK_JobRegister_User", "JobRegister", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "UserInGroup", "Group")]
         public EntityCollection<Group> Group
         {
@@ -2297,6 +2952,28 @@ namespace Alabama
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DonVi>("VPSS1Model.FK_User_DonVi", "DonVi", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_JobRegister_User", "JobRegister")]
+        public EntityCollection<JobRegister> JobRegister
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<JobRegister>("VPSS1Model.FK_JobRegister_User", "JobRegister");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<JobRegister>("VPSS1Model.FK_JobRegister_User", "JobRegister", value);
                 }
             }
         }
