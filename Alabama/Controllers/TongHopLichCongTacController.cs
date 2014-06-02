@@ -47,6 +47,9 @@ namespace Alabama.Controllers
                         tonghopdetail.TongHopID = tonghop.ID;
                         tonghopdetail.Code = codedate;
                         db.TongHopDetail.AddObject(tonghopdetail);
+
+                        item.Added = true;
+                        db.ObjectStateManager.ChangeObjectState(item, System.Data.EntityState.Modified);
                     }
                 }
 
