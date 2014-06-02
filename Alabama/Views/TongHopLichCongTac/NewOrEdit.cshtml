@@ -3,6 +3,7 @@
 @{
                
     var lstNguoiTruc = Alabama.DB.Entities.NguoiTruc.ToList();
+    var lstDiaDiem = Alabama.DB.Entities.Location.ToList();
 }
 <script type="text/javascript">
     $(document).ready(function () {
@@ -12,6 +13,8 @@
             var res;
             if (first + 1 != curr.getDate()) {
                 res = '';
+                $(".TongHop").hide();
+                return false;
             } else {
                 var last = first + 7; // last day is the first day + 6
 
@@ -19,6 +22,8 @@
 
                 var lastday = new Date(curr.setDate(last));
                 res = lastday.getDate() + '/' + (lastday.getMonth() + 1) + '/' + lastday.getFullYear();
+                $(".TongHop").show();
+                return true;
             }
 
             $('.EndDate').val(res);
@@ -52,7 +57,7 @@
                 success: function (value) {
                     if (value == "True") {
                         location.href = url;
-                    }                    
+                    }
                 }
             });
         });
@@ -82,8 +87,10 @@
     </div>
     <table class="table">
         <tr>
-            <th>
-                <input type="checkbox" name="" value="" class="checkAll" />
+            <th style="width: 5%">
+            </th>
+            <th style="width: 3%">
+                Thời gian
             </th>
             <th>
                 Nội dung
@@ -91,31 +98,35 @@
             <th>
                 Người thực hiện
             </th>
-            <th>
+            <th style="width: 15%">
+                Địa điểm
+            </th>
+            <th style="width: 15%">
                 Người trực
             </th>
             <th>
-                Thời gian
             </th>
         </tr>
         @if (Model != null && Model.Count > 0)
         {
-            for (int i = 0; i < 7; i++)
+            var listTongHop = (List<Alabama.TongHop>)ViewBag.ListTongHop;
+            foreach (var item in listTongHop)
             {
-                var list = Model.Where(m => m.TongHop.DayOfWeek == i).ToList();
+                var list = Model.Where(m => m.TongHopID == item.ID).ToList();
+               
             <tr>
-                @if (i == 6)
+                @if (item.DayOfWeek == 6)
                 {
                     if (list.Count > 0)
                     {
                     <td rowspan="@(list.Count + 1)">
-                        Chủ nhật
+                        CN
                     </td>
                     }
                     else
                     {
-                    <td>
-                        Chủ nhật
+                    <td rowspan="1">
+                        CN
                     </td>
                     }
 
@@ -125,59 +136,83 @@
                     if (list.Count > 0)
                     {
                     <td rowspan="@(list.Count + 1)">
-                        Thứ @(i + 2)
+                        Thứ @(item.DayOfWeek + 2)
                     </td>
                     }
                     else
                     {
-                    <td>
-                        Thứ @(i + 2)
+                    <td rowspan="1">
+                        Thứ @(item.DayOfWeek + 2)
                     </td>
                     }
 
                 }
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+                    <select class="ChangeNguoiTruc span12" TongHopID="@item.ID">
+                        <option value="0">--</option>
+                        @foreach (var item12 in lstNguoiTruc)
+                        {
+                            var selected = "";
+                            if (item12.ID == item.NguoiTrucID)
+                            {
+                                selected = "selected='selected'";
+                            }
+                            <option value="@item12.ID" @selected>@item12.Title</option>
+                        }
+                    </select>
+                </td>
+                
+                <td>
+                </td>
             </tr>
-                var i1 = 1;
-                foreach (var item in list)
-                {
+            
+                        foreach (var item1 in list)
+                        {
             <tr>
                 <td>
-                    @item.NoiDung
+                    @item1.Time
                 </td>
                 <td>
-                    @item.NguoiThucHien
+                    @item1.NoiDung
                 </td>
                 <td>
-                    @if (i1 == 1)
-                    {
-                        <select class="ChangeNguoiTruc" TongHopID="@item.TongHopID">
-                            <option value="0">-:-</option>
-                            @foreach (var item1 in lstNguoiTruc)
+                    @item1.NguoiThucHien
+                </td>
+                <td>
+                    @item1.Location
+                    <select class="ChangeDiaDiem span12" TongHopID="@item.ID">
+                        <option value="0">--</option>
+                        @foreach (var itemdd in lstDiaDiem)
+                        {
+                            var selected = "";
+                            if (itemdd.ID == item1.Location)
                             {
-                                var selected = "";
-                                if (item1.ID == item.TongHop.NguoiTrucID)
-                                {
-                                    selected = "selected='selected'";
-                                }
-                                <option value="@item1.ID" @selected>@item1.Title</option>
+                                selected = "selected='selected'";
                             }
-                        </select>
-                    }
-                    else
-                    {
-                        @(item.TongHop.NguoiTruc != null ? item.TongHop.NguoiTruc.Title : "")   
-                    }
+                            <option value="@itemdd.ID" @selected>@itemdd.Title</option>
+                        }
+                    </select>
                 </td>
                 <td>
-                    @item.Time
+                    @(item.NguoiTruc != null ? item.NguoiTruc.Title : "")
                 </td>
-                <td>
-                    <a href="#Modal-EditDetail" role="button" class="btn EditDetail" value="@item.ID" data-toggle="modal">
-                        Sửa</a>
+                <td style="width: 3%">
+                    <a href="#Modal-EditDetail" role="button" class="EditDetail" value="@item1.ID" data-toggle="modal">
+                        Sửa</a><br />
+                    <a href="/TongHopLichCongTac/DeleteDetail/@item1.ID" class="confirmDelete error">Xóa</a>
                 </td>
             </tr>
-                                                                                       i1++;
-                }
+                                                                                      
+                        }
 
             }
         }
