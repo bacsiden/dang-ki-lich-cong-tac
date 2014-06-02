@@ -13,6 +13,7 @@ namespace Alabama.Controllers
         //
         // GET: /Owner/
 
+        [Authorize]
         public ActionResult Index(int? page)
         {
             return View(DB.Entities.Location.OrderByDescending(m => m.ID).ToPagedList(!page.HasValue ? 0 : page.Value, pageSize));
@@ -20,6 +21,7 @@ namespace Alabama.Controllers
         //
         // GET: /Owner/Edit/5
 
+        [Authorize]
         public ActionResult NewOrEdit(int? id = 0)
         {
             var obj = DB.Entities.Location.FirstOrDefault(m => m.ID == id);
@@ -30,6 +32,7 @@ namespace Alabama.Controllers
         // POST: /Owner/Edit/5
 
         [HttpPost]
+        [Authorize]
         public ActionResult NewOrEdit(Location model)
         {
             try
@@ -59,6 +62,7 @@ namespace Alabama.Controllers
         //
         // GET: /Owner/Delete/5
 
+        [Authorize]
         public ActionResult Delete(string arrayID = "")
         {
             try
