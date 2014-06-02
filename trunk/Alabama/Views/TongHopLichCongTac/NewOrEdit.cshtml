@@ -194,7 +194,7 @@
                         @foreach (var itemdd in lstDiaDiem)
                         {
                             var selected = "";
-                            if (itemdd.ID == item1.Location)
+                            if (item1.Location != null && itemdd.ID == item1.Location.ID)
                             {
                                 selected = "selected='selected'";
                             }
