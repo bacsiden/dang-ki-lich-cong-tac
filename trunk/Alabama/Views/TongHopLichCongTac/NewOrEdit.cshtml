@@ -35,7 +35,7 @@
             $.ajax({
                 url: "/TongHopLichCongTac/EditDetail",
                 type: "GET",
-                data: { "id": id },
+                data: { "id": id, "url": "@Request.RawUrl" },
                 success: function (model) {
                     $("#Modal-EditDetail").html(model);
                 }
