@@ -1,5 +1,9 @@
 ﻿@using Webdiyer.WebControls.Mvc
 @model List<Alabama.TongHopDetail>
+@{
+               
+    var lstNguoiTruc = Alabama.DB.Entities.NguoiTruc.ToList();
+}
 <script type="text/javascript">
     $(document).ready(function () {
         $('.StartDate').datepicker({ language: "vi", format: "dd/mm/yyyy" }).on('changeDate', function (ev) {
@@ -34,6 +38,21 @@
                 data: { "id": id },
                 success: function (model) {
                     $("#Modal-EditDetail").html(model);
+                }
+            });
+        });
+        $(".ChangeNguoiTruc").change(function () {
+            var idNguoiTruc = $(this).val();
+            var id = $(this).attr('TongHopID');
+            var url = "@Request.RawUrl";
+            $.ajax({
+                type: "GET",
+                url: "/TongHopLichCongTac/ChangeNguoiTruc",
+                data: { "id": id, "idNguoiTruc": idNguoiTruc },
+                success: function (value) {
+                    if (value) {
+                        location.href = url;
+                    }                    
                 }
             });
         });
@@ -89,7 +108,7 @@
                 {
                     if (list.Count > 0)
                     {
-                    <td rowspan="@list.Count">
+                    <td rowspan="@(list.Count + 1)">
                         Chủ nhật
                     </td>
                     }
@@ -105,7 +124,7 @@
                 {
                     if (list.Count > 0)
                     {
-                    <td rowspan="@list.Count">
+                    <td rowspan="@(list.Count + 1)">
                         Thứ @(i + 2)
                     </td>
                     }
@@ -117,26 +136,49 @@
                     }
 
                 }
-                @foreach (var item in list)
-                {
-                    <td>
-                        @item.NoiDung
-                    </td> 
-                    <td>
-                        @item.NguoiThucHien
-                    </td> 
-                    <td>
-                        @(item.TongHop.NguoiTruc != null ? item.TongHop.NguoiTruc.Title : "")
-                    </td> 
-                    <td>
-                        @item.Time
-                    </td> 
-                    <td>
-                        <a href="#Modal-EditDetail" role="button" class="btn EditDetail" value="@item.ID" data-toggle="modal">
-                            Sửa</a>
-                    </td>
-                }
             </tr>
+                var i1 = 1;
+                foreach (var item in list)
+                {
+            <tr>
+                <td>
+                    @item.NoiDung
+                </td>
+                <td>
+                    @item.NguoiThucHien
+                </td>
+                <td>
+                    @if (i1 == 1)
+                    {
+                        <select class="ChangeNguoiTruc" TongHopID="@item.TongHopID">
+                            <option value="0">-:-</option>
+                            @foreach (var item1 in lstNguoiTruc)
+                            {
+                                var selected = "";
+                                if (item1.ID == item.TongHop.NguoiTrucID)
+                                {
+                                    selected = "selected='selected'";
+                                }
+                                <option value="@item1.ID" @selected>@item1.Title</option>
+                            }
+                        </select>
+                    }
+                    else
+                    {
+                        @(item.TongHop.NguoiTruc != null ? item.TongHop.NguoiTruc.Title : "")   
+                    }
+                </td>
+                <td>
+                    @item.Time
+                </td>
+                <td>
+                    <a href="#Modal-EditDetail" role="button" class="btn EditDetail" value="@item.ID" data-toggle="modal">
+                        Sửa</a>
+                </td>
+            </tr>
+                                                                                       i1++;
+                }
+
             }
         }
     </table>
@@ -145,4 +187,4 @@
     aria-hidden="true">
 </div>*@
 <div id="Modal-EditDetail" class="modal hide fade">
-    </div>
+</div>

@@ -98,5 +98,18 @@ namespace Alabama.Controllers
             db.SaveChanges();
             return JavaScript("$('#Modal-EditDetail').modal('hide');alert('Sửa thành công');");
         }
+        public bool ChangeNguoiTruc(int id,int idNguoiTruc)
+        {
+            var db = DB.Entities;
+            var tongHop = db.TongHop.FirstOrDefault(m=>m.ID==id);
+            if (tongHop!=null && db.NguoiTruc.FirstOrDefault(m=>m.ID==idNguoiTruc)!=null)
+            {
+                tongHop.NguoiTrucID = idNguoiTruc;
+                db.ObjectStateManager.ChangeObjectState(tongHop, System.Data.EntityState.Modified);
+                db.SaveChanges();
+                return true;
+            }            
+            return false;
+        }
     }
 }
