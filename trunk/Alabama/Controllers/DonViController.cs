@@ -13,6 +13,7 @@ namespace Alabama.Controllers
         //
         // GET: /Owner/
 
+        [Authorize]
         public ActionResult Index(int? page)
         {
             return View(DB.Entities.DonVi.OrderByDescending(m => m.ID).ToPagedList(!page.HasValue ? 1 : page.Value, pageSize));
@@ -20,14 +21,15 @@ namespace Alabama.Controllers
         //
         // GET: /Owner/Edit/5
 
+        [Authorize]
         public ActionResult NewOrEdit(int? id)
         {
             var obj = DB.Entities.DonVi.FirstOrDefault(m => m.ID == id);
-            if (obj==null)
+            if (obj == null)
             {
                 obj = new DonVi();
             }
-            SelectOption(obj.LanhDaoID.HasValue?obj.LanhDaoID.Value:0);
+            SelectOption(obj.LanhDaoID.HasValue ? obj.LanhDaoID.Value : 0);
             return View(obj);
         }
 
@@ -37,7 +39,7 @@ namespace Alabama.Controllers
             string dataUser = "<option >--Chọn lãnh đạo--</option>";
             foreach (var item in Alabama.DB.Entities.User)
             {
-                if (id!=0 && item.ID==id)
+                if (id != 0 && item.ID == id)
                 {
                     dataUser += string.Format("<option value='{0}' selected='selected'>{1}</option>", item.ID, item.Name);
                 }
@@ -53,6 +55,7 @@ namespace Alabama.Controllers
         // POST: /Owner/Edit/5
 
         [HttpPost]
+        [Authorize]
         public ActionResult NewOrEdit(DonVi model)
         {
             try
@@ -83,6 +86,7 @@ namespace Alabama.Controllers
         //
         // GET: /Owner/Delete/5
 
+        [Authorize]
         public ActionResult Delete(string arrayID = "")
         {
             try

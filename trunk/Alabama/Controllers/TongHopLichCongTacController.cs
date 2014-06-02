@@ -17,6 +17,8 @@ namespace Alabama.Controllers
 
 
         [HttpGet]
+
+        [Authorize]
         public ActionResult NewOrEdit(string fromDate, string endDate)
         {
             if (fromDate == null)
@@ -31,7 +33,7 @@ namespace Alabama.Controllers
             var db = DB.Entities;
             if (db.TongHop.FirstOrDefault(m => m.Code == codedate) == null)
             {
-                var tieude = new TieuDe() { Title = "LỊCH CÔNG TÁC TUẦN TỪ " + string.Format("{0:d/M}", start )+ " ĐẾN " + string.Format("{0:d/M/yyyy}", end) };
+                var tieude = new TieuDe() { Title = "LỊCH CÔNG TÁC TUẦN TỪ " + string.Format("{0:d/M}", start) + " ĐẾN " + string.Format("{0:d/M/yyyy}", end) };
                 db.TieuDe.AddObject(tieude);
                 db.SaveChanges();
                 var listJob = db.JobRegister.Where(m => m.DateFrom >= start && m.DateFrom <= end).ToList();
@@ -59,7 +61,7 @@ namespace Alabama.Controllers
 
                 db.SaveChanges();
 
-                ViewBag.ListTongHop = db.TongHop.Where(m=>m.Code==codedate).ToList();
+                ViewBag.ListTongHop = db.TongHop.Where(m => m.Code == codedate).ToList();
                 var listDetail = db.TongHopDetail.ToList();
                 return View(listDetail);
             }
@@ -97,12 +99,14 @@ namespace Alabama.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult EditDetail(int id, string url)
         {
             ViewBag.Url = url;
             return PartialView("_EditDetail", DB.Entities.TongHopDetail.FirstOrDefault(m => m.ID == id));
         }
 
+        [Authorize]
         public ActionResult EditDetail(TongHopDetail model, string url)
         {
             var db = DB.Entities;
@@ -112,26 +116,26 @@ namespace Alabama.Controllers
             db.SaveChanges();
             return Redirect(url);
         }
-        public bool ChangeNguoiTruc(int id,int idNguoiTruc)
+        public bool ChangeNguoiTruc(int id, int idNguoiTruc)
         {
             var db = DB.Entities;
-            var tongHop = db.TongHop.FirstOrDefault(m=>m.ID==id);
-            if (tongHop!=null)
+            var tongHop = db.TongHop.FirstOrDefault(m => m.ID == id);
+            if (tongHop != null)
             {
-                if (db.NguoiTruc.FirstOrDefault(m=>m.ID==idNguoiTruc)!=null)
+                if (db.NguoiTruc.FirstOrDefault(m => m.ID == idNguoiTruc) != null)
                 {
                     tongHop.NguoiTrucID = idNguoiTruc;
                 }
                 else
                 {
                     tongHop.NguoiTrucID = null;
-                }                
+                }
                 db.ObjectStateManager.ChangeObjectState(tongHop, System.Data.EntityState.Modified);
                 db.SaveChanges();
                 return true;
-            }            
+            }
             return false;
         }
-       
+
     }
 }

@@ -13,6 +13,7 @@ namespace Alabama.Controllers
         //
         // GET: /Owner/
 
+        [Authorize]
         public ActionResult Index(int? page)
         {
             return View(DB.Entities.JobRegister.OrderByDescending(m => m.ID).ToPagedList(!page.HasValue ? 1 : page.Value, pageSize));
@@ -20,19 +21,20 @@ namespace Alabama.Controllers
         //
         // GET: /Owner/Edit/5
 
+        [Authorize]
         public ActionResult NewOrEdit(int? id)
         {
             var currentUser = new UserDAL().GetCurrentUser;
             var obj = DB.Entities.JobRegister.FirstOrDefault(m => m.ID == id);
             if (obj == null)
             {
-                obj = new JobRegister() { UserID=currentUser.ID,DateFrom=DateTime.Now,Created=DateTime.Now};
-                ViewBag.DateFrom = obj.DateFrom.ToString("08:00 AM");                 
+                obj = new JobRegister() { UserID = currentUser.ID, DateFrom = DateTime.Now, Created = DateTime.Now };
+                ViewBag.DateFrom = obj.DateFrom.ToString("08:00 AM");
             }
             else
             {
                 ViewBag.DateFrom = obj.DateFrom.ToString("hh:mm tt");
-            }                      
+            }
             ViewBag.UserName = currentUser.Name;
             SelectOption(obj.LocationID.HasValue ? obj.LocationID.Value : 0);
             return View(obj);
@@ -40,7 +42,7 @@ namespace Alabama.Controllers
 
         void SelectOption(int locationID)
         {
-            #region SELECT OPTION            
+            #region SELECT OPTION
 
             string dataLocation = "<option >--Chọn địa điểm--</option>";
             foreach (var item in Alabama.DB.Entities.Location)
@@ -61,7 +63,8 @@ namespace Alabama.Controllers
         // POST: /Owner/Edit/5
 
         [HttpPost]
-        public ActionResult NewOrEdit(JobRegister model,FormCollection frm)
+        [Authorize]
+        public ActionResult NewOrEdit(JobRegister model, FormCollection frm)
         {
             try
             {
@@ -85,7 +88,7 @@ namespace Alabama.Controllers
             {
                 ViewBag.UserName = new UserDAL().GetCurrentUser.Name;
                 ViewBag.DateFrom = model.DateFrom.ToString("hh:mm tt");
-                ViewBag.DateCreated = model.Created.ToString("hh:mm tt");    
+                ViewBag.DateCreated = model.Created.ToString("hh:mm tt");
                 SelectOption(model.LocationID.HasValue ? model.LocationID.Value : 0);
                 return View(model);
             }
@@ -94,6 +97,7 @@ namespace Alabama.Controllers
         //
         // GET: /Owner/Delete/5
 
+        [Authorize]
         public ActionResult Delete(string arrayID = "")
         {
             try
