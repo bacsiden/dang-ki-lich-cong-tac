@@ -132,10 +132,6 @@ namespace Alabama.Controllers
             }            
             return false;
         }
-        public bool Test(string StartDate)
-        {
-             
-            return false;
-        }
+       
     }
 }
