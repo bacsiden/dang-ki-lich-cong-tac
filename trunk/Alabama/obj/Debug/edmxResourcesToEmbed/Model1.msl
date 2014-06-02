@@ -4,139 +4,182 @@
     <EntitySetMapping Name="Config">
       <EntityTypeMapping TypeName="VPSS1Model.Config">
         <MappingFragment StoreEntitySet="Config">
-          <ScalarProperty Name="Multiline" ColumnName="Multiline" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Key" ColumnName="Key" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Key" ColumnName="Key" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Multiline" ColumnName="Multiline" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DonVi">
+      <EntityTypeMapping TypeName="VPSS1Model.DonVi">
+        <MappingFragment StoreEntitySet="DonVi">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="LanhDaoID" ColumnName="LanhDaoID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Function">
       <EntityTypeMapping TypeName="VPSS1Model.Function">
         <MappingFragment StoreEntitySet="Function">
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Group">
       <EntityTypeMapping TypeName="VPSS1Model.Group">
         <MappingFragment StoreEntitySet="Group">
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Menu">
-      <EntityTypeMapping TypeName="VPSS1Model.Menu">
-        <MappingFragment StoreEntitySet="Menu">
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="Inherit" ColumnName="Inherit" />
-          <ScalarProperty Name="Oder" ColumnName="Oder" />
-          <ScalarProperty Name="Icon" ColumnName="Icon" />
-          <ScalarProperty Name="Url" ColumnName="Url" />
-          <ScalarProperty Name="TabTitle" ColumnName="TabTitle" />
-          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Role1">
-      <EntityTypeMapping TypeName="VPSS1Model.Role1">
-        <MappingFragment StoreEntitySet="Role1">
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <AssociationSetMapping Name="FunctionInRole" TypeName="VPSS1Model.FunctionInRole" StoreEntitySet="FunctionInRole">
-      <EndProperty Name="Role1">
-        <ScalarProperty Name="ID" ColumnName="RoleID" />
-      </EndProperty>
-      <EndProperty Name="Function">
-        <ScalarProperty Name="ID" ColumnName="FunctionID" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="GroupInMenu" TypeName="VPSS1Model.GroupInMenu" StoreEntitySet="GroupInMenu">
-      <EndProperty Name="Menu">
-        <ScalarProperty Name="ID" ColumnName="MenuID" />
-      </EndProperty>
-      <EndProperty Name="Group">
-        <ScalarProperty Name="ID" ColumnName="GroupID" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="RoleInGroup" TypeName="VPSS1Model.RoleInGroup" StoreEntitySet="RoleInGroup">
-      <EndProperty Name="Role1">
-        <ScalarProperty Name="ID" ColumnName="RoleID" />
-      </EndProperty>
-      <EndProperty Name="Group">
-        <ScalarProperty Name="ID" ColumnName="GroupID" />
-      </EndProperty>
-    </AssociationSetMapping>
     <EntitySetMapping Name="JobRegister">
       <EntityTypeMapping TypeName="VPSS1Model.JobRegister">
         <MappingFragment StoreEntitySet="JobRegister">
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="DateTo" ColumnName="DateTo" />
-          <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
-          <ScalarProperty Name="FullName" ColumnName="FullName" />
-          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-          <ScalarProperty Name="Content" ColumnName="Content" />
-          <ScalarProperty Name="NguoiThucHien" ColumnName="NguoiThucHien" />
-          <ScalarProperty Name="Created" ColumnName="Created" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="NguoiThucHien" ColumnName="NguoiThucHien" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+          <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Added" ColumnName="Added" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Location">
       <EntityTypeMapping TypeName="VPSS1Model.Location">
         <MappingFragment StoreEntitySet="Location">
-          <ScalarProperty Name="Content" ColumnName="Content" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menu">
+      <EntityTypeMapping TypeName="VPSS1Model.Menu">
+        <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="TabTitle" ColumnName="TabTitle" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="Oder" ColumnName="Oder" />
+          <ScalarProperty Name="Inherit" ColumnName="Inherit" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NguoiTruc">
+      <EntityTypeMapping TypeName="VPSS1Model.NguoiTruc">
+        <MappingFragment StoreEntitySet="NguoiTruc">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role1">
+      <EntityTypeMapping TypeName="VPSS1Model.Role1">
+        <MappingFragment StoreEntitySet="Role1">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TieuDe">
+      <EntityTypeMapping TypeName="VPSS1Model.TieuDe">
+        <MappingFragment StoreEntitySet="TieuDe">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TongHop">
+      <EntityTypeMapping TypeName="VPSS1Model.TongHop">
+        <MappingFragment StoreEntitySet="TongHop">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NguoiTrucID" ColumnName="NguoiTrucID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
+          <ScalarProperty Name="TieuDeID" ColumnName="TieuDeID" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TongHopDetail">
+      <EntityTypeMapping TypeName="VPSS1Model.TongHopDetail">
+        <MappingFragment StoreEntitySet="TongHopDetail">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TongHopID" ColumnName="TongHopID" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="NguoiThucHien" ColumnName="NguoiThucHien" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="User">
       <EntityTypeMapping TypeName="VPSS1Model.User">
         <MappingFragment StoreEntitySet="User">
-          <ScalarProperty Name="DonViID" ColumnName="DonViID" />
-          <ScalarProperty Name="Avata" ColumnName="Avata" />
-          <ScalarProperty Name="Locked" ColumnName="Locked" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-          <ScalarProperty Name="Sex" ColumnName="Sex" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="AspnetUserID" ColumnName="AspnetUserID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AspnetUserID" ColumnName="AspnetUserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Locked" ColumnName="Locked" />
+          <ScalarProperty Name="Avata" ColumnName="Avata" />
+          <ScalarProperty Name="DonViID" ColumnName="DonViID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="UserInGroup" TypeName="VPSS1Model.UserInGroup" StoreEntitySet="UserInGroup">
-      <EndProperty Name="User">
-        <ScalarProperty Name="ID" ColumnName="UserID" />
+    <AssociationSetMapping Name="FunctionInRole" TypeName="VPSS1Model.FunctionInRole" StoreEntitySet="FunctionInRole">
+      <EndProperty Name="Function">
+        <ScalarProperty Name="ID" ColumnName="FunctionID" />
       </EndProperty>
+      <EndProperty Name="Role1">
+        <ScalarProperty Name="ID" ColumnName="RoleID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="GroupInMenu" TypeName="VPSS1Model.GroupInMenu" StoreEntitySet="GroupInMenu">
       <EndProperty Name="Group">
         <ScalarProperty Name="ID" ColumnName="GroupID" />
       </EndProperty>
+      <EndProperty Name="Menu">
+        <ScalarProperty Name="ID" ColumnName="MenuID" />
+      </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="DonVi">
-      <EntityTypeMapping TypeName="VPSS1Model.DonVi">
-        <MappingFragment StoreEntitySet="DonVi">
-          <ScalarProperty Name="LanhDaoID" ColumnName="LanhDaoID" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+    <AssociationSetMapping Name="RoleInGroup" TypeName="VPSS1Model.RoleInGroup" StoreEntitySet="RoleInGroup">
+      <EndProperty Name="Group">
+        <ScalarProperty Name="ID" ColumnName="GroupID" />
+      </EndProperty>
+      <EndProperty Name="Role1">
+        <ScalarProperty Name="ID" ColumnName="RoleID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserInGroup" TypeName="VPSS1Model.UserInGroup" StoreEntitySet="UserInGroup">
+      <EndProperty Name="Group">
+        <ScalarProperty Name="ID" ColumnName="GroupID" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="ID" ColumnName="UserID" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>
