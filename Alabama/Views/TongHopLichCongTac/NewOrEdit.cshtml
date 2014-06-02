@@ -50,7 +50,7 @@
                 url: "/TongHopLichCongTac/ChangeNguoiTruc",
                 data: { "id": id, "idNguoiTruc": idNguoiTruc },
                 success: function (value) {
-                    if (value) {
+                    if (value == "True") {
                         location.href = url;
                     }                    
                 }
