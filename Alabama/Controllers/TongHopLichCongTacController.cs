@@ -73,6 +73,9 @@ namespace Alabama.Controllers
                             tonghopdetail.TongHopID = item.ID;
                             tonghopdetail.Code = codedate;
                             db.TongHopDetail.AddObject(tonghopdetail);
+
+                            job.Added = true;
+                            db.ObjectStateManager.ChangeObjectState(job, System.Data.EntityState.Modified);
                         }
                     }
                     db.SaveChanges();
@@ -84,19 +87,20 @@ namespace Alabama.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditDetail(int id)
+        public ActionResult EditDetail(int id, string url)
         {
+            ViewBag.Url = url;
             return PartialView("_EditDetail", DB.Entities.TongHopDetail.FirstOrDefault(m => m.ID == id));
         }
 
-        public ActionResult EditDetail(TongHopDetail model)
+        public ActionResult EditDetail(TongHopDetail model, string url)
         {
             var db = DB.Entities;
             // Add new      
             db.AttachTo("TongHopDetail", model);
             db.ObjectStateManager.ChangeObjectState(model, System.Data.EntityState.Modified);
             db.SaveChanges();
-            return JavaScript("$('#Modal-EditDetail').modal('hide');alert('Sửa thành công');");
+            return Redirect(url);
         }
         public bool ChangeNguoiTruc(int id,int idNguoiTruc)
         {
