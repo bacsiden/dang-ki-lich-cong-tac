@@ -111,7 +111,14 @@ namespace Alabama.Controllers
             var tongHop = db.TongHop.FirstOrDefault(m=>m.ID==id);
             if (tongHop!=null)
             {
-                tongHop.NguoiTrucID = idNguoiTruc;
+                if (db.NguoiTruc.FirstOrDefault(m=>m.ID==idNguoiTruc)!=null)
+                {
+                    tongHop.NguoiTrucID = idNguoiTruc;
+                }
+                else
+                {
+                    tongHop.NguoiTrucID = null;
+                }                
                 db.ObjectStateManager.ChangeObjectState(tongHop, System.Data.EntityState.Modified);
                 db.SaveChanges();
                 return true;
