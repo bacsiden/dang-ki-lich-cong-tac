@@ -10,8 +10,12 @@
     <EntitySet Name="JobRegister" EntityType="VPSS1Model.Store.JobRegister" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Location" EntityType="VPSS1Model.Store.Location" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Menu" EntityType="VPSS1Model.Store.Menu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NguoiTruc" EntityType="VPSS1Model.Store.NguoiTruc" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Role1" EntityType="VPSS1Model.Store.Role1" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="RoleInGroup" EntityType="VPSS1Model.Store.RoleInGroup" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TieuDe" EntityType="VPSS1Model.Store.TieuDe" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TongHop" EntityType="VPSS1Model.Store.TongHop" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TongHopDetail" EntityType="VPSS1Model.Store.TongHopDetail" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="User" EntityType="VPSS1Model.Store.User" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserInGroup" EntityType="VPSS1Model.Store.UserInGroup" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_DonVi_User" Association="VPSS1Model.Store.FK_DonVi_User">
@@ -49,6 +53,22 @@
     <AssociationSet Name="FK_RoleInGroup_Role1" Association="VPSS1Model.Store.FK_RoleInGroup_Role1">
       <End Role="Role1" EntitySet="Role1" />
       <End Role="RoleInGroup" EntitySet="RoleInGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TongHop_NguoiTruc" Association="VPSS1Model.Store.FK_TongHop_NguoiTruc">
+      <End Role="NguoiTruc" EntitySet="NguoiTruc" />
+      <End Role="TongHop" EntitySet="TongHop" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TongHop_TieuDe" Association="VPSS1Model.Store.FK_TongHop_TieuDe">
+      <End Role="TieuDe" EntitySet="TieuDe" />
+      <End Role="TongHop" EntitySet="TongHop" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TongHopDetail_Location" Association="VPSS1Model.Store.FK_TongHopDetail_Location">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="TongHopDetail" EntitySet="TongHopDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TongHopDetail_TongHop" Association="VPSS1Model.Store.FK_TongHopDetail_TongHop">
+      <End Role="TongHop" EntitySet="TongHop" />
+      <End Role="TongHopDetail" EntitySet="TongHopDetail" />
     </AssociationSet>
     <AssociationSet Name="FK_User_DonVi" Association="VPSS1Model.Store.FK_User_DonVi">
       <End Role="DonVi" EntitySet="DonVi" />
@@ -126,6 +146,7 @@
     <Property Name="DateFrom" Type="datetime" Nullable="false" />
     <Property Name="DateTo" Type="datetime" />
     <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Added" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Location">
     <Key>
@@ -149,6 +170,13 @@
     <Property Name="Inherit" Type="bit" />
     <Property Name="IsActive" Type="bit" />
   </EntityType>
+  <EntityType Name="NguoiTruc">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Role1">
     <Key>
       <PropertyRef Name="ID" />
@@ -164,6 +192,37 @@
     </Key>
     <Property Name="GroupID" Type="int" Nullable="false" />
     <Property Name="RoleID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TieuDe">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="TongHop">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="NguoiTrucID" Type="int" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" />
+    <Property Name="FromDate" Type="datetime" Nullable="false" />
+    <Property Name="DayOfWeek" Type="int" Nullable="false" />
+    <Property Name="TieuDeID" Type="int" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="TongHopDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TongHopID" Type="int" Nullable="false" />
+    <Property Name="Time" Type="time" Nullable="false" />
+    <Property Name="NguoiThucHien" Type="nvarchar" MaxLength="200" />
+    <Property Name="NoiDung" Type="nvarchar" MaxLength="200" />
+    <Property Name="LocationID" Type="int" />
+    <Property Name="Code" Type="varchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -308,6 +367,58 @@
       </Principal>
       <Dependent Role="RoleInGroup">
         <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TongHop_NguoiTruc">
+    <End Role="NguoiTruc" Type="VPSS1Model.Store.NguoiTruc" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TongHop" Type="VPSS1Model.Store.TongHop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NguoiTruc">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TongHop">
+        <PropertyRef Name="NguoiTrucID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TongHop_TieuDe">
+    <End Role="TieuDe" Type="VPSS1Model.Store.TieuDe" Multiplicity="1" />
+    <End Role="TongHop" Type="VPSS1Model.Store.TongHop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TieuDe">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TongHop">
+        <PropertyRef Name="TieuDeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TongHopDetail_Location">
+    <End Role="Location" Type="VPSS1Model.Store.Location" Multiplicity="0..1" />
+    <End Role="TongHopDetail" Type="VPSS1Model.Store.TongHopDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TongHopDetail">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TongHopDetail_TongHop">
+    <End Role="TongHop" Type="VPSS1Model.Store.TongHop" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TongHopDetail" Type="VPSS1Model.Store.TongHopDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TongHop">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TongHopDetail">
+        <PropertyRef Name="TongHopID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
