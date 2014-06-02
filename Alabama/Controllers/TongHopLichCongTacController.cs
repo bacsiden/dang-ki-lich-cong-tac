@@ -109,7 +109,7 @@ namespace Alabama.Controllers
         {
             var db = DB.Entities;
             var tongHop = db.TongHop.FirstOrDefault(m=>m.ID==id);
-            if (tongHop!=null && db.NguoiTruc.FirstOrDefault(m=>m.ID==idNguoiTruc)!=null)
+            if (tongHop!=null)
             {
                 tongHop.NguoiTrucID = idNguoiTruc;
                 db.ObjectStateManager.ChangeObjectState(tongHop, System.Data.EntityState.Modified);
