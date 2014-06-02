@@ -31,7 +31,7 @@ namespace Alabama.Controllers
             var db = DB.Entities;
             if (db.TongHop.FirstOrDefault(m => m.Code == codedate) == null)
             {
-                var tieude = new TieuDe() { Title = "LỊCH CÔNG TÁC TUẦN TỪ " + string.Format("{0:d/M}", start + " ĐẾN " + string.Format("{0:d/M/yyyy}", end)) };
+                var tieude = new TieuDe() { Title = "LỊCH CÔNG TÁC TUẦN TỪ " + string.Format("{0:d/M}", start )+ " ĐẾN " + string.Format("{0:d/M/yyyy}", end) };
                 db.TieuDe.AddObject(tieude);
                 db.SaveChanges();
                 var listJob = db.JobRegister.Where(m => m.DateFrom >= start && m.DateFrom <= end).ToList();
@@ -130,6 +130,11 @@ namespace Alabama.Controllers
                 db.SaveChanges();
                 return true;
             }            
+            return false;
+        }
+        public bool Test(string StartDate)
+        {
+             
             return false;
         }
     }

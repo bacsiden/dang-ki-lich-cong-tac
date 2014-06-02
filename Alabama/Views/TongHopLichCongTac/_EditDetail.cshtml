@@ -1,13 +1,17 @@
 ﻿@model Alabama.TongHopDetail
-           <script type="text/javascript">
-               $(document).ready(function () {
-                   $('.timepicker-default').timepicker({
-                       showSeconds: true,
-                       showMeridian: false,
-                       defaultTime: 'value'
-                   });
-               });
-           </script>
+           @{
+               
+               var lstDiaDiem = Alabama.DB.Entities.Location.ToList();
+           }
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.timepicker-default').timepicker({
+            showSeconds: true,
+            showMeridian: false,
+            defaultTime: 'value'
+        });
+    });
+</script>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
         ×</button>
@@ -22,14 +26,14 @@
         @Html.HiddenFor(model => model.TongHopID)
         @Html.HiddenFor(model => model.Code)
         <div class="editor-label">
-            @Html.LabelFor(model => model.NoiDung)
+            Nội dung
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.NoiDung)
+            @Html.TextAreaFor(model => model.NoiDung, new { rows = "3", Class = "input-xxlarge" })
             @Html.ValidationMessageFor(model => model.NoiDung)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.Time)
+            Giờ
         </div>
         <div class="editor-field">
             <div class="input-append bootstrap-timepicker-component">
@@ -39,11 +43,29 @@
             @Html.ValidationMessageFor(model => model.Time)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.NguoiThucHien)
+            Người thực hiện
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.NguoiThucHien)
+            @Html.TextAreaFor(model => model.NguoiThucHien, new { rows = "3", Class = "input-xxlarge" })
             @Html.ValidationMessageFor(model => model.NguoiThucHien)
+        </div>
+        <div class="editor-label">
+            Người thực hiện
+        </div>
+        <div class="editor-field">
+            <select  name="LocationID">
+                <option value="0">--</option>
+                @foreach (var itemdd in lstDiaDiem)
+                {
+                    var selected = "";
+                    if (Model.Location != null && itemdd.ID == Model.Location.ID)
+                    {
+                        selected = "selected='selected'";
+                    }
+                    <option value="@itemdd.ID" @selected>@itemdd.Title</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.LocationID)
         </div>
     </div>
     <div class="modal-footer">
