@@ -31,10 +31,13 @@ namespace Alabama.Controllers
             var db = DB.Entities;
             if (db.TongHop.FirstOrDefault(m => m.Code == codedate) == null)
             {
+                var tieude = new TieuDe() { Title = "LỊCH CÔNG TÁC TUẦN TỪ " + string.Format("{0:d/M}", start + " ĐẾN " + string.Format("{0:d/M/yyyy}", end)) };
+                db.TieuDe.AddObject(tieude);
+                db.SaveChanges();
                 var listJob = db.JobRegister.Where(m => m.DateFrom >= start && m.DateFrom <= end).ToList();
                 for (int i = 0; i < 7; i++)
                 {
-                    var tonghop = new TongHop() { FromDate = start, DayOfWeek = i, Code = codedate };
+                    var tonghop = new TongHop() { FromDate = start, DayOfWeek = i, Code = codedate, TieuDeID = tieude.ID };
                     db.TongHop.AddObject(tonghop);
                     db.SaveChanges();
                     foreach (var item in listJob)
@@ -45,6 +48,7 @@ namespace Alabama.Controllers
                         tonghopdetail.NoiDung = item.Content;
                         tonghopdetail.NguoiThucHien = item.NguoiThucHien;
                         tonghopdetail.TongHopID = tonghop.ID;
+                        tonghopdetail.Location = item.Location != null ? item.Location.Title : "";
                         tonghopdetail.Code = codedate;
                         db.TongHopDetail.AddObject(tonghopdetail);
 
@@ -55,6 +59,7 @@ namespace Alabama.Controllers
 
                 db.SaveChanges();
 
+                ViewBag.ListTongHop = db.TongHop.Where(m=>m.Code==codedate).ToList();
                 var listDetail = db.TongHopDetail.ToList();
                 return View(listDetail);
             }
@@ -74,6 +79,7 @@ namespace Alabama.Controllers
                             tonghopdetail.NoiDung = job.Content;
                             tonghopdetail.NguoiThucHien = job.NguoiThucHien;
                             tonghopdetail.TongHopID = item.ID;
+                            tonghopdetail.Location = job.Location!=null?job.Location.Title:"";
                             tonghopdetail.Code = codedate;
                             db.TongHopDetail.AddObject(tonghopdetail);
 
@@ -84,6 +90,7 @@ namespace Alabama.Controllers
                     db.SaveChanges();
 
                 }
+                ViewBag.ListTongHop = db.TongHop.Where(m => m.Code == codedate).ToList();
                 var listDetail = db.TongHopDetail.Where(m => m.Code == codedate).ToList();
                 return View(listDetail);
             }
