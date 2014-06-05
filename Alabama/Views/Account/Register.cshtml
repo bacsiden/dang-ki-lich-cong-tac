@@ -11,7 +11,7 @@
     Layout = null;
 }
 @{
-    ViewBag.Title = "Đăng ký hệ thống quản lý bưu kiện";
+    ViewBag.Title = "Đăng ký hệ thống đăng ký lịch công tác";
 }
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -23,7 +23,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Quản lý bưu phầm - bưu kiện</title>
+    <title>@ViewBag.Title</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -57,7 +57,7 @@
         {
  @Html.ValidationSummary(true, "Đăng kí tài khoản không thành công, vui lòng điền đúng các thông tin.")
             <h3>
-                Đăng nhập tài khoản</h3>
+                Đăng ký tài khoản</h3>
             <hr />
             <div class="control-group">
                 <div class="controls">
@@ -90,14 +90,6 @@
                     @Html.ValidationMessageFor(m => m.ConfirmPassword)
                 </div>
             </div>
-
-            <div class="control-group">
-                <div class="controls">
-                    @Html.DropDownListFor(m => m.BuuCucID, (SelectList)ViewBag.SelectListBuuCuc, new { @class = "input-block-level", placeholder = "Bưu cục" })
-                    @Html.ValidationMessageFor(m => m.BuuCucID)
-                </div>
-            </div>
-            
             <div class="control-group">
                 <div class="controls">
                     <button type="submit" class="btn btn-primary input-block-level">
@@ -108,8 +100,6 @@
             <hr />
 
             <p class="clearfix">
-                @*<a href="#" class="goto-forgot pull-left">Forgot Password?</a>*@
-                @Html.ActionLink("Đăng ký", "Register", null, new { @class = "goto-register pull-right" })
                 <a href="/Account/Logon" class="goto-login pull-left">← Quay lại</a>
             </p>
         }

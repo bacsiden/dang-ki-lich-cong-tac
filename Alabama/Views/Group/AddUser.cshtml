@@ -9,11 +9,13 @@
     <div>
         <div class="control-group">
             <label class="control-label">
-                Tên người dùng</label>
+                Tên người dùng (Tên đăng nhập)</label>
             <div class="controls">
-                @Html.TextBoxFor(m => m.UserName)
+                <select data-placeholder="Select UserName" name="UserName" class="chosen-with-diselect input-xlarge">
+                    @Html.Raw(ViewBag.listUser)
+                </select>
             </div>
-            <input type="submit" value="OK" class="btn btn-primary"/>
+            <input type="submit" value="OK" class="btn btn-primary" />
             <button type="button" class="btn" onclick="javascript:window.history.go(-1);">
                 Hủy</button>
         </div>

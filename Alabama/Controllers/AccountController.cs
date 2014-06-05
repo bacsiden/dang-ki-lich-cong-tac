@@ -103,6 +103,66 @@ namespace Alabama.Controllers
             user.Locked = true;
             Update(user);
         }
+        public bool IsLockedOut(string userName)
+        {
+            try
+            {
+                bool locked = false;
+                var usr = DB.Entities.User.FirstOrDefault(m => m.UserName == userName);
+                MembershipUser aspnetUser = Membership.GetUser(userName);
+                if (usr != null)
+                {
+                    if (usr.Locked)
+                    {
+                        locked = true;
+                    }
+                }
+
+                if (aspnetUser != null)
+                {
+                    if (aspnetUser.IsLockedOut)
+                    {
+                        locked = true;
+                    }
+                }
+                return locked;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// Reset password (dành cho Admin muốn reset mật khẩu của member)
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="newPassword"></param>
+        /// <returns></returns>
+        public bool ChangePassword(string userName, string newPassword)
+        {
+            try
+            {
+                MembershipUser aspnetUser = Membership.GetUser(userName);
+                string resetPassword = aspnetUser.ResetPassword();
+                return aspnetUser.ChangePassword(resetPassword, newPassword);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public bool UnLockUser(string userName)
+        {
+            try
+            {
+                MembershipUser aspnetUser = Membership.GetUser(userName);
+                return aspnetUser.UnlockUser();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
     public class AccountController : BaseController
     {
@@ -156,7 +216,28 @@ namespace Alabama.Controllers
                 ViewBag.Title = "Thêm mới tài khoản người dùng";
                 obj = new User();
             }
+            SelectOption(obj);
             return View(obj);
+        }
+        void SelectOption(User obj)
+        {
+            #region SELECT OPTION
+            var listDonVi = DB.Entities.DonVi.ToList();
+            string data = "<option >--Chọn--</option>";
+            foreach (var item in listDonVi)
+            {
+                if (obj.DonViID.HasValue && obj.DonViID.Value==item.ID)
+                {
+                    data += string.Format("<option value='{0}' selected='selected'>{1}</option>", item.ID, item.Title);
+                }
+                else
+                {
+                    data += string.Format("<option value='{0}'>{1}</option>", item.ID, item.Title);
+                }
+                
+            }
+            ViewBag.DonVi = data;
+            #endregion
         }
 
         [HttpPost]
@@ -164,24 +245,28 @@ namespace Alabama.Controllers
         {
             try
             {
+                string mess = "";
                 var db = DB.Entities;
                 if (model.ID == 0)
                 {
                     // Add new                 
                     db.User.AddObject(model);
+                    mess = "Thêm mới tài khoản thành công";
                 }
                 else
                 {
                     // Edit    
                     db.AttachTo("User", model);
                     db.ObjectStateManager.ChangeObjectState(model, System.Data.EntityState.Modified);
+                    mess = "Sửa tài khoản thành công";
                 }
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new {message=mess});
             }
             catch
             {
-                return View();
+                SelectOption(model);
+                return View(model);
             }
         }
 
@@ -258,7 +343,7 @@ namespace Alabama.Controllers
                         }
                         else
                         {
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction("Index", "JobRegister");
                         }
                     }
                     else
@@ -365,6 +450,58 @@ namespace Alabama.Controllers
 
             // If we got this far, something failed, redisplay form
             ViewBag.PasswordLength = MembershipService.MinPasswordLength;
+            return View(model);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult ResetPassWord(int id)
+        {
+           
+            DB.BaseClass<User> bc = new DB.BaseClass<User>();
+            var temp = bc.GetByID(id);
+            if (temp != null)
+            {
+                return View(new ResetPasswordModel { UserName = temp.UserName });
+            }
+            return RedirectToAction("Index");
+        }
+
+        //[RequireHttps]
+        [HttpPost]
+        [Authorize]
+        public ActionResult ResetPassWord(ResetPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {                    
+                    var userDAL = new UserDAL();
+                    bool isSuccess;
+                    if (userDAL.IsLockedOut(model.UserName))
+                    {
+                        isSuccess = userDAL.UnLockUser(model.UserName);
+                    }
+
+                    isSuccess = userDAL.ChangePassword(model.UserName, model.NewPassword);
+                    if (isSuccess)
+                    {
+                        string message = "Đổi mật khẩu thành công";
+                        return RedirectToAction("Index", new {message=message});
+                    }
+                }                
+                catch(Exception ex)
+                {
+                    if (ex.Message.Equals("The length of parameter 'newPassword' needs to be greater or equal to '6'."))
+                    {
+                        ModelState.AddModelError("", "Mật khẩu yêu cầu tối thiểu phải 6 kí tự.");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Có lỗi xảy ra trong khi đổi mật khẩu.");
+                    }
+                }
+            }
             return View(model);
         }
 

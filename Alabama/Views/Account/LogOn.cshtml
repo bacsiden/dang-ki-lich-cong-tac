@@ -3,7 +3,7 @@
 }
 @model Alabama.Models.LogOnModel
 @{
-    ViewBag.Title = "Đăng nhập hệ thống quản lý bưu kiện";
+    ViewBag.Title = "Đăng nhập hệ thống đăng ký lịch công tác";
 }
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -15,7 +15,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Quản lý bưu phầm - bưu kiện</title>
+    <title>@ViewBag.Title</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -29,14 +29,14 @@
     <link rel="stylesheet" href="/Content/css/flaty.css">
     <link rel="stylesheet" href="/Content/css/flaty-responsive.css">
     <style type="text/css">
-        .field-validation-error,.validation-summary-errors,.field-validation-valid
+        .field-validation-error, .validation-summary-errors, .field-validation-valid
         {
-            color:Red;
+            color: Red;
         }
-        ul 
+        ul
         {
-            list-style:none;
-            padding:0;
+            list-style: none;
+            padding: 0;
         }
     </style>
     <script src="/Content/assets/modernizr/modernizr-2.6.2.min.js"></script>
@@ -60,7 +60,7 @@
             <div class="control-group">
                 <div class="controls">
                     @Html.ValidationMessageFor(m => m.UserName, "")
-                    @Html.TextBoxFor(m => m.UserName, new { @class = "input-block-level", placeholder = "Tên đăng nhập" })                    
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "input-block-level", placeholder = "Tên đăng nhập" })
                 </div>
             </div>
 
@@ -68,7 +68,6 @@
                 <div class="controls">
                     @Html.ValidationMessageFor(m => m.Password, "")
                     @Html.PasswordFor(m => m.Password, new { @class = "input-block-level", placeholder = "Mật khẩu" })
-                    
                 </div>
             </div>
 
@@ -190,6 +189,6 @@
                 goToForm('register');
             });
         });
-        </script>
+    </script>
 </body>
 </html>

@@ -119,7 +119,7 @@ namespace Alabama
                 if (user.Locked)
                 {
                     new AccountController().LogOff();
-                    filterContext.Result = new RedirectResult("/BuuKien/Index");
+                    filterContext.Result = new RedirectResult("/Home/Index");
                 }
                 else
                 {
@@ -135,7 +135,7 @@ namespace Alabama
                     {
                         if (String.IsNullOrEmpty(UrlRedirect))
                         {
-                            filterContext.Result = new RedirectResult("/BuuKien/Index");
+                            filterContext.Result = new RedirectResult("/Home/Index");
                         }
                         else
                         {
