@@ -15,7 +15,7 @@ namespace Alabama.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            ViewBag.Message = "CHÀO MỪNG ĐẾN VỚI PHẦN MỀM QUẢN LÝ BƯU PHẨM - BƯU KIỆN";
+            ViewBag.Message = "CHÀO MỪNG ĐẾN VỚI PHẦN MỀM ĐĂNG KÝ LỊCH CÔNG TÁC";
             return View();
         }
 

@@ -12,7 +12,7 @@ table.styleWidth
 {
     width: 50%;
 }
-.validation-summary-errors,.error
+.validation-summary-errors,.error,.f_req,.field-validation-error
 {
     color: Red;
 }

@@ -25,7 +25,7 @@ namespace Alabama.Controllers
                 return RedirectToAction("Index");
 
             ViewBag.GoupName = g.Title;
-            ViewBag.GroupID = id;
+            ViewBag.GroupID = id;            
             return View(DB.Entities.User.Where(m => m.Group.FirstOrDefault(x => x.ID == g.ID) != null));
         }
 
@@ -45,11 +45,23 @@ namespace Alabama.Controllers
         [ValidationFunction("/Group/index", ActionName.ADDUSERFORGROUP)]
         public ActionResult AddUser(int id)
         {
-            ViewBag.GroupID = id;
+            ViewBag.GroupID = id;            
             ViewBag.GroupName = DB.Entities.Group.First(m => m.ID == id).Title;
+            SelectOption(id);
             return View(new User());
         }
-
+        void SelectOption(int id)
+        {
+            #region SELECT OPTION
+            var listUser = DB.Entities.User.Where(m=>m.Group.FirstOrDefault(n=>n.ID==id)==null).ToList();
+            string data = "<option >--Chọn--</option>";
+            foreach (var item in listUser)
+            {
+                data += string.Format("<option value='{0}'>{1} ({0})</option>", item.UserName, item.Name);
+            }
+            ViewBag.listUser = data;
+            #endregion            
+        }
         [Authorize]
         [ValidationFunction("/Group/index", ActionName.ADDUSERFORGROUP)]
         public ActionResult DoAddUser(User objUser, int groupID)
@@ -65,6 +77,7 @@ namespace Alabama.Controllers
             }
             catch (Exception ex)
             {
+                SelectOption(groupID);
                 ModelState.AddModelError("", "Tài khoản bạn nhập vào không đúng.");
                 return View("AddUser", objUser);
             }

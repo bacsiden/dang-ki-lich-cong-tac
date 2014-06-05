@@ -13,6 +13,7 @@
                 {
                     @Html.ValidationSummary(true)
                     @Html.HiddenFor(model => model.ID)
+                    @Html.HiddenFor(model => model.AspnetUserID)
                     <div class="control-group">
                         <label class="control-label" for="UserName">
                             Tên đăng nhập</label>
@@ -100,6 +101,18 @@
                             <div class="span12">
                                 @Html.TextBoxFor(model => model.Avata)
                                 @Html.ValidationMessageFor(model => model.Avata)
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="control-group">
+                        <label class="control-label" for="Avata">
+                            Đơn vị</label>
+                        <div class="controls">
+                            <div class="span12">
+                                <select data-placeholder="Select đơn vị" name="DonViID" class="chosen-with-diselect input-xlarge">
+                                    @Html.Raw(ViewBag.DonVi)
+                                </select>
+                                @Html.ValidationMessageFor(model => model.DonViID)
                             </div>
                         </div>
                     </div> 
