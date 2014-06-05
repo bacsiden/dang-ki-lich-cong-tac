@@ -182,7 +182,7 @@ namespace Alabama.Controllers
         // URL: /Account/LogOn
         // **************************************
 
-
+        [Authorize]
         public ActionResult Index(int id = 0)
         {
             try
@@ -207,6 +207,7 @@ namespace Alabama.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult NewOrEdit(int? id = 0)
         {
             var obj = DB.Entities.User.FirstOrDefault(m => m.ID == id);
@@ -219,6 +220,7 @@ namespace Alabama.Controllers
             SelectOption(obj);
             return View(obj);
         }
+
         void SelectOption(User obj)
         {
             #region SELECT OPTION
@@ -241,6 +243,7 @@ namespace Alabama.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult NewOrEdit(User model)
         {
             try
@@ -269,7 +272,7 @@ namespace Alabama.Controllers
                 return View(model);
             }
         }
-
+        [Authorize]
         public ActionResult DeleteByListID(string arrayID = "")
         {
             try
@@ -295,6 +298,7 @@ namespace Alabama.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public ActionResult LockByListID(string arrayID = "")
         {
             try
@@ -514,6 +518,7 @@ namespace Alabama.Controllers
             return View();
         }
 
+        [Authorize]
         public Models.Account Get(int id)
         {
             try
@@ -527,6 +532,7 @@ namespace Alabama.Controllers
             }
         }
 
+        [Authorize]
         public Models.Account Get(string user, string pass)
         {
             try
@@ -541,6 +547,7 @@ namespace Alabama.Controllers
             }
         }
 
+        [Authorize]
         public Models.Account Get(string user)
         {
             try
@@ -555,6 +562,7 @@ namespace Alabama.Controllers
             }
         }
 
+        [Authorize]
         public DataTable Gets(string name) // Gat table of Account has the similar name
         {
             try
@@ -568,6 +576,7 @@ namespace Alabama.Controllers
             }
         }
 
+        [Authorize]
         public int GetGroup(string user, string pass)
         {
             try
@@ -581,6 +590,7 @@ namespace Alabama.Controllers
             }
         }
 
+        [Authorize]
         public object ChangeBalance(string userName, int changeType, int money, int transactionID)
         {
             SqlParameter[] pars = new SqlParameter[4];
@@ -592,6 +602,7 @@ namespace Alabama.Controllers
                 CommandType.StoredProcedure, pars);
         }
 
+        [Authorize]
         public void Insert(Models.Account ac)
         {
             SqlParameter[] pars = new SqlParameter[13];
@@ -613,6 +624,7 @@ namespace Alabama.Controllers
                 CommandType.StoredProcedure, pars);
         }
 
+        [Authorize]
         public void Update(Models.Account ac)
         {
             SqlParameter[] pars = new SqlParameter[14];
@@ -635,6 +647,7 @@ namespace Alabama.Controllers
                 CommandType.StoredProcedure, pars);
         }
 
+        [Authorize]
         public int Del(int id)
         {
             return DataUtilities.ExcuteNonQuery("Account_Delete", CommandType.StoredProcedure, "@ID", id);
