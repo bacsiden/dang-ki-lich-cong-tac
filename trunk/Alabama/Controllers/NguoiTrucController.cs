@@ -7,6 +7,7 @@ using Webdiyer.WebControls.Mvc;
 
 namespace Alabama.Controllers
 {
+    [Authorize]
     public class NguoiTrucController : Controller
     {
         int pageSize = 20;

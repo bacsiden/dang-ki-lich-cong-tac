@@ -7,6 +7,7 @@ using Webdiyer.WebControls.Mvc;
 
 namespace Alabama.Controllers
 {
+    [Authorize]
     public class JobRegisterController : Controller
     {
         int pageSize = 20;

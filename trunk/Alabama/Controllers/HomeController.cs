@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 
 namespace Alabama.Controllers
 {
+    [Authorize]
     public class HomeController : BaseController
     {
         [Authorize]

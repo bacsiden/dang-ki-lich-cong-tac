@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Alabama.Controllers
 {
+    [Authorize]
     public class RoleController : BaseController
     {
         //
