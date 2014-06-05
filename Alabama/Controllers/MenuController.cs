@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Alabama.Controllers
 {
+    [Authorize]
     public class MenuController : BaseController
     {
         [Authorize]
@@ -155,6 +156,7 @@ namespace Alabama.Controllers
                 return View();
             }
         }
+        [Authorize]
         [ValidationFunction("/Menu/index", ActionName.VIEWLISTMENU)]
         public string DoActive(int id)
         {

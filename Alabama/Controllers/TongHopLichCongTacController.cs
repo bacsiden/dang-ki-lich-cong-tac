@@ -8,6 +8,7 @@ using System.Globalization;
 
 namespace Alabama.Controllers
 {
+    [Authorize]
     public class TongHopLichCongTacController : Controller
     {
         int pageSize = 20;
