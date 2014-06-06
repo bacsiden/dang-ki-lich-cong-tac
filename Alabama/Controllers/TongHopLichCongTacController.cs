@@ -16,9 +16,9 @@ namespace Alabama.Controllers
         // GET: /Owner/
 
         [Authorize]
-        public ActionResult Index(int?page)
+        public ActionResult Index(int? page)
         {
-            var list = DB.Entities.TieuDe.OrderByDescending(m=>m.ID).ToPagedList(page.HasValue?page.Value:1,1);
+            var list = DB.Entities.TieuDe.OrderByDescending(m => m.ID).ToPagedList(page.HasValue ? page.Value : 1, 1);
             return View(list);
         }
 
@@ -122,6 +122,25 @@ namespace Alabama.Controllers
             db.SaveChanges();
             return Redirect(url);
         }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult EditTieuDe(int id, string url)
+        {
+            ViewBag.Url = url;
+            return PartialView("_EditTieuDe", DB.Entities.TieuDe.FirstOrDefault(m => m.ID == id));
+        }
+        [Authorize]
+        public ActionResult EditTieuDe(TieuDe model, string url)
+        {
+            var db = DB.Entities;
+            // Add new      
+            db.AttachTo("TieuDe", model);
+            db.ObjectStateManager.ChangeObjectState(model, System.Data.EntityState.Modified);
+            db.SaveChanges();
+            return Redirect(url);
+        }
+
         public bool ChangeNguoiTruc(int id, int idNguoiTruc)
         {
             var db = DB.Entities;

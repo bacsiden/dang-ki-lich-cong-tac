@@ -60,6 +60,25 @@
                 }
             });
         });
+
+        // sửa tiêu đề
+        $(".TieuDe").hover(function () {
+            $(".TieuDeEdit").show();
+        }, function () {
+            $(".TieuDeEdit").hide();
+        });
+        $(".TieuDeEdit").click(function () {
+            var id = $(this).attr('value');
+            $.ajax({
+                url: "/TongHopLichCongTac/EditTieuDe",
+                type: "GET",
+                data: { "id": id, "url": "@Request.RawUrl" },
+                success: function (model) {
+                    $("#Modal-EditDetail").html(model);
+                }
+            });
+        });
+
     });
 </script>
 <h3>
@@ -89,7 +108,14 @@
     </div>
     <div class="row-fluid">
         <div class="span12" style="text-align: center;">
-            <h3>@(listTongHop != null ? listTongHop[0].TieuDe.Title : "")</h3>
+            @if (listTongHop != null && listTongHop.Count > 0)
+            {
+                <h3 class="TieuDe">@(Html.Raw(listTongHop[0].TieuDe.Title.Replace("\n", "<br />")))
+                    <br />
+                    <a href="#Modal-EditDetail" role="button" class="btn btn-info hide TieuDeEdit" value="@listTongHop[0].TieuDeID" data-toggle="modal">
+                        Sửa tiêu đề</a>
+                </h3>
+            }
         </div>
     </div>
     <table class="table table-bordered">
@@ -153,9 +179,9 @@
                     }
 
                 }
-               <td colspan="4">
-               </td>
-                <td style="border-left:none;">
+                <td colspan="4">
+                </td>
+                <td style="border-left: none;">
                     <select class="ChangeNguoiTruc span12" TongHopID="@item.ID">
                         <option value="0">--</option>
                         @foreach (var item12 in lstNguoiTruc)
@@ -169,7 +195,7 @@
                         }
                     </select>
                 </td>
-                <td style="border-left:none;">
+                <td style="border-left: none;">
                 </td>
             </tr>
             

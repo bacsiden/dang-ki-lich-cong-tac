@@ -1,0 +1,32 @@
+﻿@model Alabama.TieuDe          
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Title').focus();
+    });
+</script>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        ×</button>
+    <h3 id="myModalLabel1">
+        Sửa tiêu đề
+    </h3>
+</div>
+@using (Html.BeginForm("EditTieuDe", "TongHopLichCongTac", new { url = ViewBag.Url }))
+{
+    <div class="modal-body Content-EditDetail" id="Content-EditDetail">
+        @Html.HiddenFor(model => model.ID)
+        <div class="editor-label">
+            Tiêu đề
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Title, new { rows = "3", Class = "input-xxlarge" })
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit">
+            Lưu lại</button>
+        <button class="btn" data-dismiss="modal" aria-hidden="true">
+            Hủy</button>
+    </div>
+}
