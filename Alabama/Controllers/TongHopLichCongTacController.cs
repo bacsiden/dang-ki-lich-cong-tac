@@ -15,7 +15,12 @@ namespace Alabama.Controllers
         //
         // GET: /Owner/
 
-
+        [Authorize]
+        public ActionResult Index(int?page)
+        {
+            var list = DB.Entities.TieuDe.OrderByDescending(m=>m.ID).ToPagedList(page.HasValue?page.Value:1,1);
+            return View(list);
+        }
 
         [HttpGet]
 

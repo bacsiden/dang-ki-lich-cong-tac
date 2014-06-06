@@ -1,0 +1,150 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@model PagedList<Alabama.TieuDe>
+@{
+    ViewBag.Title = "Lịch công tác đã tổng hợp";
+}
+<h3>
+    @ViewBag.Title</h3>
+<div class="row-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            @Html.ActionLink("Tạo mới", "NewOrEdit", null, new { @class = "btn btn-info" })
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <table class="table table-bordered">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td colspan="6" style="text-align: center">
+                            <b>@item.Title</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="width: 5%">
+                        </th>
+                        <th style="width: 3%">
+                            Thời gian
+                        </th>
+                        <th>
+                            Nội dung
+                        </th>
+                        <th>
+                            Người thực hiện
+                        </th>
+                        <th style="width: 15%">
+                            Địa điểm
+                        </th>
+                        <th style="width: 15%">
+                            Người trực
+                        </th>
+                    </tr>
+                          foreach (var itemTH in item.TongHop)
+                          {
+
+                              var list = itemTH.TongHopDetail;
+                              
+                              
+                    <tr>
+                        @if (itemTH.DayOfWeek == 6)
+                        {
+                            if (list.Count > 0)
+                            {
+                            <td rowspan="@(list.Count + 1)">
+                                CN
+                            </td>
+                            }
+                            else
+                            {
+                            <td rowspan="1">
+                                CN
+                            </td>
+                            }
+
+                        }
+                        else
+                        {
+                            if (list.Count > 0)
+                            {
+                            <td rowspan="@(list.Count + 1)">
+                                Thứ @(itemTH.DayOfWeek + 2)
+                            </td>
+                            }
+                            else
+                            {
+                            <td rowspan="1">
+                                Thứ @(itemTH.DayOfWeek + 2)
+                            </td>
+                            }
+
+                        }
+                        @if (list.Count == 0) {
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            @(itemTH.NguoiTruc != null ? itemTH.NguoiTruc.Title : "")
+                        </td>
+                        }
+                    </tr>
+                        
+                              
+                        foreach (var item1 in list)
+                        {
+                    <tr>
+                        <td>
+                            @item1.Time.Hours:@item1.Time.Minutes
+                        </td>
+                        <td>
+                            @item1.NoiDung
+                        </td>
+                        <td>
+                            @item1.NguoiThucHien
+                        </td>
+                        <td>
+                            @(item1.Location != null ? item1.Location.Title : "")
+                        </td>
+                        <td>
+                            @(itemTH.NguoiTruc != null ? itemTH.NguoiTruc.Title : "")
+                        </td>
+                    </tr>
+                                                                                      
+                        }
+                          }
+                }
+            </table>
+            <div class="row-fluid">
+                <div class="span4">
+                    <div class="dataTables_info">
+                        @if (Model.TotalItemCount > 0)
+                        {
+                            if (Model.TotalItemCount < Model.PageSize)
+                            {
+                            <span>1 </span>
+                            <span>- </span>@Model.TotalItemCount
+                            }
+                            else
+                            {
+                            <span></span>@((Model.CurrentPageIndex - 1) * Model.PageSize + 1)
+                            <span>- </span>@((Model.CurrentPageIndex != Model.TotalPageCount) ? (Model.CurrentPageIndex * Model.PageSize) : Math.Abs((Model.CurrentPageIndex) * Model.PageSize - (Model.PageSize * Model.TotalPageCount) - Model.TotalItemCount))
+                            }
+                            <span>of </span>@(Model.TotalItemCount)
+                            
+                        }
+                    </div>
+                </div>
+                <div class="span8">
+                    <div class="dataTables_paginate paging_bootstrap pagination phantrangmvcpager">
+                        @Html.Pager(Model, new PagerOptions { ContainerTagName = "ul", PageIndexParameterName = "page", CurrentPagerItemWrapperFormatString = "<li class='active'>{0}</li>", CurrentPageNumberFormatString = "{0}", FirstPageText = "&laquo; ", LastPageText = " &raquo;", NextPageText = "Next →", PrevPageText = "← Prev", SeparatorHtml = "" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

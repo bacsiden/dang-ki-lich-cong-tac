@@ -4,14 +4,16 @@
 <!DOCTYPE html>
 <html class="no-js">
 <head>
-    <meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>@(string.IsNullOrEmpty(ViewBag.Title)?"PHẦN MỀM ĐĂNG KÝ LỊCH CÔNG TÁC":ViewBag.Title)</title>
+    <title>@(string.IsNullOrEmpty(ViewBag.Title) ? "PHẦN MỀM ĐĂNG KÝ LỊCH CÔNG TÁC" : ViewBag.Title)
+    </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="/Content/assets/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="/Content/assets/bootstrap/bootstrap-responsive.min.css">
-    <link href="/Content/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet"
+        type="text/css" />
     @*<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">*@
     <link rel="stylesheet" href="/Content/assets/normalize/normalize.css">
     <link href="/Content/assets/chosen-bootstrap/chosen.min.css" rel="stylesheet" type="text/css" />
@@ -21,7 +23,7 @@
     <link rel="stylesheet" href="/Content/css/flaty-responsive.css">
     <link href="/Content/assets/data-tables/DT_bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="/Content/css/myStylecss.css" rel="stylesheet" type="text/css" />
-    <link rel="shortcut icon" href="/Content/img/favicon.html">
+    <link rel="shortcut icon" href="/Content/img/favicon.ico">
     <script type="text/javascript" src="/Content/assets/modernizr/modernizr-2.6.2.min.js"></script>
     <script type="text/javascript">        window.jQuery || document.write('<script src="/Content/assets/jquery/jquery-1.10.1.min.js"><\/script>')</script>
     <script type="text/javascript" src="/Content/assets/bootstrap/bootstrap.min.js"></script>
@@ -65,8 +67,7 @@
                 <!-- BEGIN Search Form -->
                 <li>
                     <form target="#" method="GET" class="search-form">
-                    <span class="search-pan">
-                        @*<button type="submit">
+                    <span class="search-pan">@*<button type="submit">
                             <i class="icon-search"></i>
                         </button>
                         <input type="text" name="search" placeholder="Search ..." autocomplete="off" />*@
@@ -96,6 +97,11 @@
             </div>*@
             <!-- END Breadcrumb -->
             @RenderBody()
+
+            <!-- Footer -->
+            <footer>
+                    <p>@DateTime.Now.Year © Copyright.</p>
+            </footer>
             <a id="btn-scrollup" class="btn btn-circle btn-large" href="#"><i class="icon-chevron-up">
             </i></a>
         </div>
