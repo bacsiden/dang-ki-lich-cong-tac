@@ -185,6 +185,7 @@
     <Content Include="Content\css\flaty2.css" />
     <Content Include="Content\css\flaty.css" />
     <Content Include="Content\css\myStylecss.css" />
+    <Content Include="Content\img\favicon.ico" />
     <Content Include="Content\img\3.png" />
     <Content Include="Content\img\4.png" />
     <Content Include="Content\img\admin.png" />
@@ -324,6 +325,7 @@
     <Content Include="Views\TongHopLichCongTac\_EditDetail.cshtml" />
     <Content Include="Views\Shared\_Success.cshtml" />
     <Content Include="Views\Account\ResetPassWord.cshtml" />
+    <Content Include="Views\TongHopLichCongTac\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_Layout.cshtml" />
