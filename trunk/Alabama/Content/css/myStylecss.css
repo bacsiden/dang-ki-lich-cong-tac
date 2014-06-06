@@ -1,7 +1,7 @@
 ﻿.label-add
 {
-    line-height:28px;
-    font-weight:bold;
+    line-height: 28px;
+    font-weight: bold;
 }
 .fleft
 {
@@ -12,7 +12,7 @@ table.styleWidth
 {
     width: 50%;
 }
-.validation-summary-errors,.error,.f_req,.field-validation-error
+.validation-summary-errors, .error, .f_req, .field-validation-error
 {
     color: Red;
 }
@@ -27,6 +27,9 @@ table.styleWidth
     line-height: 49px;
     text-align: center;
     width: 100%;
+    background: url('/content/img/logo.jpg') center center no-repeat;
+    height: 121px;
+    background-size: 70.4% 100%;
 }
 #navbar .Fluild-Edit
 {
@@ -41,9 +44,9 @@ table.styleWidth
 }
 #navbar .Fluild-Edit #OptionLogin .user-profile
 {
-    float:right;
+    float: right;
 }
 .LockUser, .DeleteItem, .EditItem
 {
-    display:none;
+    display: none;
 }
