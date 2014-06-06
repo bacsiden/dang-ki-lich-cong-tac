@@ -326,6 +326,7 @@
     <Content Include="Views\Shared\_Success.cshtml" />
     <Content Include="Views\Account\ResetPassWord.cshtml" />
     <Content Include="Views\TongHopLichCongTac\Index.cshtml" />
+    <Content Include="Views\TongHopLichCongTac\_EditTieuDe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_Layout.cshtml" />
