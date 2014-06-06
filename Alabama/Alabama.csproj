@@ -216,6 +216,7 @@
     <Content Include="Content\img\demo\gallery\9_thumb.jpg" />
     <Content Include="Content\img\favicon.html" />
     <Content Include="Content\img\logo-login.jpg" />
+    <Content Include="Content\img\logo.jpg" />
     <Content Include="Content\img\null.jpeg" />
     <Content Include="Content\js\flaty.js" />
     <Content Include="Content\js\myJquery.js" />

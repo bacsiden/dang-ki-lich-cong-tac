@@ -5,42 +5,30 @@
 <div class="row-fluid">
     <div class="row-fluid">
         <div class="span12">
-            @Html.ActionLink("Create New", "NewOrEdit", null, new { @class = "btn btn-info addNewItem" })
-            @Html.ActionLink("Edit", "NewOrEdit", null, new { @class = "btn btn-info EditItem" })
-            @Html.ActionLink("Delete", "Delete", null, new { @class = "btn btn-danger DeleteItem confirmDelete" })
+            @Html.ActionLink("Tạo mới", "NewOrEdit", null, new { @class = "btn btn-info addNewItem" })
+            @Html.ActionLink("Sửa", "NewOrEdit", null, new { @class = "btn btn-info EditItem" })
+            @Html.ActionLink("Xóa", "Delete", null, new { @class = "btn btn-danger DeleteItem confirmDelete" })
         </div>
     </div>
     <table class="table">
         <tr>
-            <th>
+            <th style="width:3%">
                 <input type="checkbox" name="" value="" class="checkAll" />
             </th>
+            <th style="width:10%">
+                Họ tên
+            </th>            
             <th>
-                UserID
+                Người thực hiện
             </th>
             <th>
-                Created
+                Nội dung
             </th>
-            <th>
-                NguoiThucHien
+            <th style="width:10%">
+                Địa điểm
             </th>
-            <th>
-                Content
-            </th>
-            <th>
-                LocationID
-            </th>
-            <th>
-                FullName
-            </th>
-            <th>
-                DateFrom
-            </th>
-            <th>
-                DateTo
-            </th>
-            <th>
-                Status
+            <th style="width:10%">
+                Thời gian thực hiện
             </th>
         </tr>
         @foreach (var item in Model)
@@ -51,10 +39,7 @@
                 </td>
                 <td>
                     @(item.UserID.HasValue?item.User.Name:"")
-                </td>
-                <td>
-                    @String.Format("{0:g}", item.Created)
-                </td>
+                </td>               
                 <td>
                     @item.NguoiThucHien
                 </td>
@@ -65,16 +50,7 @@
                     @(item.LocationID.HasValue ? item.Location.Title : "")
                 </td>
                 <td>
-                    @item.FullName
-                </td>
-                <td>
-                    @String.Format("{0:g}", item.DateFrom)
-                </td>
-                <td>
-                    @String.Format("{0:g}", item.DateTo)
-                </td>
-                <td>
-                    @item.Status
+                    @String.Format("{0:dd/MM/yyyy hh:mm}", item.DateFrom)
                 </td>
             </tr>
         }
