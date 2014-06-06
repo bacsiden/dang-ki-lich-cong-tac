@@ -10549,7 +10549,7 @@
 	 * through the initialisation options.
 	 *  @namespace
 	 *  @todo Really should attach the settings object to individual instances so we
-	 *    don't need to create new instances on each $().dataTable() call (if the
+	 *    don't need to T?o m?i instances on each $().dataTable() call (if the
 	 *    table already exists). It would also save passing oSettings around and
 	 *    into every single function. However, this is a very significant 
 	 *    architecture change for DataTables and will almost certainly break
