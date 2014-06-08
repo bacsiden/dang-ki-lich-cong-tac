@@ -20,13 +20,15 @@ namespace Alabama.Controllers
             return View();
         }
 
-        public static string temp1 = "<li class='{3}'><a href=\"{1}\" class='menu-item-a'><i class=\"{2}\"></i><span>&nbsp;{0}</span> </a></li>";
-        public static string temp2 = "";
+        public static string temp1 = "<li class='{3}'><a href=\"{1}\" class='menu-item-a {5}'><i class=\"{2}\"></i><span>&nbsp;{0}</span>{4} </a>{6}</li>";
+        public static string temp2 = "<ul class=\"submenu\">{0}</ul>";
         public static string BuildMenu()
         {
             var user = new UserDAL().GetCurrentUser;
             string s = "";
-            var lst = DB.Entities.Menu;
+            string cls = "dropdown-toggle";
+            string icondrop = "<b class=\"arrow icon-angle-right\"></b>";
+            var lst = DB.Entities.Menu.OrderBy(m=>m.Oder);
             foreach (var item in lst)
             {
                 if (item.ParentID == null || item.ParentID.Value == 0)
@@ -36,7 +38,22 @@ namespace Alabama.Controllers
                     {
                         tmp = "hiddenField";
                     }
-                    s += string.Format(temp1, item.Title, item.Url, item.Icon, tmp);
+                    var listChild = lst.Where(m => m.ParentID == item.ID).OrderBy(m=>m.Oder).ToList();
+                    if (listChild.Count > 0)
+                    {
+                        string subLI = "";
+                        foreach (var itemSub in listChild)
+                        {
+                            subLI += string.Format("<li><a href=\"{1}\" class='menu-item-a'>{0}</a></li>", itemSub.Title, itemSub.Url);
+                        }
+                        string subMenu = string.Format(temp2,subLI);
+                        s += string.Format(temp1, item.Title,"#", item.Icon, tmp, icondrop, cls, subMenu);
+                    }
+                    else
+                    {
+                        s += string.Format(temp1, item.Title, item.Url, item.Icon, tmp, "", "","");
+                    }
+
                 }
             }
             return s;
