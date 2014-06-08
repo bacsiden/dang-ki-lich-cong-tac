@@ -151,6 +151,25 @@ namespace Alabama.Controllers
                 throw ex;
             }
         }
+        /// <summary>
+        /// Đổi mật khẩu yêu cầu nhập vào mật khẩu cũ (dành cho member sau khi đăng nhập)
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="oldPassword"></param>
+        /// <param name="newPassword"></param>
+        /// <returns></returns>
+        public bool ChangePassword(string userName, string oldPassword, string newPassword)
+        {
+            try
+            {
+                MembershipUser aspnetUser = Membership.GetUser(userName);
+                return aspnetUser.ChangePassword(oldPassword, newPassword);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public bool UnLockUser(string userName)
         {
             try
@@ -228,7 +247,7 @@ namespace Alabama.Controllers
             string data = "<option >--Chọn--</option>";
             foreach (var item in listDonVi)
             {
-                if (obj.DonViID.HasValue && obj.DonViID.Value==item.ID)
+                if (obj.DonViID.HasValue && obj.DonViID.Value == item.ID)
                 {
                     data += string.Format("<option value='{0}' selected='selected'>{1}</option>", item.ID, item.Title);
                 }
@@ -236,7 +255,7 @@ namespace Alabama.Controllers
                 {
                     data += string.Format("<option value='{0}'>{1}</option>", item.ID, item.Title);
                 }
-                
+
             }
             ViewBag.DonVi = data;
             #endregion
@@ -264,7 +283,7 @@ namespace Alabama.Controllers
                     mess = "Sửa tài khoản thành công";
                 }
                 db.SaveChanges();
-                return RedirectToAction("Index", new {message=mess});
+                return RedirectToAction("Index", new { message = mess });
             }
             catch
             {
@@ -335,7 +354,7 @@ namespace Alabama.Controllers
             if (ModelState.IsValid)
             {
                 var user = new UserDAL().GetUserByUserName(model.UserName);
-                if (user!=null && !user.Locked)
+                if (user != null && !user.Locked)
                 {
                     if (MembershipService.ValidateUser(model.UserName, model.Password))
                     {
@@ -429,39 +448,61 @@ namespace Alabama.Controllers
         // URL: /Account/ChangePassword
         // **************************************
 
+        //
+        // GET: /Account/ChangePassword   
         [Authorize]
         public ActionResult ChangePassword()
         {
-            ViewBag.PasswordLength = MembershipService.MinPasswordLength;
-            return View();
+            return PartialView("_ChangePass");
         }
+
+        //
+        // POST: /Account/ChangePassword
 
         [Authorize]
         [HttpPost]
-        public ActionResult ChangePassword(ChangePasswordModel model)
+        public ActionResult ChangePassword(Models.ChangePasswordModel model)
         {
             if (ModelState.IsValid)
             {
-                if (MembershipService.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword))
+                if (model.OldPassword.Equals(model.NewPassword))
                 {
-                    return RedirectToAction("ChangePasswordSuccess");
+                    ModelState.AddModelError("NewPassword", "Mật khẩu mới phải khác mật khẩu cũ!");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+                    try
+                    {
+                        var userDAL = new UserDAL();
+                        bool succeeded = userDAL.ChangePassword(CurrentUser.UserName, model.OldPassword, model.NewPassword);
+                        if (succeeded)
+                        {
+                            return JavaScript(@"noticeChangePassWord(true, 'Đổi mật khẩu thành công.');");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("OldPassword", "Mật khẩu hiện tại không đúng.");
+                        }
+                    }
+                    catch (ArgumentException)
+                    {
+                        ModelState.AddModelError("NewPassword", "Mật khẩu yêu cầu tối thiểu phải 6 kí tự.");
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError("NewPassword", "Mật khẩu yêu cầu tối thiểu phải 6 kí tự.");
+                    }
                 }
             }
-
             // If we got this far, something failed, redisplay form
-            ViewBag.PasswordLength = MembershipService.MinPasswordLength;
-            return View(model);
+            return PartialView("_ChangePass", model);
         }
 
         [HttpGet]
         [Authorize]
         public ActionResult ResetPassWord(int id)
         {
-           
+
             DB.BaseClass<User> bc = new DB.BaseClass<User>();
             var temp = bc.GetByID(id);
             if (temp != null)
@@ -479,7 +520,7 @@ namespace Alabama.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {                    
+                {
                     var userDAL = new UserDAL();
                     bool isSuccess;
                     if (userDAL.IsLockedOut(model.UserName))
@@ -491,10 +532,10 @@ namespace Alabama.Controllers
                     if (isSuccess)
                     {
                         string message = "Đổi mật khẩu thành công";
-                        return RedirectToAction("Index", new {message=message});
+                        return RedirectToAction("Index", new { message = message });
                     }
-                }                
-                catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     if (ex.Message.Equals("The length of parameter 'newPassword' needs to be greater or equal to '6'."))
                     {

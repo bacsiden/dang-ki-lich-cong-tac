@@ -25,13 +25,17 @@
     <link href="/Content/css/myStylecss.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="/Content/img/favicon.ico">
     <script type="text/javascript" src="/Content/assets/modernizr/modernizr-2.6.2.min.js"></script>
-    <script type="text/javascript">        window.jQuery || document.write('<script src="/Content/assets/jquery/jquery-1.10.1.min.js"><\/script>')</script>
+    <script type="text/javascript" src="/Content/assets/jquery/jquery-1.10.1.min.js"></script>
+    
+    
+    <script src="../../Scripts/jquery.unobtrusive-ajax.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
     <script type="text/javascript" src="/Content/assets/bootstrap/bootstrap.min.js"></script>
     <script type="text/javascript" src="/Content/assets/nicescroll/jquery.nicescroll.min.js"></script>
     <script src="/Content/assets/chosen-bootstrap/chosen.jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="/Content/assets/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
     <script type="text/javascript" src="/Content/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script type="text/javascript" src="/Content/js/flaty.js"></script>
+    <script type="text/javascript" src="/Content/js/flaty.js"></script>    
     <script src="/Content/js/myJquery.js" type="text/javascript"></script>
 </head>
 <body>
@@ -97,7 +101,8 @@
             </div>*@
             <!-- END Breadcrumb -->
             @RenderBody()
-
+            <div id="ModalGeneral" class="modal hide fade">
+            </div>
             <!-- Footer -->
             <footer>
                     <p>@DateTime.Now.Year © Copyright.</p>

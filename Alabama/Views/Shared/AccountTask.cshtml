@@ -11,7 +11,7 @@
             if ($this.attr('href').indexOf("@ctrler") > -1) {
                 $(".nav-list li.active").removeClass();
                 $this.parent().addClass("active");
-                if (obj.is('.submenu')) {                    
+                if (obj.is('.submenu')) {
                     obj.prev().children().next().next().removeClass("icon-angle-right").addClass("icon-angle-down");
                     obj.prev().parent().addClass("active");
                 }
@@ -20,17 +20,81 @@
     });
 </script>
 @if (Request.IsAuthenticated)
-{<li class="user-profile"><a data-toggle="dropdown" href="#" class="user-menu dropdown-toggle">
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".ChangePassWord").click(function () {
+                $("#ModalGeneral").html($('.waiting').html());
+                $.ajax({
+                    url: "/Account/ChangePassword",
+                    type: "GET",
+                    success: function (model) {
+                        if (model.indexOf("<!DOCTYPE html>") != -1) {
+                            var ShowStr = '<div class="modal-header"><button class="close" data-dismiss="modal">×</button><h3>Thông báo</h3></div><div class="modal-body"><p class="validation-summary-errors">Bạn đã đăng xuất. Xin mời đăng nhập lại.</p><a href="" class="btn">OK</a></div>';
+                            $("#ModalGeneral").html(ShowStr);
+                        } else {
+                            $("#ModalGeneral").html(model);
+                        }
+                    }
+                });
+            });
+            $(".EditUserProfile").click(function () {
+                $("#ShowBoxChangePassWord").html($('.waiting').html());
+                $("#ShowBoxChangePassWord").empty();
+                $.ajax({
+                    url: "/Account/EditUserProfile",
+                    type: "GET",
+                    success: function (model) {
+                        if (model.indexOf("<!DOCTYPE html>") != -1) {
+                            var ShowStr = '<div class="modal-header"><button class="close" data-dismiss="modal">×</button><h3>Thông báo</h3></div><div class="modal-body"><p class="validation-summary-errors">Bạn đã đăng xuất. Xin mời đăng nhập lại.</p><a href="" class="btn">OK</a></div>';
+                            $("#ShowBoxChangePassWord").html(ShowStr);
+                        } else {
+                            $("#ShowBoxChangePassWord").html(model);
+                        }
+                    }
+                });
+            });
+            $(".chiTietThanhVien").click(function () {
+                $("#ShowBoxChangePassWord").html($('.waiting').html());
+                var getName = $(this).attr("getname");
+                $.ajax({
+                    url: "/Account/ChiTietThanhVien",
+                    type: "GET",
+                    data: { "name": getName },
+                    success: function (model) {
+                        if (model.indexOf("<!DOCTYPE html>") != -1) {
+                            var ShowStr = '<div class="modal-header"><button class="close" data-dismiss="modal">×</button><h3>Thông báo</h3></div><div class="modal-body"><p class="validation-summary-errors">Bạn đã đăng xuất. Xin mời đăng nhập lại.</p><a href="" class="btn">OK</a></div>';
+                            $("#ShowBoxChangePassWord").html(ShowStr);
+                        } else {
+                            $("#ShowBoxChangePassWord").html(model);
+                        }
+                    }
+                });
+            });
+        });
+        function noticeChangePassWord(success, message) {
+            if (success) {
+                $('#ModalGeneral').modal('hide');
+                $('.modal-backdrop').remove();
+                setTimeout(function () {
+                    alert(message);
+                }, 200);
+            } else {
+                alert(message);
+            }
+        };
+    </script>
+    <li class="user-profile"><a data-toggle="dropdown" href="#" class="user-menu dropdown-toggle">
         <img class="nav-user-photo" src="/Content/img/demo/avatar/avatar1.jpg" alt="Penny's Photo" />
-        <span class="hidden-phone" id="user_info"><span>@(new Alabama.Controllers.AccountController().CurrentUser.Name ) @*@User.Identity.Name*@</span></span>
-        <i class="icon-caret-down"></i>
+        <span class="hidden-phone" id="user_info"><span>@(new Alabama.Controllers.AccountController().CurrentUser.Name)
+            @*@User.Identity.Name*@</span></span> <i class="icon-caret-down"></i>
         <!-- BEGIN User Dropdown -->
         <ul class="dropdown-menu dropdown-navbar" id="user_menu">
             @*<li class="nav-header"><i class="icon-time"></i>Logined From 20:45 </li>*@
-            <li><a href="#"><i class="icon-cog"></i>Đổi mật khẩu</a></li>
+            <li><a href="#ModalGeneral" role="button"  data-toggle="modal" class="ChangePassWord"><i class="icon-cog"></i>Đổi mật khẩu</a>
+            </li>
             <li><a href="#"><i class="icon-user"></i>Chi tiết tài khoản</a></li>
-            @*<li><a href="#"><i class="icon-question"></i>Help</a></li>*@
-            @*<li class="divider visible-phone"></li>
+            @*<li><a href="#"><i class="icon-question"></i>Help</a></li>*@ @*<li class="divider visible-phone"></li>
             <li class="visible-phone"><a href="#"><i class="icon-tasks"></i>Tasks <span class="badge badge-warning">
                 4</span> </a></li>
             <li class="visible-phone"><a href="#"><i class="icon-bell-alt"></i>Notifications <span
@@ -41,6 +105,7 @@
             <li><a href="/Account/Logoff"><i class="icon-off"></i>Đăng xuất </a></li>
         </ul>
         <!-- BEGIN User Dropdown --></li>
+        
 }
 else
 {
