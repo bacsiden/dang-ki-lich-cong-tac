@@ -18,7 +18,8 @@ namespace Alabama.Controllers
         [Authorize]
         public ActionResult Index(int? page)
         {
-            var list = DB.Entities.TieuDe.OrderByDescending(m => m.ID).ToPagedList(page.HasValue ? page.Value : 1, 1);
+            ViewBag.STT = page.HasValue?page.Value*pageSize - pageSize:1;
+            var list = DB.Entities.TieuDe.OrderByDescending(m => m.ID).ToPagedList(page.HasValue ? page.Value : 1, pageSize);
             return View(list);
         }
 
