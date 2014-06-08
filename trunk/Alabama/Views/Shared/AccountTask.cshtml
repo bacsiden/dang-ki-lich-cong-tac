@@ -7,9 +7,14 @@
     $(document).ready(function () {
         $(".nav-list li a.menu-item-a").each(function () {
             var $this = $(this);
+            var obj = $this.parent().parent();
             if ($this.attr('href').indexOf("@ctrler") > -1) {
                 $(".nav-list li.active").removeClass();
                 $this.parent().addClass("active");
+                if (obj.is('.submenu')) {                    
+                    obj.prev().children().next().next().removeClass("icon-angle-right").addClass("icon-angle-down");
+                    obj.prev().parent().addClass("active");
+                }
             }
         });
     });

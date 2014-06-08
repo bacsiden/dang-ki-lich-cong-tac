@@ -26,7 +26,7 @@ namespace Alabama.Controllers
             db.AddRange(DB.Entities.Menu);
             SelectList select = new SelectList(db.ToList(), "ID", "Title");
             ViewBag.dropDown = select;
-            return View(new Menu());
+            return View(new Menu() {Oder=100});
         }
 
         //

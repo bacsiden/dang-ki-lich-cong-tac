@@ -33,7 +33,7 @@
                                 @(stt++)
                             </td>
                             <td>
-                                @Html.ActionLink(item.Title, "NewOrEdit", new { fromDate = item.TongHop.FirstOrDefault().FromDate.ToString("dd/MM/yyyy"), endDate = "" })
+                                <a href="@Url.Action("NewOrEdit", new { fromDate = item.TongHop.FirstOrDefault().FromDate.ToString("dd/MM/yyyy"), endDate = "" })"><span style="text-align:center">@Html.Raw(item.Title.Replace("\n", "<br />"))</span></a>
                             </td>
                         </tr>
                         }}
