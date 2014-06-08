@@ -13,23 +13,12 @@ namespace Alabama.Models
 
     #region Models
 
-    public class ChangePasswordModel
+    public class ChangePasswordModel : PassWordModels
     {
-        [Required]
+        [Required(ErrorMessage = "Bạn phải nhập vào mật khẩu cũ")]
         [DataType(DataType.Password)]
         [Display(Name = "Mật khẩu hiện tại")]
         public string OldPassword { get; set; }
-
-        [Required]
-        [ValidatePasswordLength]
-        [DataType(DataType.Password)]
-        [Display(Name = "Mật khẩu mới")]
-        public string NewPassword { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Xác nhận mật khẩu mới")]
-        [Compare("NewPassword", ErrorMessage = "Xác nhận mật khẩu mới không đúng.")]
-        public string ConfirmPassword { get; set; }
     }
 
     public class LogOnModel
