@@ -110,11 +110,6 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\PassWordModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\CRM\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\bootstrap-colorpicker\css\colorpicker.css" />
@@ -237,19 +232,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Service References\CRM\Alabama.CRM.KeyPairInfo.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\CRM\Alabama.CRM.PackageInfo.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\CRM\publicService.disco" />
-    <None Include="Service References\CRM\configuration91.svcinfo" />
-    <None Include="Service References\CRM\configuration.svcinfo" />
-    <None Include="Service References\CRM\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -285,7 +267,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LogOnPartial.cshtml" />
     <Content Include="Views\Web.config" />
-    <None Include="Service References\CRM\publicService.wsdl" />
     <Content Include="Views\Account\AddMoney.cshtml" />
     <Content Include="Views\Account\AddMoney1.cshtml" />
     <Content Include="Views\Home\ErrorDetails.cshtml" />
@@ -337,12 +318,6 @@
     <None Include="Content\assets\font-awesome\font\fontawesome-webfont.svg" />
     <None Include="Content\assets\font-awesome\font\fontawesome-webfont.ttf%40v=3.2.1" />
     <None Include="Content\assets\font-awesome\font\fontawesome-webfont.woff%40v=3.2.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\CRM\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Report\" />

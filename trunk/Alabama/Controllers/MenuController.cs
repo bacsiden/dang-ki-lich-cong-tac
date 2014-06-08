@@ -13,7 +13,9 @@ namespace Alabama.Controllers
         [ValidationFunction("/Home/index", ActionName.VIEWLISTMENU)]
         public ActionResult Index()
         {
-            return View(DB.Entities.Menu);
+            var lst = DB.Entities.Menu.OrderBy(m => m.Oder)
+                .ToList();
+            return View(lst);
         }
 
         [Authorize]

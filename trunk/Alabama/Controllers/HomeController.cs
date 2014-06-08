@@ -28,7 +28,8 @@ namespace Alabama.Controllers
             string s = "";
             string cls = "dropdown-toggle";
             string icondrop = "<b class=\"arrow icon-angle-right\"></b>";
-            var lst = DB.Entities.Menu.OrderBy(m=>m.Oder);
+            var lst = user.UserName==UserDAL.ADMIN? DB.Entities.Menu.OrderBy(m=>m.Oder):
+                DB.Entities.Menu.Where(x=>x.IsActive.Value).OrderBy(m=>m.Oder);
             foreach (var item in lst)
             {
                 if (item.ParentID == null || item.ParentID.Value == 0)
