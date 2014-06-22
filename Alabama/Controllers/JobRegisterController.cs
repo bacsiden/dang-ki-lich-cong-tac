@@ -37,7 +37,7 @@ namespace Alabama.Controllers
                 ViewBag.DateFrom = obj.DateFrom.ToString("hh:mm tt");
             }
             ViewBag.UserName = currentUser.Name;
-            SelectOption(obj.LocationID.HasValue ? obj.LocationID.Value : 0);
+            //SelectOption(obj.LocationID.HasValue ? obj.LocationID.Value : 0);
             return View(obj);
         }
 
@@ -90,7 +90,7 @@ namespace Alabama.Controllers
                 ViewBag.UserName = new UserDAL().GetCurrentUser.Name;
                 ViewBag.DateFrom = model.DateFrom.ToString("hh:mm tt");
                 ViewBag.DateCreated = model.Created.ToString("hh:mm tt");
-                SelectOption(model.LocationID.HasValue ? model.LocationID.Value : 0);
+                //SelectOption(model.LocationID.HasValue ? model.LocationID.Value : 0);
                 return View(model);
             }
         }

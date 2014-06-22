@@ -57,7 +57,7 @@ namespace Alabama.Controllers
                         tonghopdetail.NoiDung = item.Content;
                         tonghopdetail.NguoiThucHien = item.NguoiThucHien;
                         tonghopdetail.TongHopID = tonghop.ID;
-                        tonghopdetail.LocationID = item.LocationID.Value;
+                        tonghopdetail.Location = item.Location;
                         tonghopdetail.Code = codedate;
                         db.TongHopDetail.AddObject(tonghopdetail);
 
@@ -88,7 +88,7 @@ namespace Alabama.Controllers
                             tonghopdetail.NoiDung = job.Content;
                             tonghopdetail.NguoiThucHien = job.NguoiThucHien;
                             tonghopdetail.TongHopID = item.ID;
-                            tonghopdetail.LocationID = job.LocationID.Value;
+                            tonghopdetail.Location = job.Location;
                             tonghopdetail.Code = codedate;
                             db.TongHopDetail.AddObject(tonghopdetail);
 
