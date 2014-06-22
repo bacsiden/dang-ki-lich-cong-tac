@@ -5,30 +5,83 @@
     var lstNguoiTruc = Alabama.DB.Entities.NguoiTruc.ToList();
     var listTongHop = (List<Alabama.TongHop>)ViewBag.ListTongHop;
 }
+<style type="text/css"> 
+    select
+    {
+        min-width:100px;
+        width:100px;
+    }
+    .row-fluid [class*="span"] {
+        margin-left:0;
+    }
+    .row-fluid .span2 {
+        width: 10.53%;
+    }
+</style>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('.StartDate').datepicker({ language: "vi", format: "dd/mm/yyyy" }).on('changeDate', function (ev) {
-            var curr = new Date(convertDateTimeVItoEN($(this).val()));
-            var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-            var res;
-            if (first + 1 != curr.getDate()) {
-                res = '';
-                $(".TongHop").hide();
-                return false;
-            } else {
-                var last = first + 7; // last day is the first day + 6
+        //        $('.StartDate').datepicker({ language: "vi", format: "dd/mm/yyyy" }).on('changeDate', function (ev) {
+        //            var curr = new Date(convertDateTimeVItoEN($(this).val()));
+        //            var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+        //            var res;
+        //            if (first + 1 != curr.getDate()) {
+        //                res = '';
+        //                $(".TongHop").hide();
+        //                return false;
+        //            } else {
+        //                var last = first + 7; // last day is the first day + 6
 
-                var firstday = new Date(curr.setDate(first));
+        //                var firstday = new Date(curr.setDate(first));
 
-                var lastday = new Date(curr.setDate(last));
-                res = lastday.getDate() + '/' + (lastday.getMonth() + 1) + '/' + lastday.getFullYear();
-                $(".TongHop").show();
-                $('.EndDate').val(res);
-                return true;
-            }
+        //                var lastday = new Date(curr.setDate(last));
+        //                res = lastday.getDate() + '/' + (lastday.getMonth() + 1) + '/' + lastday.getFullYear();
+        //                $(".TongHop").show();
+        //                $('.EndDate').val(res);
+        //                return true;
+        //            }
+        //        });
+        
+        loadSelectDay();      
+        $(".selectday").change(function () {
+            var m = eval($(".selectmonth").val());
+            var y = eval($(".selectyear").val());
+            var d = eval($(this).val());
+            var fromdate = new Date(y, m, d, 0, 0, 0, 0);
+            var enddate = fromdate.addDays(6);
+            
+            $('.EndDate').val(enddate.toLocaleFormat('%d-%m-%Y'));
+        });
+        $(".selectmonth").change(function () {
+            var m = eval($(this).val());
+            var y = eval($(".selectyear").val());
+            var mondays = getMondaysByMonthYear(m, y);
+            $('.selectday').html('')
+            $.each(mondays, function (key, value) {
+                $('.selectday')
+                     .append($("<option></option>")
+                     .attr("value", value)
+                     .text(value));
+            });
+            var enddate = mondays[0] + 6 + "-" + (m + 1) + "-" + y;
+            $('.EndDate').val(enddate);
+        });
+        $(".selectyear").change(function () {
+            var m = eval($(".selectmonth").val());
+            var y = eval($(".selectyear").val());
+            var mondays = getMondaysByMonthYear(m, y);
+            $('.selectday').html('')
+            $.each(mondays, function (key, value) {
+                $('.selectday')
+                     .append($("<option></option>")
+                     .attr("value", value)
+                     .text(value));
+            });
+            var enddate = mondays[0] + 6 + "-" + (m + 1) + "-" + y;
+            $('.EndDate').val(enddate);
         });
         $(".TongHop").click(function () {
-            var start = $(".StartDate").val();
+
+            var start = $(".selectday").val() + "/" + (eval($(".selectmonth").val())+1) + "/" + $(".selectyear").val();
             var end = $(".EndDate").val();
             var url = $(this).attr('href');
             var newUrl = addParam(addParam(url, "fromDate", start), "endDate", end);
@@ -61,12 +114,12 @@
             });
         });
 
-        // sửa tiêu đề
-        $(".TieuDe").hover(function () {
-            $(".TieuDeEdit").show();
-        }, function () {
-            $(".TieuDeEdit").hide();
-        });
+//        // sửa tiêu đề
+//        $(".TieuDe").hover(function () {
+//            $(".TieuDeEdit").show();
+//        }, function () {
+//            $(".TieuDeEdit").hide();
+//        });
         $(".TieuDeEdit").click(function () {
             var id = $(this).attr('value');
             $.ajax({
@@ -80,13 +133,46 @@
         });
 
     });
+    function loadSelectDay() {
+        var m = eval($('.selectmonth').val());
+        var y = eval($(".selectyear").val());
+        var fromdate = "@Request.QueryString["fromDate"]";
+        var enddate = "@Request.QueryString["endDate"]";
+        var selected = 0;
+        if(fromdate!=""){
+            var arr = fromdate.split("/");
+            m=eval(arr[1])-1;
+            y=eval(arr[2]);
+            selected = eval(arr[0]);
+            $('.selectmonth').val(m);   
+        } 
+        var mondays = getMondaysByMonthYear(m, y);
+        $('.selectday').html('')
+        $.each(mondays, function (key, value) {
+            if (selected!=0 && selected==value) {
+                $('.selectday')
+                     .append($("<option selected='selected'></option>")
+                     .attr("value", value)
+                     .text(value));
+            }else {
+                $('.selectday')
+                     .append($("<option></option>")
+                     .attr("value", value)
+                     .text(value));
+            }
+        });
+        if(enddate==""){
+            enddate = mondays[0] + 6 + "-" + (m + 1) + "-" + y;  
+        }
+        $('.EndDate').val(enddate);
+    }
 </script>
 <h3>
     Tổng hợp lịch công tác</h3>
 <div class="row-fluid">
     <div class="row-fluid">
         <div class="span12">
-            @Html.ActionLink("Tổng hợp", "NewOrEdit", null, new { @class = "btn btn-info TongHop hide" })
+            @Html.ActionLink("Tổng hợp", "NewOrEdit", null, new { @class = "btn btn-info TongHop" })
             @if (Model.Count > 0)
             {
                 <a href="/TongHopLichCongTac/Test?StartDate=@Request.QueryString["fromDate"]" target="_blank" class="btn btn-info">
@@ -94,13 +180,37 @@
             }
         </div>
     </div>
+    <br />
     <div class="row-fluid">
-        <div class="span4">
+        <div class="span2">
             <label>
-                Ngày bắt đầu</label>
-            <input type="text" name="name" value="@Request.QueryString["fromDate"]" class="StartDate" />
+                Tuần từ ngày</label>
+            @*<input type="text" name="name" value="@Request.QueryString["fromDate"]" class="StartDate" />            *@
+            <select class="selectday">
+            </select>
         </div>
-        <div class="span4">
+        <div class="span2">
+            <label>
+                Tháng</label>
+            <select class="selectmonth">
+                @for (int i = 0; i < 12; i++)
+                {
+                    string selected = (DateTime.Now.Month == i + 1) ? "selected='selected'" : "";
+                    <option value="@i" @selected >@(i + 1)</option>
+                }
+            </select>
+        </div>
+        <div class="span2">
+            <label>
+                Năm</label>
+            <select class="selectyear">
+                @for (int i = 2014; i < DateTime.Now.Year + 2; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+        </div>
+        <div class="span3">
             <label>
                 Ngày cuối tuần</label>
             <input type="text" name="name" value="@Request.QueryString["EndDate"]" class="EndDate" readonly="readonly" />
@@ -110,11 +220,10 @@
         <div class="span12" style="text-align: center;">
             @if (listTongHop != null && listTongHop.Count > 0)
             {
-                <h3 class="TieuDe">@(Html.Raw(listTongHop[0].TieuDe.Title.Replace("\n", "<br />")))
-                    <br />
-                    <a href="#Modal-EditDetail" role="button" class="btn btn-info hide TieuDeEdit" value="@listTongHop[0].TieuDeID" data-toggle="modal">
-                        Sửa tiêu đề</a>
+                <h3 class="TieuDe">@(Html.Raw(listTongHop[0].TieuDe.Title.Replace("\n", "<br />")))                    
                 </h3>
+                    <a href="#Modal-EditDetail" role="button" class="TieuDeEdit" value="@listTongHop[0].TieuDeID" data-toggle="modal">
+                        Sửa tiêu đề</a>
             }
         </div>
     </div>

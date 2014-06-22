@@ -286,3 +286,29 @@ function convertDateTimeVItoEN(date) {
     var arr = date.split('/');
     return arr[1] + "/" + arr[0] + "/" + arr[2] + " ";
 }
+
+function getMondaysByMonthYear(m,y) {
+    var d = new Date(y, m, 1, 0, 0, 0, 0);
+        month = m,
+        mondays = [];
+
+    d.setDate(1);
+
+    // Get the first Monday in the month
+    while (d.getDay() !== 1) {
+        d.setDate(d.getDate() + 1);
+    }
+
+    // Get all the other Mondays in the month
+    while (d.getMonth() === month) {
+        mondays.push(new Date(d.getTime()).getDate());
+        d.setDate(d.getDate() + 7);
+    }
+    return mondays;
+}
+
+Date.prototype.addDays = function (days) {
+    var dat = new Date(this.valueOf());
+    dat.setDate(dat.getDate() + days);
+    return dat;
+}
