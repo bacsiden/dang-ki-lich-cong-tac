@@ -55,7 +55,7 @@
             var m = eval($(this).val());
             var y = eval($(".selectyear").val());
             var mondays = getMondaysByMonthYear(m, y);
-            $('.selectday').html('')
+            $('.selectday').html('');
             $.each(mondays, function (key, value) {
                 $('.selectday')
                      .append($("<option></option>")
@@ -69,7 +69,7 @@
             var m = eval($(".selectmonth").val());
             var y = eval($(".selectyear").val());
             var mondays = getMondaysByMonthYear(m, y);
-            $('.selectday').html('')
+            $('.selectday').html('');
             $.each(mondays, function (key, value) {
                 $('.selectday')
                      .append($("<option></option>")
@@ -80,7 +80,6 @@
             $('.EndDate').val(enddate);
         });
         $(".TongHop").click(function () {
-
             var start = $(".selectday").val() + "/" + (eval($(".selectmonth").val())+1) + "/" + $(".selectyear").val();
             var end = $(".EndDate").val();
             var url = $(this).attr('href');
