@@ -21,16 +21,14 @@ using System.Xml.Serialization;
 
 [assembly: EdmRelationshipAttribute("VPSS1Model", "FK_DonVi_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Alabama.User), "DonVi", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.DonVi), true)]
 [assembly: EdmRelationshipAttribute("VPSS1Model", "FK_User_DonVi", "DonVi", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Alabama.DonVi), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.User), true)]
-[assembly: EdmRelationshipAttribute("VPSS1Model", "FK_JobRegister_Location", "Location", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Alabama.Location), "JobRegister", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.JobRegister), true)]
-[assembly: EdmRelationshipAttribute("VPSS1Model", "FK_JobRegister_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Alabama.User), "JobRegister", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.JobRegister), true)]
-[assembly: EdmRelationshipAttribute("VPSS1Model", "FK_TongHopDetail_Location", "Location", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Alabama.Location), "TongHopDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.TongHopDetail), true)]
 [assembly: EdmRelationshipAttribute("VPSS1Model", "FK_TongHop_NguoiTruc", "NguoiTruc", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Alabama.NguoiTruc), "TongHop", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.TongHop), true)]
 [assembly: EdmRelationshipAttribute("VPSS1Model", "FK_TongHop_TieuDe", "TieuDe", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Alabama.TieuDe), "TongHop", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.TongHop), true)]
-[assembly: EdmRelationshipAttribute("VPSS1Model", "FK_TongHopDetail_TongHop", "TongHop", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Alabama.TongHop), "TongHopDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.TongHopDetail), true)]
 [assembly: EdmRelationshipAttribute("VPSS1Model", "FunctionInRole", "Function", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Function), "Role1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Role1))]
 [assembly: EdmRelationshipAttribute("VPSS1Model", "GroupInMenu", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Group), "Menu", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Menu))]
 [assembly: EdmRelationshipAttribute("VPSS1Model", "RoleInGroup", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Group), "Role1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Role1))]
 [assembly: EdmRelationshipAttribute("VPSS1Model", "UserInGroup", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.Group), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.User))]
+[assembly: EdmRelationshipAttribute("VPSS1Model", "FK_JobRegister_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Alabama.User), "JobRegister", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.JobRegister), true)]
+[assembly: EdmRelationshipAttribute("VPSS1Model", "FK_TongHopDetail_TongHop", "TongHop", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Alabama.TongHop), "TongHopDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Alabama.TongHopDetail), true)]
 
 #endregion
 
@@ -149,38 +147,6 @@ namespace Alabama
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<JobRegister> JobRegister
-        {
-            get
-            {
-                if ((_JobRegister == null))
-                {
-                    _JobRegister = base.CreateObjectSet<JobRegister>("JobRegister");
-                }
-                return _JobRegister;
-            }
-        }
-        private ObjectSet<JobRegister> _JobRegister;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Location> Location
-        {
-            get
-            {
-                if ((_Location == null))
-                {
-                    _Location = base.CreateObjectSet<Location>("Location");
-                }
-                return _Location;
-            }
-        }
-        private ObjectSet<Location> _Location;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Menu> Menu
         {
             get
@@ -261,22 +227,6 @@ namespace Alabama
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<TongHopDetail> TongHopDetail
-        {
-            get
-            {
-                if ((_TongHopDetail == null))
-                {
-                    _TongHopDetail = base.CreateObjectSet<TongHopDetail>("TongHopDetail");
-                }
-                return _TongHopDetail;
-            }
-        }
-        private ObjectSet<TongHopDetail> _TongHopDetail;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<User> User
         {
             get
@@ -289,6 +239,54 @@ namespace Alabama
             }
         }
         private ObjectSet<User> _User;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<JobRegister> JobRegister
+        {
+            get
+            {
+                if ((_JobRegister == null))
+                {
+                    _JobRegister = base.CreateObjectSet<JobRegister>("JobRegister");
+                }
+                return _JobRegister;
+            }
+        }
+        private ObjectSet<JobRegister> _JobRegister;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Location> Location
+        {
+            get
+            {
+                if ((_Location == null))
+                {
+                    _Location = base.CreateObjectSet<Location>("Location");
+                }
+                return _Location;
+            }
+        }
+        private ObjectSet<Location> _Location;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<TongHopDetail> TongHopDetail
+        {
+            get
+            {
+                if ((_TongHopDetail == null))
+                {
+                    _TongHopDetail = base.CreateObjectSet<TongHopDetail>("TongHopDetail");
+                }
+                return _TongHopDetail;
+            }
+        }
+        private ObjectSet<TongHopDetail> _TongHopDetail;
 
         #endregion
 
@@ -324,22 +322,6 @@ namespace Alabama
         public void AddToGroup(Group group)
         {
             base.AddObject("Group", group);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the JobRegister EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToJobRegister(JobRegister jobRegister)
-        {
-            base.AddObject("JobRegister", jobRegister);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Location EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToLocation(Location location)
-        {
-            base.AddObject("Location", location);
         }
     
         /// <summary>
@@ -383,19 +365,35 @@ namespace Alabama
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the TongHopDetail EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToTongHopDetail(TongHopDetail tongHopDetail)
-        {
-            base.AddObject("TongHopDetail", tongHopDetail);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the User EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToUser(User user)
         {
             base.AddObject("User", user);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the JobRegister EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToJobRegister(JobRegister jobRegister)
+        {
+            base.AddObject("JobRegister", jobRegister);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Location EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLocation(Location location)
+        {
+            base.AddObject("Location", location);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the TongHopDetail EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToTongHopDetail(TongHopDetail tongHopDetail)
+        {
+            base.AddObject("TongHopDetail", tongHopDetail);
         }
 
         #endregion
@@ -1181,24 +1179,24 @@ namespace Alabama
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> LocationID
+        public global::System.String Location
         {
             get
             {
-                return _LocationID;
+                return _Location;
             }
             set
             {
-                OnLocationIDChanging(value);
-                ReportPropertyChanging("LocationID");
-                _LocationID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LocationID");
-                OnLocationIDChanged();
+                OnLocationChanging(value);
+                ReportPropertyChanging("Location");
+                _Location = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Location");
+                OnLocationChanged();
             }
         }
-        private Nullable<global::System.Int32> _LocationID;
-        partial void OnLocationIDChanging(Nullable<global::System.Int32> value);
-        partial void OnLocationIDChanged();
+        private global::System.String _Location;
+        partial void OnLocationChanging(global::System.String value);
+        partial void OnLocationChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1324,44 +1322,6 @@ namespace Alabama
 
     
         #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_JobRegister_Location", "Location")]
-        public Location Location
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Location>("VPSS1Model.FK_JobRegister_Location", "Location").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Location>("VPSS1Model.FK_JobRegister_Location", "Location").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Location> LocationReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Location>("VPSS1Model.FK_JobRegister_Location", "Location");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Location>("VPSS1Model.FK_JobRegister_Location", "Location", value);
-                }
-            }
-        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1510,54 +1470,6 @@ namespace Alabama
         #endregion
 
     
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_JobRegister_Location", "JobRegister")]
-        public EntityCollection<JobRegister> JobRegister
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<JobRegister>("VPSS1Model.FK_JobRegister_Location", "JobRegister");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<JobRegister>("VPSS1Model.FK_JobRegister_Location", "JobRegister", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_TongHopDetail_Location", "TongHopDetail")]
-        public EntityCollection<TongHopDetail> TongHopDetail
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TongHopDetail>("VPSS1Model.FK_TongHopDetail_Location", "TongHopDetail");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TongHopDetail>("VPSS1Model.FK_TongHopDetail_Location", "TongHopDetail", value);
-                }
-            }
-        }
-
-        #endregion
-
     }
     
     /// <summary>
@@ -2674,24 +2586,24 @@ namespace Alabama
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> LocationID
+        public global::System.String Location
         {
             get
             {
-                return _LocationID;
+                return _Location;
             }
             set
             {
-                OnLocationIDChanging(value);
-                ReportPropertyChanging("LocationID");
-                _LocationID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LocationID");
-                OnLocationIDChanged();
+                OnLocationChanging(value);
+                ReportPropertyChanging("Location");
+                _Location = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Location");
+                OnLocationChanged();
             }
         }
-        private Nullable<global::System.Int32> _LocationID;
-        partial void OnLocationIDChanging(Nullable<global::System.Int32> value);
-        partial void OnLocationIDChanged();
+        private global::System.String _Location;
+        partial void OnLocationChanging(global::System.String value);
+        partial void OnLocationChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2721,44 +2633,6 @@ namespace Alabama
 
     
         #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_TongHopDetail_Location", "Location")]
-        public Location Location
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Location>("VPSS1Model.FK_TongHopDetail_Location", "Location").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Location>("VPSS1Model.FK_TongHopDetail_Location", "Location").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Location> LocationReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Location>("VPSS1Model.FK_TongHopDetail_Location", "Location");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Location>("VPSS1Model.FK_TongHopDetail_Location", "Location", value);
-                }
-            }
-        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3221,28 +3095,6 @@ namespace Alabama
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_JobRegister_User", "JobRegister")]
-        public EntityCollection<JobRegister> JobRegister
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<JobRegister>("VPSS1Model.FK_JobRegister_User", "JobRegister");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<JobRegister>("VPSS1Model.FK_JobRegister_User", "JobRegister", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "UserInGroup", "Group")]
         public EntityCollection<Group> Group
         {
@@ -3255,6 +3107,28 @@ namespace Alabama
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Group>("VPSS1Model.UserInGroup", "Group", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("VPSS1Model", "FK_JobRegister_User", "JobRegister")]
+        public EntityCollection<JobRegister> JobRegister
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<JobRegister>("VPSS1Model.FK_JobRegister_User", "JobRegister");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<JobRegister>("VPSS1Model.FK_JobRegister_User", "JobRegister", value);
                 }
             }
         }

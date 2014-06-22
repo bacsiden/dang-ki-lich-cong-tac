@@ -47,10 +47,11 @@
                         <label class="control-label" for="LocationName">
                             Địa điểm</label>
                         <div class="controls">
-                            <select data-placeholder="Chọn địa điểm" name="LocationID" class="chosen-with-diselect">
+                            @*<select data-placeholder="Chọn địa điểm" name="LocationID" class="chosen-with-diselect">
                                 @Html.Raw(ViewBag.dataLocation)
-                            </select>
-                            @Html.ValidationMessageFor(model => model.LocationID)
+                            </select>*@
+                            @Html.TextBoxFor(model => model.Location)
+                            @Html.ValidationMessageFor(model => model.Location)
                         </div>
                     </div>  
                     <div class="control-group">

@@ -52,7 +52,7 @@
             Địa điểm
         </div>
         <div class="editor-field">
-            <select  name="LocationID">
+            @*<select  name="LocationID">
                 <option value="0">--</option>
                 @foreach (var itemdd in lstDiaDiem)
                 {
@@ -63,8 +63,9 @@
                     }
                     <option value="@itemdd.ID" @selected>@itemdd.Title</option>
                 }
-            </select>
-            @Html.ValidationMessageFor(model => model.LocationID)
+            </select>*@
+            @Html.TextBoxFor(model => model.Location)
+            @Html.ValidationMessageFor(model => model.Location)
         </div>
     </div>
     <div class="modal-footer">
