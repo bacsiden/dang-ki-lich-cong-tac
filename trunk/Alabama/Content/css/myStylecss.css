@@ -1,4 +1,8 @@
-﻿.label-add
+﻿.btn 
+{
+    word-break:break-word;
+}
+.label-add
 {
     line-height: 28px;
     font-weight: bold;
@@ -54,7 +58,7 @@ table.styleWidth
 {
     float:left;
     margin-right:5px;
-    width:105px;
+    width:106px;
     display:inline;    
 }
 .row-fluid .span33 select,.row-fluid .span33 input
