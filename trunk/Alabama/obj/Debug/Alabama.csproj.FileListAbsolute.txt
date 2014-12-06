@@ -68,3 +68,10 @@ D:\Project\Đăng ký lịch công tác\Alabama\bin\Alabama.pdb
 D:\Project\Đăng ký lịch công tác\Alabama\obj\Debug\Alabama.csprojResolveAssemblyReference.cache
 D:\Project\Đăng ký lịch công tác\Alabama\obj\Debug\Alabama.dll
 D:\Project\Đăng ký lịch công tác\Alabama\obj\Debug\Alabama.pdb
+D:\Recnaleerf\Xuan Vu\dang-ki-lich-cong-tac\Alabama\bin\Alabama.dll
+D:\Recnaleerf\Xuan Vu\dang-ki-lich-cong-tac\Alabama\bin\Alabama.pdb
+D:\Recnaleerf\Xuan Vu\dang-ki-lich-cong-tac\Alabama\obj\Debug\Alabama.csprojResolveAssemblyReference.cache
+D:\Recnaleerf\Xuan Vu\dang-ki-lich-cong-tac\Alabama\obj\Debug\RdlCompile.cache
+D:\Recnaleerf\Xuan Vu\dang-ki-lich-cong-tac\Alabama\obj\Debug\RdlCompile.compiled
+D:\Recnaleerf\Xuan Vu\dang-ki-lich-cong-tac\Alabama\obj\Debug\Alabama.dll
+D:\Recnaleerf\Xuan Vu\dang-ki-lich-cong-tac\Alabama\obj\Debug\Alabama.pdb
