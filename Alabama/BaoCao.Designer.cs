@@ -425,13 +425,6 @@ namespace Alabama {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public LichCongTacRow FindByThu(string Thu) {
-                return ((LichCongTacRow)(this.Rows.Find(new object[] {
-                            Thu})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
                 LichCongTacDataTable cln = ((LichCongTacDataTable)(base.Clone()));
                 cln.InitVars();
@@ -470,10 +463,6 @@ namespace Alabama {
                 base.Columns.Add(this.columnTrucLanhDao);
                 this.columnThu = new global::System.Data.DataColumn("Thu", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnThu);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnThu}, true));
-                this.columnThu.AllowDBNull = false;
-                this.columnThu.Unique = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -698,7 +687,12 @@ namespace Alabama {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Thu {
                 get {
-                    return ((string)(this[this.tableLichCongTac.ThuColumn]));
+                    try {
+                        return ((string)(this[this.tableLichCongTac.ThuColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Thu\' in table \'LichCongTac\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableLichCongTac.ThuColumn] = value;
@@ -763,6 +757,18 @@ namespace Alabama {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetTrucLanhDaoNull() {
                 this[this.tableLichCongTac.TrucLanhDaoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsThuNull() {
+                return this.IsNull(this.tableLichCongTac.ThuColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetThuNull() {
+                this[this.tableLichCongTac.ThuColumn] = global::System.Convert.DBNull;
             }
         }
         

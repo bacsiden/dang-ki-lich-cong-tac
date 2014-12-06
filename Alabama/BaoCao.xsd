@@ -20,15 +20,11 @@
               <xs:element name="NguoiThucHien" msprop:Generator_ColumnVarNameInTable="columnNguoiThucHien" msprop:Generator_ColumnPropNameInRow="NguoiThucHien" msprop:Generator_ColumnPropNameInTable="NguoiThucHienColumn" msprop:Generator_UserColumnName="NguoiThucHien" type="xs:string" minOccurs="0" />
               <xs:element name="DiaDiem" msprop:Generator_ColumnVarNameInTable="columnDiaDiem" msprop:Generator_ColumnPropNameInRow="DiaDiem" msprop:Generator_ColumnPropNameInTable="DiaDiemColumn" msprop:Generator_UserColumnName="DiaDiem" type="xs:string" minOccurs="0" />
               <xs:element name="TrucLanhDao" msprop:Generator_ColumnVarNameInTable="columnTrucLanhDao" msprop:Generator_ColumnPropNameInRow="TrucLanhDao" msprop:Generator_ColumnPropNameInTable="TrucLanhDaoColumn" msprop:Generator_UserColumnName="TrucLanhDao" type="xs:string" minOccurs="0" />
-              <xs:element name="Thu" msprop:Generator_ColumnVarNameInTable="columnThu" msprop:Generator_ColumnPropNameInRow="Thu" msprop:Generator_ColumnPropNameInTable="ThuColumn" msprop:Generator_UserColumnName="Thu" type="xs:string" />
+              <xs:element name="Thu" msprop:Generator_ColumnVarNameInTable="columnThu" msprop:Generator_ColumnPropNameInRow="Thu" msprop:Generator_ColumnPropNameInTable="ThuColumn" msprop:Generator_UserColumnName="Thu" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
       </xs:choice>
     </xs:complexType>
-    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:LichCongTac" />
-      <xs:field xpath="mstns:Thu" />
-    </xs:unique>
   </xs:element>
 </xs:schema>
