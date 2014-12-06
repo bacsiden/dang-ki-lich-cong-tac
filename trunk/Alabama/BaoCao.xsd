@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="BaoCao" targetNamespace="http://tempuri.org/BaoCao.xsd" xmlns:mstns="http://tempuri.org/BaoCao.xsd" xmlns="http://tempuri.org/BaoCao.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="BaoCao" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="BaoCao" msprop:Generator_UserDSName="BaoCao">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="LichCongTac" msprop:Generator_TableClassName="LichCongTacDataTable" msprop:Generator_TableVarName="tableLichCongTac" msprop:Generator_TablePropName="LichCongTac" msprop:Generator_RowDeletingName="LichCongTacRowDeleting" msprop:Generator_RowChangingName="LichCongTacRowChanging" msprop:Generator_RowEvHandlerName="LichCongTacRowChangeEventHandler" msprop:Generator_RowDeletedName="LichCongTacRowDeleted" msprop:Generator_UserTableName="LichCongTac" msprop:Generator_RowChangedName="LichCongTacRowChanged" msprop:Generator_RowEvArgName="LichCongTacRowChangeEvent" msprop:Generator_RowClassName="LichCongTacRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ThoiGian" msprop:Generator_ColumnVarNameInTable="columnThoiGian" msprop:Generator_ColumnPropNameInRow="ThoiGian" msprop:Generator_ColumnPropNameInTable="ThoiGianColumn" msprop:Generator_UserColumnName="ThoiGian" type="xs:string" minOccurs="0" />
+              <xs:element name="NoiDung" msprop:Generator_ColumnVarNameInTable="columnNoiDung" msprop:Generator_ColumnPropNameInRow="NoiDung" msprop:Generator_ColumnPropNameInTable="NoiDungColumn" msprop:Generator_UserColumnName="NoiDung" type="xs:string" minOccurs="0" />
+              <xs:element name="NguoiThucHien" msprop:Generator_ColumnVarNameInTable="columnNguoiThucHien" msprop:Generator_ColumnPropNameInRow="NguoiThucHien" msprop:Generator_ColumnPropNameInTable="NguoiThucHienColumn" msprop:Generator_UserColumnName="NguoiThucHien" type="xs:string" minOccurs="0" />
+              <xs:element name="DiaDiem" msprop:Generator_ColumnVarNameInTable="columnDiaDiem" msprop:Generator_ColumnPropNameInRow="DiaDiem" msprop:Generator_ColumnPropNameInTable="DiaDiemColumn" msprop:Generator_UserColumnName="DiaDiem" type="xs:string" minOccurs="0" />
+              <xs:element name="TrucLanhDao" msprop:Generator_ColumnVarNameInTable="columnTrucLanhDao" msprop:Generator_ColumnPropNameInRow="TrucLanhDao" msprop:Generator_ColumnPropNameInTable="TrucLanhDaoColumn" msprop:Generator_UserColumnName="TrucLanhDao" type="xs:string" minOccurs="0" />
+              <xs:element name="Thu" msprop:Generator_ColumnVarNameInTable="columnThu" msprop:Generator_ColumnPropNameInRow="Thu" msprop:Generator_ColumnPropNameInTable="ThuColumn" msprop:Generator_UserColumnName="Thu" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:LichCongTac" />
+      <xs:field xpath="mstns:Thu" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

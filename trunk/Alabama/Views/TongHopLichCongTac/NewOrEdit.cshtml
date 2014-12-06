@@ -112,7 +112,8 @@
                 data: { "id": id, "idNguoiTruc": idNguoiTruc },
                 success: function (value) {
                     if (value == "True") {
-                        location.href = url;
+                        alert("Cập nhật thành công");
+                        //location.href = url;
                     }
                 }
             });
@@ -176,27 +177,31 @@
 <div class="row-fluid">
     <div class="row-fluid">
         <div class="span12">
-            @Html.ActionLink("Tổng hợp", "NewOrEdit", null, new { @class = "btn btn-info TongHop" })
+            @if (!(ViewBag.IsEdit != null && (bool)ViewBag.IsEdit)) 
+            {
+                @Html.ActionLink("Tổng hợp", "NewOrEdit", null, new { @class = "btn btn-info TongHop" })
+            }
+            
             @if (Model.Count > 0)
             {
-                <a href="/TongHopLichCongTac/Test?StartDate=@Request.QueryString["fromDate"]" target="_blank" class="btn btn-info">
+                <a href="/TongHopLichCongTac/DisplayReport?codedate=@ViewBag.CodeDate" target="_blank" class="btn btn-info">
                     Xuất file</a>
             }
         </div>
     </div>
     <br />
     <div class="row-fluid">
-        <div class="span2">
+        <div class="span33">
             <label>
                 Tuần từ ngày</label>
             @*<input type="text" name="name" value="@Request.QueryString["fromDate"]" class="StartDate" />            *@
-            <select class="selectday span10">
+            <select class="selectday">
             </select>
         </div>
-        <div class="span2">
+        <div class="span33">
             <label>
                 Tháng</label>
-            <select class="selectmonth span10">
+            <select class="selectmonth">
                 @for (int i = 0; i < 12; i++)
                 {
                     string selected = (DateTime.Now.Month == i + 1) ? "selected='selected'" : "";
@@ -204,17 +209,17 @@
                 }
             </select>
         </div>
-        <div class="span2">
+        <div class="span33">
             <label>
                 Năm</label>
-            <select class="selectyear span10">
+            <select class="selectyear">
                 @for (int i = 2014; i < DateTime.Now.Year + 2; i++)
                 {
                     <option value="@i">@i</option>
                 }
             </select>
         </div>
-        <div class="span3">
+        <div class="span33">
             <label>
                 Ngày cuối tuần</label>
             <input type="text" name="name" value="@Request.QueryString["EndDate"]" class="EndDate" readonly="readonly" />
