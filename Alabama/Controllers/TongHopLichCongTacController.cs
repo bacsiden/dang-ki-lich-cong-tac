@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Webdiyer.WebControls.Mvc;
 using System.Globalization;
+using Microsoft.Reporting.WebForms;
+using System.Data;
 
 namespace Alabama.Controllers
 {
@@ -18,7 +20,7 @@ namespace Alabama.Controllers
         [Authorize]
         public ActionResult Index(int? page)
         {
-            ViewBag.STT = page.HasValue?page.Value*pageSize - pageSize:1;
+            ViewBag.STT = page.HasValue ? page.Value * pageSize - pageSize : 1;
             var list = DB.Entities.TieuDe.OrderByDescending(m => m.ID).ToPagedList(page.HasValue ? page.Value : 1, pageSize);
             return View(list);
         }
@@ -37,6 +39,7 @@ namespace Alabama.Controllers
             DateTime start = new DateTime(int.Parse(arrFrom[2]), int.Parse(arrFrom[1]), int.Parse(arrFrom[0]), 0, 0, 0);
             DateTime end = start.AddDays(7).AddSeconds(-1);
             string codedate = "" + start.Day + start.Month + start.Year;
+            ViewBag.CodeDate = codedate;
             var db = DB.Entities;
             if (db.TongHop.FirstOrDefault(m => m.Code == codedate) == null)
             {
@@ -101,6 +104,7 @@ namespace Alabama.Controllers
                 }
                 ViewBag.ListTongHop = db.TongHop.Where(m => m.Code == codedate).ToList();
                 var listDetail = db.TongHopDetail.Where(m => m.Code == codedate).ToList();
+                ViewBag.IsEdit = true;
                 return View(listDetail);
             }
         }
@@ -142,6 +146,48 @@ namespace Alabama.Controllers
             return Redirect(url);
         }
 
+        [Authorize]
+        public FileContentResult DisplayReport(string codedate)
+        {
+            if (string.IsNullOrEmpty(codedate))
+            {
+                return null;
+            }
+            var obj = DB.Entities.TongHop.FirstOrDefault(m => m.Code == codedate);
+            var list = DB.Entities.TongHopDetail.Where(m => m.Code == codedate).ToList().Select(m => new LichCongTac()
+            {
+                Thu = m.TongHop.DayOfWeek + "",
+                DiaDiem = m.Location,
+                NoiDung = m.NoiDung,
+                ThoiGian = m.Time.ToString(),
+                TrucLanhDao = m.TongHop.NguoiTruc.Title,
+                NguoiThucHien = m.NguoiThucHien
+            }).ToList();
+            DataTable dt = new BaoCao().LichCongTac;
+            foreach (var item in list)
+            {
+                DataRow dr = dt.NewRow();
+                dr["Thu"] = item.Thu;
+                dr["ThoiGian"] = item.ThoiGian;
+                dr["DiaDiem"] = item.DiaDiem;
+                dr["NoiDung"] = item.NoiDung;
+                dr["NguoiThucHien"] = item.NguoiThucHien;
+                dr["TrucLanhDao"] = item.TrucLanhDao;
+                dt.Rows.Add(dr);
+            }
+
+            LocalReport localReport = new LocalReport();
+            localReport.ReportPath = Server.MapPath("~/Views/TongHopLichCongTac/BaoCao.rdlc");
+            ReportParameter param0 = new ReportParameter("Title", obj.TieuDe.Title);
+            ReportDataSource reportDataSource = new ReportDataSource();
+            localReport.SetParameters(param0);
+            reportDataSource.Name = "DataSet1";
+            reportDataSource.Value = dt;
+            localReport.DataSources.Add(reportDataSource);
+            Byte[] mybytes = localReport.Render("pdf");
+            return File(mybytes, "pdf");
+        }
+
         public bool ChangeNguoiTruc(int id, int idNguoiTruc)
         {
             var db = DB.Entities;
@@ -161,6 +207,16 @@ namespace Alabama.Controllers
                 return true;
             }
             return false;
+        }
+
+        public class LichCongTac
+        {
+            public string Thu { get; set; }
+            public string ThoiGian { get; set; }
+            public string NoiDung { get; set; }
+            public string NguoiThucHien { get; set; }
+            public string DiaDiem { get; set; }
+            public string TrucLanhDao { get; set; }
         }
 
     }
