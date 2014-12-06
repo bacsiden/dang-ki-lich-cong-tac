@@ -194,6 +194,7 @@
     <Content Include="Content\img\logo-login.jpg" />
     <Content Include="Content\img\logo.jpg" />
     <Content Include="Content\img\null.jpeg" />
+    <Content Include="Content\js\facebook.js" />
     <Content Include="Content\js\flaty.js" />
     <Content Include="Content\js\myJquery.js" />
     <Content Include="Global.asax" />
