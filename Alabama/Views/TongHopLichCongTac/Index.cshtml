@@ -16,7 +16,7 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th style="width:3%;">
+                        <th style="width: 3%;">
                             STT
                         </th>
                         <th>
@@ -26,17 +26,21 @@
                 </thead>
                 <tbody>
                     @{ var stt = (int)ViewBag.STT;
-                        foreach (var item in Model)
-                        {
+                       foreach (var item in Model)
+                       {
+                           if (item.TongHop != null)
+                           {
                         <tr>
                             <td>
                                 @(stt++)
                             </td>
                             <td>
-                                <a href="@Url.Action("NewOrEdit", new { fromDate = item.TongHop.FirstOrDefault().FromDate.ToString("dd/MM/yyyy"), endDate = "" })"><span style="text-align:center">@Html.Raw(item.Title.Replace("\n", "<br />"))</span></a>
+                                <a href="@Url.Action("NewOrEdit", new { fromDate = item.TongHop.FirstOrDefault().FromDate.ToString("dd/MM/yyyy"), endDate = "" })">
+                                    <span style="text-align: center">@Html.Raw(item.Title.Replace("\n", "<br />"))</span></a>
                             </td>
                         </tr>
-                        }}
+                           }
+                       }}
                 </tbody>
             </table>
             <div class="row-fluid">

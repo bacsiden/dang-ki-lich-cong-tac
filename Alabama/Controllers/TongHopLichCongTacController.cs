@@ -146,6 +146,7 @@ namespace Alabama.Controllers
             return Redirect(url);
         }
 
+
         [Authorize]
         public FileContentResult DisplayReport(string codedate)
         {
@@ -153,32 +154,41 @@ namespace Alabama.Controllers
             {
                 return null;
             }
-            var obj = DB.Entities.TongHop.FirstOrDefault(m => m.Code == codedate);
-            var list = DB.Entities.TongHopDetail.Where(m => m.Code == codedate).ToList().Select(m => new LichCongTac()
-            {
-                Thu = m.TongHop.DayOfWeek + "",
-                DiaDiem = m.Location,
-                NoiDung = m.NoiDung,
-                ThoiGian = m.Time.ToString(),
-                TrucLanhDao = m.TongHop.NguoiTruc.Title,
-                NguoiThucHien = m.NguoiThucHien
-            }).ToList();
+            var listTongHop = DB.Entities.TongHop.Where(m => m.Code == codedate).ToList();            
             DataTable dt = new BaoCao().LichCongTac;
-            foreach (var item in list)
+            foreach (var item in listTongHop)
             {
-                DataRow dr = dt.NewRow();
-                dr["Thu"] = item.Thu;
-                dr["ThoiGian"] = item.ThoiGian;
-                dr["DiaDiem"] = item.DiaDiem;
-                dr["NoiDung"] = item.NoiDung;
-                dr["NguoiThucHien"] = item.NguoiThucHien;
-                dr["TrucLanhDao"] = item.TrucLanhDao;
-                dt.Rows.Add(dr);
+                if (item.TongHopDetail.Count > 0)
+                {
+                    foreach (var detail in item.TongHopDetail)
+                    {
+                        DataRow dr = dt.NewRow();
+                        dr["Thu"] = GetThuByDayOfWeek(item.DayOfWeek,item.FromDate);
+                        dr["ThoiGian"] = detail.Time.ToString("hh'h'mm");
+                        dr["DiaDiem"] = detail.Location;
+                        dr["NoiDung"] = "- "+detail.NoiDung;
+                        dr["NguoiThucHien"] = "- " + detail.NguoiThucHien;
+                        dr["TrucLanhDao"] = item.NguoiTrucID.HasValue ? item.NguoiTruc.Title : "";
+                        dt.Rows.Add(dr);
+                    }
+                }
+                else
+                {
+                    DataRow dr = dt.NewRow();
+                    dr["Thu"] = GetThuByDayOfWeek(item.DayOfWeek, item.FromDate);
+                    dr["ThoiGian"] = "";
+                    dr["DiaDiem"] = "";
+                    dr["NoiDung"] = "";
+                    dr["NguoiThucHien"] = "";
+                    dr["TrucLanhDao"] = "";
+                    dt.Rows.Add(dr);
+                }
             }
 
             LocalReport localReport = new LocalReport();
             localReport.ReportPath = Server.MapPath("~/Views/TongHopLichCongTac/BaoCao.rdlc");
-            ReportParameter param0 = new ReportParameter("Title", obj.TieuDe.Title);
+            string title = listTongHop.Count>0?(listTongHop.First().TieuDe.Title):"";
+            ReportParameter param0 = new ReportParameter("Title", title);
             ReportDataSource reportDataSource = new ReportDataSource();
             localReport.SetParameters(param0);
             reportDataSource.Name = "DataSet1";
@@ -186,6 +196,36 @@ namespace Alabama.Controllers
             localReport.DataSources.Add(reportDataSource);
             Byte[] mybytes = localReport.Render("pdf");
             return File(mybytes, "pdf");
+        }
+
+        public string GetThuByDayOfWeek(int dayofweek, DateTime fromdate)
+        {
+            string thu = "";
+            switch (dayofweek)
+            {
+                case 0:
+                    thu = "Thứ 2\n"+fromdate.ToString("dd/MM");
+                    break;
+                case 1:
+                    thu = "Thứ 3\n" + fromdate.AddDays(1).ToString("dd/MM");
+                    break;
+                case 2:
+                    thu = "Thứ 4\n" + fromdate.AddDays(2).ToString("dd/MM");
+                    break;
+                case 3:
+                    thu = "Thứ 5\n" + fromdate.AddDays(3).ToString("dd/MM");
+                    break;
+                case 4:
+                    thu = "Thứ 6\n" + fromdate.AddDays(4).ToString("dd/MM");
+                    break;
+                case 5:
+                    thu = "Thứ 7\n" + fromdate.AddDays(5).ToString("dd/MM");
+                    break;
+                case 6:
+                    thu = "CN\n" + fromdate.AddDays(6).ToString("dd/MM");
+                    break;
+            }
+            return thu;
         }
 
         public bool ChangeNguoiTruc(int id, int idNguoiTruc)

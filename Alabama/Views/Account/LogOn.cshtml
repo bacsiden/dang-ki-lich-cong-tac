@@ -74,8 +74,6 @@
             <div class="control-group">
                 <div class="controls">
                     <label class="checkbox">
-                        @*<input type="checkbox" value="remember" />
-                        Remember me*@
                         @Html.CheckBoxFor(m => m.RememberMe)
                         Ghi nhớ lần sau
                     </label>
@@ -92,84 +90,9 @@
             <hr />
 
             <p class="clearfix">
-                @*<a href="#" class="goto-forgot pull-left">Forgot Password?</a>*@
                 @Html.ActionLink("Đăng ký", "Register", null, new { @class = "goto-register pull-right" })
             </p>
         }
-        <!-- END Login Form -->
-        <!-- BEGIN Forgot Password Form -->
-        @*<form id="form-forgot" action="http://themes.shamsoft.ir/flaty/index.html" method="get"
-        class="hide">
-        <h3>
-            Get back your password</h3>
-        <hr />
-        <div class="control-group">
-            <div class="controls">
-                <input type="text" placeholder="Email" class="input-block-level" />
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <button type="submit" class="btn btn-primary input-block-level">
-                    Recover</button>
-            </div>
-        </div>
-        <hr />
-        <p class="clearfix">
-            <a href="#" class="goto-login pull-left">← Back to login form</a>
-        </p>
-        </form>*@
-        <!-- END Forgot Password Form -->
-        <!-- BEGIN Register Form -->
-        @*<form id="form-register" action="http://themes.shamsoft.ir/flaty/index.html" method="get"
-        class="hide">
-        <h3>
-            Sign up</h3>
-        <hr />
-        <div class="control-group">
-            <div class="controls">
-                <input type="text" placeholder="Email" class="input-block-level" />
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <input type="text" placeholder="Username" class="input-block-level" />
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <input type="password" placeholder="Password" class="input-block-level" />
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <input type="password" placeholder="Repeat Password" class="input-block-level" />
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <label class="checkbox">
-                    <input type="checkbox" value="remember" />
-                    I accept the <a href="#">user aggrement</a>
-                </label>
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <button type="submit" class="btn btn-primary input-block-level">
-                    Sign up</button>
-            </div>
-        </div>
-        <hr />
-        <p class="clearfix">
-            <a href="#" class="goto-login pull-left">← Back to login form</a>
-        </p>
-        </form>*@
-        <!-- END Register Form -->
-    </div>
-    <!-- END Main Content -->
-    <!--basic scripts-->
-    <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>-->
     <script>        window.jQuery || document.write('<script src="/Content/assets/jquery/jquery-1.10.1.min.js"><\/script>')</script>
     <script src="/Content/assets/bootstrap/bootstrap.min.js"></script>
     <script type="text/javascript">
