@@ -10,7 +10,7 @@ using System.Data;
 
 namespace Alabama.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class TongHopLichCongTacController : BaseController
     {
         int pageSize = 20;
@@ -203,7 +203,7 @@ namespace Alabama.Controllers
             return Redirect(url);
         }
 
-        [Authorize]
+        //[Authorize]
         public FileContentResult DisplayReport(string codedate)
         {
             if (string.IsNullOrEmpty(codedate))
@@ -228,17 +228,17 @@ namespace Alabama.Controllers
                         dt.Rows.Add(dr);
                     }
                 }
-                else
-                {
-                    DataRow dr = dt.NewRow();
-                    dr["Thu"] = GetThuByDayOfWeek(item.DayOfWeek, item.FromDate);
-                    dr["ThoiGian"] = "";
-                    dr["DiaDiem"] = "";
-                    dr["NoiDung"] = "";
-                    dr["NguoiThucHien"] = "";
-                    dr["TrucLanhDao"] = "";
-                    dt.Rows.Add(dr);
-                }
+                //else
+                //{
+                //    DataRow dr = dt.NewRow();
+                //    dr["Thu"] = GetThuByDayOfWeek(item.DayOfWeek, item.FromDate);
+                //    dr["ThoiGian"] = "";
+                //    dr["DiaDiem"] = "";
+                //    dr["NoiDung"] = "";
+                //    dr["NguoiThucHien"] = "";
+                //    dr["TrucLanhDao"] = "";
+                //    dt.Rows.Add(dr);
+                //}
             }
 
             LocalReport localReport = new LocalReport();
