@@ -13,7 +13,7 @@ namespace Alabama.Controllers
         // GET: /Role/
 
         [Authorize]
-        [ValidationFunction("/Home/index", ActionName.VIEWLISTROLE)]
+        [ValidationFunction("/JobRegister/index", ActionName.VIEWLISTROLE)]
         public ActionResult Index()
         {
             return View(DB.Entities.Role1);

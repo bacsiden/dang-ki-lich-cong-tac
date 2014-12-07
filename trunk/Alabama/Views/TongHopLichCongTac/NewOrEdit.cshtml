@@ -21,6 +21,7 @@
         bottom:0;
         left:50%;
         margin-left:-40px;
+        word-break: break-all;
     }
 </style>
 <script type="text/javascript">
@@ -52,9 +53,10 @@
             var y = eval($(".selectyear").val());
             var d = eval($(this).val());
             var fromdate = new Date(y, m, d, 0, 0, 0, 0);
-            var enddate = fromdate.addDays(6);
-            
-            $('.EndDate').val(enddate.toLocaleFormat('%d-%m-%Y'));
+            var enddate = fromdate.addDays(6).toLocaleDateString();
+            var list = enddate.split("/");
+            $('.EndDate').val(list[1]+"/"+list[0]+"/"+list[2]);
+            resetURL();                 
         });
         $(".selectmonth").change(function () {
             var m = eval($(this).val());
@@ -69,6 +71,7 @@
             });
             var enddate = mondays[0] + 6 + "-" + (m + 1) + "-" + y;
             $('.EndDate').val(enddate);
+            resetURL();
         });
         $(".selectyear").change(function () {
             var m = eval($(".selectmonth").val());
@@ -83,6 +86,7 @@
             });
             var enddate = mondays[0] + 6 + "-" + (m + 1) + "-" + y;
             $('.EndDate').val(enddate);
+            resetURL();
         });
         $(".TongHop").click(function () {
             var start = $(".selectday").val() + "/" + (eval($(".selectmonth").val())+1) + "/" + $(".selectyear").val();
@@ -138,6 +142,15 @@
         });
 
     });
+    function resetURL() {
+        var d1 = $(".selectday").val();
+        var m1 = eval($(".selectmonth").val())+1;
+        var y1 = $(".selectyear").val();
+        var end1 = $(".EndDate").val();
+        var url1 = "@Url.Action("NewOrEdit", "TongHopLichCongTac")";
+        var newUrl = addParam(addParam(url1, "endDate",end1), "fromDate", d1+"/"+m1+"/"+y1);
+        location.href = newUrl;
+}
     function loadSelectDay() {
         var m = eval($('.selectmonth').val());
         var y = eval($(".selectyear").val());
@@ -177,16 +190,26 @@
 <div class="row-fluid">
     <div class="row-fluid">
         <div class="span12">
-            @if (!(ViewBag.IsEdit != null && (bool)ViewBag.IsEdit)) 
+            @if (!(ViewBag.IsEdit != null && (bool)ViewBag.IsEdit))
             {
-                @Html.ActionLink("Tổng hợp", "NewOrEdit", null, new { @class = "btn btn-info TongHop" })
+                if (ViewBag.TongHopLichCongTac != null && (bool)ViewBag.TongHopLichCongTac)
+                {
+                @Html.ActionLink("Tổng hợp", "TongHop", null, new { @class = "btn btn-info TongHop" })
+                }
             }
-            
+            else
+            {
+                if (ViewBag.TongHopLaiLichCongTac != null && (bool)ViewBag.TongHopLaiLichCongTac)
+                {
+                @Html.ActionLink("Tổng hợp lại", "TongHopLai", null, new { @class = "btn btn-info TongHop" })   
+                }
+            }
             @if (Model.Count > 0)
             {
                 <a href="/TongHopLichCongTac/DisplayReport?codedate=@ViewBag.CodeDate" target="_blank" class="btn btn-info">
                     Xuất file</a>
             }
+            <a href="@Url.Action("Index")" class="btn"><i class="icon-mail-reply"></i> Quay lại</a>
         </div>
     </div>
     <br />
@@ -226,14 +249,17 @@
         </div>
     </div>
     <div class="row-fluid">
-        <div class="span12" style="text-align: center;position:relative;padding-bottom:5px;margin-bottom:5px;">
+        <div class="span12" style="text-align: center; position: relative; padding-bottom: 5px;
+            margin-bottom: 5px;">
             @if (listTongHop != null && listTongHop.Count > 0)
             {
-                <h3 class="TieuDe">@(Html.Raw(listTongHop[0].TieuDe.Title.Replace("\n", "<br />")))                    
+                <h3 class="TieuDe">@(Html.Raw(listTongHop[0].TieuDe.Title.Replace("\n", "<br />")))
                 </h3>
-                <a href="#Modal-EditDetail" role="button" class="TieuDeEdit" value="@listTongHop[0].TieuDeID" data-toggle="modal">
-                        Sửa tiêu đề</a>
-                    
+                               if (ViewBag.SuaXoaLichCongTac != null && (bool)ViewBag.SuaXoaLichCongTac)
+                               {
+                <a href="#Modal-EditDetail" role="button" class="TieuDeEdit" value="@listTongHop[0].TieuDeID"
+                data-toggle="modal">Sửa tiêu đề</a>
+                               }
             }
         </div>
     </div>
@@ -301,25 +327,32 @@
                 <td colspan="4">
                 </td>
                 <td style="border-left: none;">
-                    <select class="ChangeNguoiTruc span12" TongHopID="@item.ID">
-                        <option value="0">--</option>
-                        @foreach (var item12 in lstNguoiTruc)
-                        {
-                            var selected = "";
-                            if (item12.ID == item.NguoiTrucID)
+                    @if (ViewBag.SuaXoaLichCongTac != null && (bool)ViewBag.SuaXoaLichCongTac)
+                    {
+                        <select class="ChangeNguoiTruc span12" TongHopID="@item.ID">
+                            <option value="0">--</option>
+                            @foreach (var item12 in lstNguoiTruc)
                             {
-                                selected = "selected='selected'";
+                                var selected = "";
+                                if (item12.ID == item.NguoiTrucID)
+                                {
+                                    selected = "selected='selected'";
+                                }
+                                <option value="@item12.ID" @selected>@item12.Title</option>
                             }
-                            <option value="@item12.ID" @selected>@item12.Title</option>
-                        }
-                    </select>
+                        </select>
+                    }
+                    else
+                    {
+                        @(item.NguoiTruc != null ? item.NguoiTruc.Title : "")
+                    }
                 </td>
                 <td style="border-left: none;">
                 </td>
             </tr>
             
-                        foreach (var item1 in list)
-                        {
+                    foreach (var item1 in list)
+                    {
             <tr>
                 <td>
                     @item1.Time.Hours:@item1.Time.Minutes
@@ -337,13 +370,16 @@
                     @(item.NguoiTruc != null ? item.NguoiTruc.Title : "")
                 </td>
                 <td style="width: 3%">
-                    <a href="#Modal-EditDetail" role="button" class="EditDetail" value="@item1.ID" data-toggle="modal">
-                        Sửa</a><br />
-                    <a href="/TongHopLichCongTac/DeleteDetail/@item1.ID" class="confirmDelete error">Xóa</a>
+                    @if (ViewBag.SuaXoaLichCongTac != null && (bool)ViewBag.SuaXoaLichCongTac)
+                    {
+                        <a href="#Modal-EditDetail" role="button" class="EditDetail" value="@item1.ID" data-toggle="modal">
+                            Sửa</a><br />
+                        <a href="/TongHopLichCongTac/DeleteDetail/@item1.ID" class="confirmDelete error">Xóa</a>
+                    }
                 </td>
             </tr>
                                                                                       
-                        }
+                    }
 
             }
         }

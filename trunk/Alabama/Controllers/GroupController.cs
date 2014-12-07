@@ -10,7 +10,7 @@ namespace Alabama.Controllers
     public class GroupController : BaseController
     {
         [Authorize]
-        [ValidationFunction("/Home/index", ActionName.VIEWLISTGROUP)]
+        [ValidationFunction("/JobRegister/index", ActionName.VIEWLISTGROUP)]
         public ActionResult Index()
         {
             return View(DB.Entities.Group);

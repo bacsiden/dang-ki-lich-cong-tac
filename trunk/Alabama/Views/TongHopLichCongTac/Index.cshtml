@@ -38,6 +38,12 @@
                                 <a href="@Url.Action("NewOrEdit", new { fromDate = item.TongHop.FirstOrDefault().FromDate.ToString("dd/MM/yyyy"), endDate = "" })">
                                     <span style="text-align: center">@Html.Raw(item.Title.Replace("\n", "<br />"))</span></a>
                             </td>
+                            <td>
+                                @if (ViewBag.SuaXoaLichCongTac != null && (bool)ViewBag.SuaXoaLichCongTac)
+                                {
+                                    @Html.ActionLink("Xóa", "DeleteLichCongTacByTitleID", new { id = item.ID }, new { Class = "confirmDelete" })
+                                }
+                            </td>
                         </tr>
                            }
                        }}

@@ -27,6 +27,23 @@ namespace Alabama
         //    ViewBag.LayoutUrl = _currentLayoutURL;
         //    return base.View(viewName, masterName, model);
         //}
+
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            base.OnActionExecuted(filterContext);
+
+            ViewBag.IsLogin = CurrentUser != null;
+
+            if (CurrentUser != null)
+            {
+                #region Lich công tác
+                bool isAdmin = CurrentUser.UserName.Equals(UserDAL.ADMIN, StringComparison.OrdinalIgnoreCase);
+                ViewBag.SuaXoaLichCongTac = isAdmin || IsFunctionInRole(ActionName.TongHopLaiLichCongTac.ToString());
+                ViewBag.TongHopLaiLichCongTac = isAdmin || IsFunctionInRole(ActionName.TongHopLaiLichCongTac.ToString());
+                ViewBag.TongHopLichCongTac = isAdmin || IsFunctionInRole(ActionName.TongHopLichCongTac.ToString());
+                #endregion
+            }
+        }
         public enum ActionName
         {
             // Khai báo các quyền tương ứng với bảng Function
@@ -76,6 +93,23 @@ namespace Alabama
             DELETEROLE,
             #endregion
 
+            #region Quản lý danh mục Đơn vị, Người trực, Địa điểm
+            [System.ComponentModel.Description("Xem danh mục")]
+            ViewCategory,
+            [System.ComponentModel.Description("Thêm sửa danh mục")]
+            NewOrEditCategory,
+            [System.ComponentModel.Description("Xóa danh mục")]
+            DeleteCategory,
+            #endregion
+
+            #region Quản lý tổng hợp lịch công tác
+            [System.ComponentModel.Description("Tổng hợp lịch công tác")]
+            TongHopLichCongTac,
+            [System.ComponentModel.Description("Tổng hợp lại lịch công tác")]
+            TongHopLaiLichCongTac,
+            [System.ComponentModel.Description("Xóa lịch công tác")]
+            XoaLichCongTac,
+            #endregion
 
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -96,22 +130,32 @@ namespace Alabama
             /// <summary>
             /// Quyền được phép truy cập
             /// </summary>
-            public string AllowFunctionCodes { get; set; }
+            public List<string> AllowFunctionCodes { get; set; }
 
             public string UrlRedirect { get; set; }
 
 
             public ValidationFunctionAttribute(ActionName allowFunctionCode)
             {
-                AllowFunctionCodes = allowFunctionCode.ToString();
+                AllowFunctionCodes = new List<string> { allowFunctionCode.ToString() };
             }
 
 
             public ValidationFunctionAttribute(string urlRedirect, ActionName allowFunctionCode)
             {
                 UrlRedirect = urlRedirect;
-                AllowFunctionCodes = allowFunctionCode.ToString();
+                AllowFunctionCodes = new List<string> { allowFunctionCode.ToString() };
             }
+            public ValidationFunctionAttribute(string urlRedirect, params ActionName[] allowFunctionCode)
+            {
+                UrlRedirect = urlRedirect;
+                AllowFunctionCodes = new List<string>();
+                foreach (var item in allowFunctionCode)
+                {
+                    AllowFunctionCodes.Add(item.ToString());
+                }
+            }
+
             public override void OnActionExecuting(ActionExecutingContext filterContext)
             {
                 bool isValid = true;
@@ -119,23 +163,27 @@ namespace Alabama
                 if (user.Locked)
                 {
                     new AccountController().LogOff();
-                    filterContext.Result = new RedirectResult("/Home/Index");
+                    filterContext.Result = new RedirectResult("/JobRegister/Index");
                 }
                 else
                 {
-                    if (!user.UserName.Equals(UserDAL.ADMIN, StringComparison.OrdinalIgnoreCase) && !string.IsNullOrEmpty(AllowFunctionCodes))
+                    if (!user.UserName.Equals(UserDAL.ADMIN, StringComparison.OrdinalIgnoreCase))
                     {
-                        isValid = true;
-                        if (!IsFunctionInRole(AllowFunctionCodes))
+                        isValid = false;
+                        foreach (var item in AllowFunctionCodes)
                         {
-                            isValid = false;
+                            if (IsFunctionInRole(item))
+                            {
+                                isValid = true;
+                                break;
+                            }
                         }
                     }
                     if (!isValid)
                     {
                         if (String.IsNullOrEmpty(UrlRedirect))
                         {
-                            filterContext.Result = new RedirectResult("/Home/Index");
+                            filterContext.Result = new RedirectResult("/JobRegister/index");
                         }
                         else
                         {
@@ -168,6 +216,17 @@ namespace Alabama
                 }
                 return false;
             }
+        }
+        public bool IsFunctionInRole(string code)
+        {
+            if (ListFunctionCode != null)
+            {
+                if (ListFunctionCode.Contains(code))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         public User CurrentUser
         {

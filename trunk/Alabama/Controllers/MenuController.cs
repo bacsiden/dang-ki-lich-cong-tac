@@ -10,7 +10,7 @@ namespace Alabama.Controllers
     public class MenuController : BaseController
     {
         [Authorize]
-        [ValidationFunction("/Home/index", ActionName.VIEWLISTMENU)]
+        [ValidationFunction("/JobRegister/index", ActionName.VIEWLISTMENU)]
         public ActionResult Index()
         {
             var lst = DB.Entities.Menu.OrderBy(m => m.Oder)
