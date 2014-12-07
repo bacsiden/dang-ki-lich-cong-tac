@@ -48,7 +48,7 @@
     </Reference>
     <Reference Include="MvcPager, Version=1.5.0.28157, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLL\MvcPager.dll</HintPath>
+      <HintPath>DLL\MvcPager.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
