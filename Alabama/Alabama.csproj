@@ -75,10 +75,6 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="V_SmashCard, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLL\V_SmashCard.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BaseController.cs" />
@@ -194,6 +190,8 @@
     <Content Include="Content\img\logo-login.jpg" />
     <Content Include="Content\img\logo.jpg" />
     <Content Include="Content\img\null.jpeg" />
+    <Content Include="Content\img\pdf.jpg" />
+    <Content Include="Content\img\word.png" />
     <Content Include="Content\js\facebook.js" />
     <Content Include="Content\js\flaty.js" />
     <Content Include="Content\js\myJquery.js" />

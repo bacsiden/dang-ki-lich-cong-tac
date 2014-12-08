@@ -204,13 +204,27 @@ namespace Alabama.Controllers
         }
 
         //[Authorize]
-        public FileContentResult DisplayReport(string codedate)
+        public FileContentResult DisplayReport(string codedate, int type = 0)
         {
             if (string.IsNullOrEmpty(codedate))
             {
                 return null;
             }
+            string fileType = "pdf";
+            string fileExtendsion = "pdf";
+            if (type == 1)
+            {
+                fileType = "word";
+                fileExtendsion = "doc";
+            }
+            //if (type == 2)
+            //{
+            //    fileType = "excel";
+            //    fileExtendsion = "xls";
+            //}
             var listTongHop = DB.Entities.TongHop.Where(m => m.Code == codedate).ToList();
+            DateTime startDate = listTongHop.Count > 0 ? listTongHop[0].FromDate : DateTime.Now;
+            string tuNgay = startDate.ToString("dd_MM_yyyy") + "_toi_" + startDate.AddDays(6).ToString("dd_MM_yyyy.");
             DataTable dt = new BaoCao().LichCongTac;
             foreach (var item in listTongHop)
             {
@@ -221,24 +235,24 @@ namespace Alabama.Controllers
                         DataRow dr = dt.NewRow();
                         dr["Thu"] = GetThuByDayOfWeek(item.DayOfWeek, item.FromDate);
                         dr["ThoiGian"] = detail.Time.ToString("hh'h'mm");
-                        dr["DiaDiem"] = detail.Location;
+                        dr["DiaDiem"] = detail.Location + ((item.TongHopDetail.Count == 1) ? Environment.NewLine : null);
                         dr["NoiDung"] = "- " + detail.NoiDung;
                         dr["NguoiThucHien"] = "- " + detail.NguoiThucHien;
                         dr["TrucLanhDao"] = item.NguoiTrucID.HasValue ? item.NguoiTruc.Title : "";
                         dt.Rows.Add(dr);
                     }
                 }
-                //else
-                //{
-                //    DataRow dr = dt.NewRow();
-                //    dr["Thu"] = GetThuByDayOfWeek(item.DayOfWeek, item.FromDate);
-                //    dr["ThoiGian"] = "";
-                //    dr["DiaDiem"] = "";
-                //    dr["NoiDung"] = "";
-                //    dr["NguoiThucHien"] = "";
-                //    dr["TrucLanhDao"] = "";
-                //    dt.Rows.Add(dr);
-                //}
+                else
+                {
+                    DataRow dr = dt.NewRow();
+                    dr["Thu"] = GetThuByDayOfWeek(item.DayOfWeek, item.FromDate);
+                    dr["ThoiGian"] = "";
+                    dr["DiaDiem"] = "\n\r\n\r";
+                    dr["NoiDung"] = "";
+                    dr["NguoiThucHien"] = "";
+                    dr["TrucLanhDao"] = "";
+                    dt.Rows.Add(dr);
+                }
             }
 
             LocalReport localReport = new LocalReport();
@@ -250,8 +264,8 @@ namespace Alabama.Controllers
             reportDataSource.Name = "DataSet1";
             reportDataSource.Value = dt;
             localReport.DataSources.Add(reportDataSource);
-            Byte[] mybytes = localReport.Render("pdf");
-            return File(mybytes, "pdf");
+            Byte[] mybytes = localReport.Render(fileType);
+            return File(mybytes, fileExtendsion, "Lich_Cong_Tac_Tuan_Tu_" + tuNgay + fileExtendsion);
         }
 
         public string GetThuByDayOfWeek(int dayofweek, DateTime fromdate)

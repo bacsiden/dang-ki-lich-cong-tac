@@ -20,7 +20,7 @@ namespace Alabama.Controllers
             return View();
         }
 
-        public static string temp1 = "<li class='{3}'><a href=\"{1}\" class='menu-item-a {5}'><i class=\"{2}\"></i><span>&nbsp;{0}</span>{4} </a>{6}</li>";
+        public static string temp1 = "<li class='{3}'><a href=\"{1}\" class='menu-item-a {5}'>{2}<span>&nbsp;{0}</span>{4} </a>{6}</li>";
         public static string temp2 = "<ul class=\"submenu\">{0}</ul>";
         public static string BuildMenu()
         {
@@ -52,7 +52,7 @@ namespace Alabama.Controllers
                     }
                     else
                     {
-                        s += string.Format(temp1, item.Title, item.Url, item.Icon, tmp, "", "","");
+                        s += string.Format(temp1, item.Title, item.Url,"", tmp, "", "", "");
                     }
 
                 }
