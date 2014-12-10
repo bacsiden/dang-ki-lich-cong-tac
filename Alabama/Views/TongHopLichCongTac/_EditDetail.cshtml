@@ -7,7 +7,9 @@
     $(document).ready(function () {
         $('.timepicker-default').timepicker({
             showMeridian: false,
-            defaultTime: 'value'
+            defaultTime: 'value',
+            minuteStep: 1,
+            showSeconds: false
         });
     });
 </script>
@@ -36,7 +38,7 @@
         </div>
         <div class="editor-field">
             <div class="input-append bootstrap-timepicker-component">
-                <input class="timepicker-default input-small" type="text" value="@Model.Time" name="Time"/>
+                <input class="timepicker-default input-small" type="text" value="@Model.Time.Hours:@Model.Time.Minutes" name="Time"/>
                 <span class="add-on"><i class="icon-time"></i></span>
             </div>
             @Html.ValidationMessageFor(model => model.Time)
@@ -69,7 +71,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="submit">
+        <button class="btn btn-primary" style="width: 70px;" type="submit" >
             Lưu lại</button>
         <button class="btn" data-dismiss="modal" aria-hidden="true">
             Hủy</button>

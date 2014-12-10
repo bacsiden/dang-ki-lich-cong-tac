@@ -1,7 +1,12 @@
 ﻿@model Alabama.JobRegister
 <script type="text/javascript">
     $(document).ready(function () {
-
+        $('.timepicker1').timepicker({
+            showMeridian: false,
+            defaultTime: 'value',
+            minuteStep: 1,
+            showSeconds: false
+        });
     });
     function beforSubmit() {
         var DateFrom = convertDateTimeVItoEN($("#DateFrom").val()) + $(".timeFrom").val();
@@ -60,7 +65,7 @@
                         <div class="controls">
                             @Html.TextBoxFor(model => model.DateFrom, new { Class = "date-picker", @Value = Model.DateFrom.ToString("dd/MM/yyyy") })
                             <div class="input-append bootstrap-timepicker-component">
-                                <input class="timepicker-default input-small timeFrom" type="text" value="@ViewBag.DateFrom" name="timeFrom"/>
+                                <input class="timepicker1 input-small timeFrom" type="text" value="@ViewBag.DateFrom" name="timeFrom"/>
                                 <span class="add-on"><i class="icon-time"></i></span>
                             </div>
                             @Html.ValidationMessageFor(model => model.DateFrom)

@@ -30,11 +30,11 @@ namespace Alabama.Controllers
             if (obj == null)
             {
                 obj = new JobRegister() { UserID = currentUser.ID, DateFrom = DateTime.Now, Created = DateTime.Now };
-                ViewBag.DateFrom = obj.DateFrom.ToString("08:00 AM");
+                ViewBag.DateFrom = obj.DateFrom.ToString("08:00");
             }
             else
             {
-                ViewBag.DateFrom = obj.DateFrom.ToString("hh:mm tt");
+                ViewBag.DateFrom = obj.DateFrom.ToString("HH:mm");
             }
             ViewBag.UserName = currentUser.Name;
             //SelectOption(obj.LocationID.HasValue ? obj.LocationID.Value : 0);
@@ -88,8 +88,8 @@ namespace Alabama.Controllers
             catch
             {
                 ViewBag.UserName = new UserDAL().GetCurrentUser.Name;
-                ViewBag.DateFrom = model.DateFrom.ToString("hh:mm tt");
-                ViewBag.DateCreated = model.Created.ToString("hh:mm tt");
+                ViewBag.DateFrom = model.DateFrom.ToString("HH:mm");
+                ViewBag.DateCreated = model.Created.ToString("HH:mm");
                 //SelectOption(model.LocationID.HasValue ? model.LocationID.Value : 0);
                 return View(model);
             }

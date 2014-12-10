@@ -17,7 +17,6 @@ namespace Alabama.Controllers
         //
         // GET: /Owner/
 
-        [Authorize]
         public ActionResult Index(int? page)
         {
             ViewBag.STT = page.HasValue ? page.Value * pageSize - pageSize : 1;
@@ -26,7 +25,6 @@ namespace Alabama.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public ActionResult NewOrEdit(string fromDate, string endDate)
         {
             if (fromDate == null)
@@ -200,6 +198,20 @@ namespace Alabama.Controllers
             db.AttachTo("TieuDe", model);
             db.ObjectStateManager.ChangeObjectState(model, System.Data.EntityState.Modified);
             db.SaveChanges();
+            return Redirect(url);
+        }
+
+        [Authorize]
+        [ValidationFunction("/TongHopLichCongTac/index", ActionName.TongHopLichCongTac, ActionName.TongHopLaiLichCongTac)]
+        public ActionResult DeleteDetail(int id, string url)
+        {
+            var db = DB.Entities;
+            var detail = db.TongHopDetail.FirstOrDefault(m => m.ID == id);
+            if (detail!=null)
+            {
+                db.TongHopDetail.DeleteObject(detail);
+                db.SaveChanges();
+            }
             return Redirect(url);
         }
 

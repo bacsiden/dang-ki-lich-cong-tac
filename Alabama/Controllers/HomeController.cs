@@ -28,8 +28,8 @@ namespace Alabama.Controllers
             string s = "";
             string cls = "dropdown-toggle";
             string icondrop = "<b class=\"arrow icon-angle-right\"></b>";
-            var lst = user.UserName==UserDAL.ADMIN? DB.Entities.Menu.OrderBy(m=>m.Oder):
-                DB.Entities.Menu.Where(x=>x.IsActive.Value).OrderBy(m=>m.Oder);
+            var lst = user != null && user.UserName == UserDAL.ADMIN ? DB.Entities.Menu.OrderBy(m => m.Oder) :
+                DB.Entities.Menu.Where(x => x.IsActive.Value).OrderBy(m => m.Oder);
             foreach (var item in lst)
             {
                 if (item.ParentID == null || item.ParentID.Value == 0)
@@ -39,7 +39,7 @@ namespace Alabama.Controllers
                     {
                         tmp = "hiddenField";
                     }
-                    var listChild = lst.Where(m => m.ParentID == item.ID).OrderBy(m=>m.Oder).ToList();
+                    var listChild = lst.Where(m => m.ParentID == item.ID).OrderBy(m => m.Oder).ToList();
                     if (listChild.Count > 0)
                     {
                         string subLI = "";
@@ -47,12 +47,12 @@ namespace Alabama.Controllers
                         {
                             subLI += string.Format("<li><a href=\"{1}\" class='menu-item-a'>{0}</a></li>", itemSub.Title, itemSub.Url);
                         }
-                        string subMenu = string.Format(temp2,subLI);
-                        s += string.Format(temp1, item.Title,"#", item.Icon, tmp, icondrop, cls, subMenu);
+                        string subMenu = string.Format(temp2, subLI);
+                        s += string.Format(temp1, item.Title, "#", item.Icon, tmp, icondrop, cls, subMenu);
                     }
                     else
                     {
-                        s += string.Format(temp1, item.Title, item.Url,"", tmp, "", "", "");
+                        s += string.Format(temp1, item.Title, item.Url, "", tmp, "", "", "");
                     }
 
                 }

@@ -263,7 +263,7 @@ namespace Alabama.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult NewOrEdit(User model)
+        public ActionResult NewOrEdit(User model, string password)
         {
             try
             {
@@ -271,13 +271,24 @@ namespace Alabama.Controllers
                 var db = DB.Entities;
                 if (model.ID == 0)
                 {
-                    // Add new                 
-                    db.User.AddObject(model);
-                    mess = "Thêm mới tài khoản thành công";
+                    MembershipUser aspnetUser = Membership.CreateUser(model.UserName, password, model.Email);
+                    Guid userCreated = (Guid)aspnetUser.ProviderUserKey;
+                    if (userCreated != null)
+                    {
+                        model.AspnetUserID = userCreated;
+                        // Add new                 
+                        db.User.AddObject(model);
+                        mess = "Thêm mới tài khoản thành công";
+                    }
                 }
                 else
                 {
                     // Edit    
+                    if (!string.IsNullOrEmpty(password))
+                    {
+                        MembershipUser aspnetUser = Membership.GetUser(model.UserName);
+                        bool  isSuccess =  aspnetUser.ChangePassword(aspnetUser.ResetPassword(), password);
+                    }
                     db.AttachTo("User", model);
                     db.ObjectStateManager.ChangeObjectState(model, System.Data.EntityState.Modified);
                     mess = "Sửa tài khoản thành công";
