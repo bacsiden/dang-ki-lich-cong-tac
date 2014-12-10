@@ -213,7 +213,8 @@
                     <img src="../../Content/img/word.png" style="height: 18px" />
                     Xuất Word</a>
             }
-            <a href="@Url.Action("Index")" class="btn"><i class="icon-mail-reply"></i>Quay lại</a>
+            <a href="@Url.Action("Index")" class="btn"><i class="icon-mail-reply"></i>&nbsp;Quay
+                lại</a>
         </div>
     </div>
     <br />
@@ -293,7 +294,7 @@
         {
             foreach (var item in listTongHop)
             {
-                var list = Model.Where(m => m.TongHopID == item.ID).ToList();
+                var list = Model.Where(m => m.TongHopID == item.ID).OrderBy(n => n.Time).ToList();
                
             <tr>
                 @if (item.DayOfWeek == 6)
@@ -378,11 +379,11 @@
                     {
                         <a href="#Modal-EditDetail" role="button" class="EditDetail" value="@item1.ID" data-toggle="modal">
                             Sửa</a><br />
-                        <a href="/TongHopLichCongTac/DeleteDetail/@item1.ID" class="confirmDelete error">Xóa</a>
+                        <a href="@Url.Action("DeleteDetail", "TongHopLichCongTac", new { id = item1.ID, url = Request.RawUrl })" class="confirmDelete error">
+                            Xóa</a>
                     }
                 </td>
-            </tr>
-                                                                                      
+            </tr>                                                                                      
                     }
 
             }
