@@ -366,7 +366,7 @@
                     @item1.NoiDung
                 </td>
                 <td>
-                    @item1.NguoiThucHien
+                    @(Html.Raw((item1.NguoiThucHien + "").Replace("\n", "<br />")))
                 </td>
                 <td>
                     @(item1.Location)
