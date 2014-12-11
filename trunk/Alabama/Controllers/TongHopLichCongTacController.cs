@@ -236,7 +236,7 @@ namespace Alabama.Controllers
             //}
             var listTongHop = DB.Entities.TongHop.Where(m => m.Code == codedate).ToList();
             DateTime startDate = listTongHop.Count > 0 ? listTongHop[0].FromDate : DateTime.Now;
-            string tuNgay = startDate.ToString("dd_MM_yyyy") + "_toi_" + startDate.AddDays(6).ToString("dd_MM_yyyy.");
+            string tuNgay = startDate.ToString("dd-MM-yyyy") + "_toi_" + startDate.AddDays(6).ToString("dd-MM-yyyy.");
             DataTable dt = new BaoCao().LichCongTac;
             foreach (var item in listTongHop)
             {
@@ -246,8 +246,8 @@ namespace Alabama.Controllers
                     {
                         DataRow dr = dt.NewRow();
                         dr["Thu"] = GetThuByDayOfWeek(item.DayOfWeek, item.FromDate);
-                        dr["ThoiGian"] = detail.Time.ToString("hh'h'mm");
-                        dr["DiaDiem"] = detail.Location + ((item.TongHopDetail.Count == 1) ? Environment.NewLine : null);
+                        dr["ThoiGian"] = detail.Time.ToString("hh'h'mm") + ((item.TongHopDetail.Count == 1) ? Environment.NewLine : null);
+                        dr["DiaDiem"] = detail.Location;
                         dr["NoiDung"] = "- " + detail.NoiDung;
                         dr["NguoiThucHien"] = "- " + detail.NguoiThucHien;
                         dr["TrucLanhDao"] = item.NguoiTrucID.HasValue ? item.NguoiTruc.Title : "";

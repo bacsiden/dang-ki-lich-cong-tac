@@ -88,346 +88,6 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Tablix Name="Tablix5">
-        <TablixBody>
-          <TablixColumns>
-            <TablixColumn>
-              <Width>0.55717in</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>10.2655in</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>0.69259in</Width>
-            </TablixColumn>
-          </TablixColumns>
-          <TablixRows>
-            <TablixRow>
-              <Height>0.22372in</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Thu">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!Thu.Value</Value>
-                              <Style>
-                                <FontFamily>Times New Roman</FontFamily>
-                                <FontSize>11pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Thu</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>None</Style>
-                        </Border>
-                        <TopBorder>
-                          <Style>Solid</Style>
-                        </TopBorder>
-                        <LeftBorder>
-                          <Style>Solid</Style>
-                        </LeftBorder>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Tablix Name="Tablix6">
-                      <TablixBody>
-                        <TablixColumns>
-                          <TablixColumn>
-                            <Width>0.73304in</Width>
-                          </TablixColumn>
-                          <TablixColumn>
-                            <Width>4.30596in</Width>
-                          </TablixColumn>
-                          <TablixColumn>
-                            <Width>4.37887in</Width>
-                          </TablixColumn>
-                          <TablixColumn>
-                            <Width>0.84763in</Width>
-                          </TablixColumn>
-                        </TablixColumns>
-                        <TablixRows>
-                          <TablixRow>
-                            <Height>0.22372in</Height>
-                            <TablixCells>
-                              <TablixCell>
-                                <CellContents>
-                                  <Textbox Name="ThoiGian">
-                                    <CanGrow>true</CanGrow>
-                                    <KeepTogether>true</KeepTogether>
-                                    <Paragraphs>
-                                      <Paragraph>
-                                        <TextRuns>
-                                          <TextRun>
-                                            <Value>=Fields!ThoiGian.Value</Value>
-                                            <Style>
-                                              <FontFamily>Times New Roman</FontFamily>
-                                              <FontSize>11pt</FontSize>
-                                            </Style>
-                                          </TextRun>
-                                        </TextRuns>
-                                        <Style>
-                                          <TextAlign>Center</TextAlign>
-                                        </Style>
-                                      </Paragraph>
-                                    </Paragraphs>
-                                    <rd:DefaultName>ThoiGian</rd:DefaultName>
-                                    <Style>
-                                      <Border>
-                                        <Style>None</Style>
-                                      </Border>
-                                      <BottomBorder>
-                                        <Style>Dotted</Style>
-                                      </BottomBorder>
-                                      <RightBorder>
-                                        <Style>Solid</Style>
-                                      </RightBorder>
-                                      <VerticalAlign>Middle</VerticalAlign>
-                                    </Style>
-                                  </Textbox>
-                                </CellContents>
-                              </TablixCell>
-                              <TablixCell>
-                                <CellContents>
-                                  <Textbox Name="NoiDung">
-                                    <CanGrow>true</CanGrow>
-                                    <KeepTogether>true</KeepTogether>
-                                    <Paragraphs>
-                                      <Paragraph>
-                                        <TextRuns>
-                                          <TextRun>
-                                            <Value>=Fields!NoiDung.Value</Value>
-                                            <Style>
-                                              <FontFamily>Times New Roman</FontFamily>
-                                              <FontSize>11pt</FontSize>
-                                            </Style>
-                                          </TextRun>
-                                        </TextRuns>
-                                        <Style />
-                                      </Paragraph>
-                                    </Paragraphs>
-                                    <rd:DefaultName>NoiDung</rd:DefaultName>
-                                    <Style>
-                                      <Border>
-                                        <Style>None</Style>
-                                      </Border>
-                                      <BottomBorder>
-                                        <Style>Dotted</Style>
-                                      </BottomBorder>
-                                      <RightBorder>
-                                        <Style>Solid</Style>
-                                      </RightBorder>
-                                      <VerticalAlign>Middle</VerticalAlign>
-                                    </Style>
-                                  </Textbox>
-                                </CellContents>
-                              </TablixCell>
-                              <TablixCell>
-                                <CellContents>
-                                  <Textbox Name="NguoiThucHien">
-                                    <CanGrow>true</CanGrow>
-                                    <KeepTogether>true</KeepTogether>
-                                    <Paragraphs>
-                                      <Paragraph>
-                                        <TextRuns>
-                                          <TextRun>
-                                            <Value>=Fields!NguoiThucHien.Value</Value>
-                                            <Style>
-                                              <FontFamily>Times New Roman</FontFamily>
-                                              <FontSize>11pt</FontSize>
-                                            </Style>
-                                          </TextRun>
-                                        </TextRuns>
-                                        <Style />
-                                      </Paragraph>
-                                    </Paragraphs>
-                                    <rd:DefaultName>NguoiThucHien</rd:DefaultName>
-                                    <Style>
-                                      <Border>
-                                        <Style>None</Style>
-                                      </Border>
-                                      <BottomBorder>
-                                        <Style>Dotted</Style>
-                                      </BottomBorder>
-                                      <RightBorder>
-                                        <Style>Solid</Style>
-                                      </RightBorder>
-                                      <VerticalAlign>Middle</VerticalAlign>
-                                    </Style>
-                                  </Textbox>
-                                </CellContents>
-                              </TablixCell>
-                              <TablixCell>
-                                <CellContents>
-                                  <Textbox Name="DiaDiem">
-                                    <CanGrow>true</CanGrow>
-                                    <KeepTogether>true</KeepTogether>
-                                    <Paragraphs>
-                                      <Paragraph>
-                                        <TextRuns>
-                                          <TextRun>
-                                            <Value>=Fields!DiaDiem.Value</Value>
-                                            <Style>
-                                              <FontFamily>Times New Roman</FontFamily>
-                                              <FontSize>11pt</FontSize>
-                                            </Style>
-                                          </TextRun>
-                                        </TextRuns>
-                                        <Style>
-                                          <TextAlign>Center</TextAlign>
-                                        </Style>
-                                      </Paragraph>
-                                    </Paragraphs>
-                                    <rd:DefaultName>DiaDiem</rd:DefaultName>
-                                    <Style>
-                                      <Border>
-                                        <Style>None</Style>
-                                      </Border>
-                                      <BottomBorder>
-                                        <Style>Dotted</Style>
-                                      </BottomBorder>
-                                      <VerticalAlign>Middle</VerticalAlign>
-                                    </Style>
-                                  </Textbox>
-                                </CellContents>
-                              </TablixCell>
-                            </TablixCells>
-                          </TablixRow>
-                        </TablixRows>
-                      </TablixBody>
-                      <TablixColumnHierarchy>
-                        <TablixMembers>
-                          <TablixMember />
-                          <TablixMember />
-                          <TablixMember />
-                          <TablixMember />
-                        </TablixMembers>
-                      </TablixColumnHierarchy>
-                      <TablixRowHierarchy>
-                        <TablixMembers>
-                          <TablixMember>
-                            <Group Name="Details1" />
-                          </TablixMember>
-                        </TablixMembers>
-                      </TablixRowHierarchy>
-                      <DataSetName>DataSet1</DataSetName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <TopBorder>
-                          <Style>None</Style>
-                        </TopBorder>
-                        <BottomBorder>
-                          <Style>Solid</Style>
-                        </BottomBorder>
-                        <LeftBorder>
-                          <Style>Solid</Style>
-                        </LeftBorder>
-                        <RightBorder>
-                          <Style>Solid</Style>
-                        </RightBorder>
-                      </Style>
-                    </Tablix>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="TrucLanhDao">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!TrucLanhDao.Value</Value>
-                              <Style>
-                                <FontFamily>Times New Roman</FontFamily>
-                                <FontSize>11pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>TrucLanhDao</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>None</Style>
-                        </Border>
-                        <TopBorder>
-                          <Style>Solid</Style>
-                        </TopBorder>
-                        <RightBorder>
-                          <Style>Solid</Style>
-                        </RightBorder>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-          </TablixRows>
-        </TablixBody>
-        <TablixColumnHierarchy>
-          <TablixMembers>
-            <TablixMember />
-            <TablixMember />
-            <TablixMember />
-          </TablixMembers>
-        </TablixColumnHierarchy>
-        <TablixRowHierarchy>
-          <TablixMembers>
-            <TablixMember>
-              <Group Name="Details">
-                <GroupExpressions>
-                  <GroupExpression>=Fields!Thu.Value</GroupExpression>
-                </GroupExpressions>
-              </Group>
-            </TablixMember>
-          </TablixMembers>
-        </TablixRowHierarchy>
-        <DataSetName>DataSet1</DataSetName>
-        <Top>1.84362cm</Top>
-        <Left>0cm</Left>
-        <Height>0.56825cm</Height>
-        <Width>29.24876cm</Width>
-        <ZIndex>1</ZIndex>
-        <Style>
-          <Border>
-            <Style>Solid</Style>
-          </Border>
-          <TopBorder>
-            <Style>Solid</Style>
-          </TopBorder>
-          <BottomBorder>
-            <Style>Solid</Style>
-          </BottomBorder>
-          <LeftBorder>
-            <Style>Solid</Style>
-          </LeftBorder>
-          <RightBorder>
-            <Style>Solid</Style>
-          </RightBorder>
-        </Style>
-      </Tablix>
       <Textbox Name="Textbox33">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -488,11 +148,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox33</rd:DefaultName>
-        <Top>2.57915cm</Top>
-        <Left>22.4282cm</Left>
+        <Top>2.59913cm</Top>
+        <Left>21.92549cm</Left>
         <Height>1.57896cm</Height>
         <Width>6.54813cm</Width>
-        <ZIndex>2</ZIndex>
+        <ZIndex>1</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -559,6 +219,9 @@
                         <Border>
                           <Style>Solid</Style>
                         </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                       </Style>
                     </Textbox>
@@ -594,6 +257,9 @@
                         <Border>
                           <Style>Solid</Style>
                         </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                       </Style>
                     </Textbox>
@@ -629,6 +295,9 @@
                         <Border>
                           <Style>Solid</Style>
                         </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                       </Style>
                     </Textbox>
@@ -664,6 +333,9 @@
                         <Border>
                           <Style>Solid</Style>
                         </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                       </Style>
                     </Textbox>
@@ -699,6 +371,9 @@
                         <Border>
                           <Style>Solid</Style>
                         </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                       </Style>
                     </Textbox>
@@ -733,6 +408,9 @@
                         <Border>
                           <Style>Solid</Style>
                         </Border>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
                         <VerticalAlign>Middle</VerticalAlign>
                       </Style>
                     </Textbox>
@@ -761,6 +439,335 @@
         <Left>0cm</Left>
         <Height>0.6cm</Height>
         <Width>29.24876cm</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
+      <Tablix Name="Tablix3">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>0.55822in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>10.26445in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.69259in</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.22384in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Thu">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Thu.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Thu</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <TopBorder>
+                          <Style>None</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
+                        <LeftBorder>
+                          <Style>Solid</Style>
+                        </LeftBorder>
+                        <RightBorder>
+                          <Style>Solid</Style>
+                        </RightBorder>
+                        <VerticalAlign>Middle</VerticalAlign>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Tablix Name="Tablix4">
+                      <TablixBody>
+                        <TablixColumns>
+                          <TablixColumn>
+                            <Width>0.73199in</Width>
+                          </TablixColumn>
+                          <TablixColumn>
+                            <Width>4.30596in</Width>
+                          </TablixColumn>
+                          <TablixColumn>
+                            <Width>4.37887in</Width>
+                          </TablixColumn>
+                          <TablixColumn>
+                            <Width>0.84763in</Width>
+                          </TablixColumn>
+                        </TablixColumns>
+                        <TablixRows>
+                          <TablixRow>
+                            <Height>0.22384in</Height>
+                            <TablixCells>
+                              <TablixCell>
+                                <CellContents>
+                                  <Textbox Name="ThoiGian">
+                                    <CanGrow>true</CanGrow>
+                                    <KeepTogether>true</KeepTogether>
+                                    <Paragraphs>
+                                      <Paragraph>
+                                        <TextRuns>
+                                          <TextRun>
+                                            <Value>=Fields!ThoiGian.Value</Value>
+                                            <Style />
+                                          </TextRun>
+                                        </TextRuns>
+                                        <Style>
+                                          <TextAlign>Center</TextAlign>
+                                        </Style>
+                                      </Paragraph>
+                                    </Paragraphs>
+                                    <rd:DefaultName>ThoiGian</rd:DefaultName>
+                                    <Style>
+                                      <Border>
+                                        <Style>None</Style>
+                                      </Border>
+                                      <BottomBorder>
+                                        <Style>Dotted</Style>
+                                      </BottomBorder>
+                                      <LeftBorder>
+                                        <Style>Solid</Style>
+                                      </LeftBorder>
+                                      <VerticalAlign>Middle</VerticalAlign>
+                                    </Style>
+                                  </Textbox>
+                                </CellContents>
+                              </TablixCell>
+                              <TablixCell>
+                                <CellContents>
+                                  <Textbox Name="NoiDung">
+                                    <CanGrow>true</CanGrow>
+                                    <KeepTogether>true</KeepTogether>
+                                    <Paragraphs>
+                                      <Paragraph>
+                                        <TextRuns>
+                                          <TextRun>
+                                            <Value>=Fields!NoiDung.Value</Value>
+                                            <Style />
+                                          </TextRun>
+                                        </TextRuns>
+                                        <Style />
+                                      </Paragraph>
+                                    </Paragraphs>
+                                    <rd:DefaultName>NoiDung</rd:DefaultName>
+                                    <Style>
+                                      <Border>
+                                        <Style>None</Style>
+                                      </Border>
+                                      <BottomBorder>
+                                        <Style>Dotted</Style>
+                                      </BottomBorder>
+                                      <LeftBorder>
+                                        <Style>Solid</Style>
+                                      </LeftBorder>
+                                      <VerticalAlign>Middle</VerticalAlign>
+                                      <PaddingLeft>1pt</PaddingLeft>
+                                      <PaddingRight>2pt</PaddingRight>
+                                    </Style>
+                                  </Textbox>
+                                </CellContents>
+                              </TablixCell>
+                              <TablixCell>
+                                <CellContents>
+                                  <Textbox Name="NguoiThucHien">
+                                    <CanGrow>true</CanGrow>
+                                    <KeepTogether>true</KeepTogether>
+                                    <Paragraphs>
+                                      <Paragraph>
+                                        <TextRuns>
+                                          <TextRun>
+                                            <Value>=Fields!NguoiThucHien.Value</Value>
+                                            <Style />
+                                          </TextRun>
+                                        </TextRuns>
+                                        <Style />
+                                      </Paragraph>
+                                    </Paragraphs>
+                                    <rd:DefaultName>NguoiThucHien</rd:DefaultName>
+                                    <Style>
+                                      <Border>
+                                        <Style>None</Style>
+                                      </Border>
+                                      <BottomBorder>
+                                        <Style>Dotted</Style>
+                                      </BottomBorder>
+                                      <LeftBorder>
+                                        <Style>Solid</Style>
+                                      </LeftBorder>
+                                      <VerticalAlign>Middle</VerticalAlign>
+                                      <PaddingLeft>1pt</PaddingLeft>
+                                      <PaddingRight>2pt</PaddingRight>
+                                    </Style>
+                                  </Textbox>
+                                </CellContents>
+                              </TablixCell>
+                              <TablixCell>
+                                <CellContents>
+                                  <Textbox Name="DiaDiem">
+                                    <CanGrow>true</CanGrow>
+                                    <KeepTogether>true</KeepTogether>
+                                    <Paragraphs>
+                                      <Paragraph>
+                                        <TextRuns>
+                                          <TextRun>
+                                            <Value>=Fields!DiaDiem.Value</Value>
+                                            <Style />
+                                          </TextRun>
+                                        </TextRuns>
+                                        <Style>
+                                          <TextAlign>Center</TextAlign>
+                                        </Style>
+                                      </Paragraph>
+                                    </Paragraphs>
+                                    <rd:DefaultName>DiaDiem</rd:DefaultName>
+                                    <Style>
+                                      <Border>
+                                        <Style>None</Style>
+                                      </Border>
+                                      <BottomBorder>
+                                        <Style>Dotted</Style>
+                                      </BottomBorder>
+                                      <LeftBorder>
+                                        <Style>Solid</Style>
+                                      </LeftBorder>
+                                      <VerticalAlign>Middle</VerticalAlign>
+                                    </Style>
+                                  </Textbox>
+                                </CellContents>
+                              </TablixCell>
+                            </TablixCells>
+                          </TablixRow>
+                        </TablixRows>
+                      </TablixBody>
+                      <TablixColumnHierarchy>
+                        <TablixMembers>
+                          <TablixMember />
+                          <TablixMember />
+                          <TablixMember />
+                          <TablixMember />
+                        </TablixMembers>
+                      </TablixColumnHierarchy>
+                      <TablixRowHierarchy>
+                        <TablixMembers>
+                          <TablixMember>
+                            <Group Name="Details1" />
+                          </TablixMember>
+                        </TablixMembers>
+                      </TablixRowHierarchy>
+                      <DataSetName>DataSet1</DataSetName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <TopBorder>
+                          <Style>None</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
+                        <LeftBorder>
+                          <Style>Solid</Style>
+                        </LeftBorder>
+                        <RightBorder>
+                          <Style>Solid</Style>
+                        </RightBorder>
+                      </Style>
+                    </Tablix>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TrucLanhDao">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!TrucLanhDao.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>TrucLanhDao</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <TopBorder>
+                          <Style>None</Style>
+                        </TopBorder>
+                        <BottomBorder>
+                          <Style>Solid</Style>
+                        </BottomBorder>
+                        <LeftBorder>
+                          <Style>Solid</Style>
+                        </LeftBorder>
+                        <RightBorder>
+                          <Style>Solid</Style>
+                        </RightBorder>
+                        <VerticalAlign>Middle</VerticalAlign>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!Thu.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>DataSet1</DataSetName>
+        <Top>1.8542cm</Top>
+        <Left>0cm</Left>
+        <Height>0.56854cm</Height>
+        <Width>29.24876cm</Width>
         <ZIndex>3</ZIndex>
         <Style>
           <Border>
@@ -769,7 +776,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>1.63705in</Height>
+    <Height>1.64492in</Height>
     <Style />
   </Body>
   <ReportParameters>
